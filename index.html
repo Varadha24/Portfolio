@@ -3,1107 +3,766 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Varadha VR — Robotics Systems Engineer</title>
+<title>Varadha VR — Robotics Systems Engineer & IoT Product Developer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --bg: #080c10;
-    --surface: #0d1318;
-    --card: #111820;
-    --border: #1e2d3d;
-    --accent: #00e5ff;
-    --accent2: #ff6b35;
-    --text: #e8f0f7;
-    --muted: #7a94aa;
-    --dim: #3a5068;
-    --mono: 'Space Mono', monospace;
-    --sans: 'Syne', sans-serif;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
-    overflow-x: hidden;
-    cursor: none;
-  }
-
-  /* Custom cursor */
-  .cursor {
-    position: fixed;
-    width: 10px; height: 10px;
-    background: var(--accent);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%,-50%);
-    transition: width .2s, height .2s, background .2s;
-    mix-blend-mode: difference;
-  }
-  .cursor-ring {
-    position: fixed;
-    width: 36px; height: 36px;
-    border: 1.5px solid var(--accent);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%,-50%);
-    transition: transform .12s ease, width .2s, height .2s;
-    opacity: 0.5;
-  }
-  body:hover .cursor { opacity: 1; }
-
-  /* Grid background */
-  .grid-bg {
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(var(--border) 1px, transparent 1px),
-      linear-gradient(90deg, var(--border) 1px, transparent 1px);
-    background-size: 60px 60px;
-    opacity: 0.2;
-    pointer-events: none;
-    z-index: 0;
-  }
-  .noise {
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.4;
-  }
-
-  /* Nav */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.2rem 3rem;
-    background: rgba(8,12,16,0.85);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-logo {
-    font-family: var(--mono);
-    font-size: .8rem;
-    color: var(--accent);
-    letter-spacing: .1em;
-  }
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-  }
-  .nav-links a {
-    font-family: var(--mono);
-    font-size: .72rem;
-    color: var(--muted);
-    text-decoration: none;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    transition: color .2s;
-  }
-  .nav-links a:hover { color: var(--accent); }
-
-  /* Layout */
-  main { position: relative; z-index: 1; }
-  section { padding: 7rem 0; }
-  .container { max-width: 1140px; margin: 0 auto; padding: 0 2rem; }
-
-  /* Hero */
-  #hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding-top: 5rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-glow {
-    position: absolute;
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(0,229,255,0.08) 0%, transparent 70%);
-    top: -100px; right: -100px;
-    pointer-events: none;
-  }
-  .hero-glow2 {
-    position: absolute;
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(255,107,53,0.06) 0%, transparent 70%);
-    bottom: 0; left: 100px;
-    pointer-events: none;
-  }
-  .hero-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-  }
-  .hero-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: .5rem;
-    font-family: var(--mono);
-    font-size: .72rem;
-    color: var(--accent);
-    letter-spacing: .15em;
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    padding: .4rem .9rem;
-    border: 1px solid rgba(0,229,255,0.25);
-    border-radius: 2px;
-    background: rgba(0,229,255,0.05);
-  }
-  .hero-tag::before {
-    content: '';
-    display: inline-block;
-    width: 6px; height: 6px;
-    background: var(--accent);
-    border-radius: 50%;
-    animation: blink 1.4s infinite;
-  }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-
-  .hero h1 {
-    font-size: clamp(3rem, 5vw, 4.8rem);
-    font-weight: 800;
-    line-height: 1.05;
-    letter-spacing: -.02em;
-    margin-bottom: 1.5rem;
-  }
-  .hero h1 span { color: var(--accent); }
-  .hero-sub {
-    font-family: var(--mono);
-    font-size: .85rem;
-    color: var(--muted);
-    line-height: 1.8;
-    max-width: 480px;
-    margin-bottom: 2.5rem;
-  }
-  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .btn {
-    font-family: var(--mono);
-    font-size: .75rem;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    padding: .85rem 1.8rem;
-    border-radius: 2px;
-    text-decoration: none;
-    transition: all .2s;
-    cursor: none;
-  }
-  .btn-primary {
-    background: var(--accent);
-    color: #000;
-    border: 1px solid var(--accent);
-  }
-  .btn-primary:hover {
-    background: transparent;
-    color: var(--accent);
-  }
-  .btn-ghost {
-    background: transparent;
-    color: var(--text);
-    border: 1px solid var(--border);
-  }
-  .btn-ghost:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  /* Hero visual */
-  .hero-visual {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .orbit-container {
-    width: 360px; height: 360px;
-    position: relative;
-  }
-  .orbit-ring {
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    border: 1px solid var(--border);
-    animation: spin linear infinite;
-  }
-  .orbit-ring:nth-child(1) { animation-duration: 20s; }
-  .orbit-ring:nth-child(2) {
-    inset: 40px;
-    border-color: rgba(0,229,255,0.15);
-    animation-duration: 14s;
-    animation-direction: reverse;
-  }
-  .orbit-ring:nth-child(3) {
-    inset: 80px;
-    border-color: rgba(255,107,53,0.1);
-    animation-duration: 10s;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  .orbit-dot {
-    position: absolute;
-    width: 8px; height: 8px;
-    background: var(--accent);
-    border-radius: 50%;
-    top: -4px; left: 50%;
-    transform: translateX(-50%);
-    box-shadow: 0 0 12px var(--accent);
-  }
-  .orbit-ring:nth-child(2) .orbit-dot {
-    background: var(--accent2);
-    box-shadow: 0 0 12px var(--accent2);
-  }
-
-  .orbit-center {
-    position: absolute;
-    inset: 120px;
-    border-radius: 50%;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--mono);
-  }
-  .orbit-center .initials {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--accent);
-    letter-spacing: .05em;
-  }
-  .orbit-center .role-label {
-    font-size: .6rem;
-    color: var(--muted);
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    margin-top: .2rem;
-  }
-
-  /* Stats bar */
-  .stats-bar {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 2px;
-    margin-top: 3rem;
-    overflow: hidden;
-  }
-  .stat {
-    background: var(--surface);
-    padding: 1.4rem 1.8rem;
-    text-align: center;
-  }
-  .stat-val {
-    font-family: var(--mono);
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--accent);
-    line-height: 1;
-    margin-bottom: .3rem;
-  }
-  .stat-label {
-    font-family: var(--mono);
-    font-size: .65rem;
-    color: var(--muted);
-    letter-spacing: .1em;
-    text-transform: uppercase;
-  }
-
-  /* Section headers */
-  .section-label {
-    font-family: var(--mono);
-    font-size: .68rem;
-    color: var(--accent);
-    letter-spacing: .2em;
-    text-transform: uppercase;
-    margin-bottom: .8rem;
-    display: flex;
-    align-items: center;
-    gap: .7rem;
-  }
-  .section-label::before {
-    content: '';
-    display: inline-block;
-    width: 24px; height: 1px;
-    background: var(--accent);
-  }
-  h2 {
-    font-size: clamp(2rem, 3.5vw, 2.8rem);
-    font-weight: 800;
-    letter-spacing: -.02em;
-    line-height: 1.1;
-    margin-bottom: 1rem;
-  }
-  .section-desc {
-    font-family: var(--mono);
-    font-size: .82rem;
-    color: var(--muted);
-    line-height: 1.8;
-    max-width: 560px;
-    margin-bottom: 3.5rem;
-  }
-
-  /* About */
-  #about .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 5rem;
-    align-items: start;
-  }
-  .about-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  .about-card-header {
-    padding: 1rem 1.4rem;
-    border-bottom: 1px solid var(--border);
-    font-family: var(--mono);
-    font-size: .68rem;
-    color: var(--muted);
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    display: flex;
-    gap: .5rem;
-    align-items: center;
-  }
-  .dot { width:10px; height:10px; border-radius:50%; }
-  .dot-red{background:#ff5f57;} .dot-yellow{background:#ffbd2e;} .dot-green{background:#28c840;}
-  .about-card-body { padding: 1.6rem; }
-  .about-card-body p {
-    font-family: var(--mono);
-    font-size: .78rem;
-    color: var(--muted);
-    line-height: 1.9;
-  }
-  .about-card-body p + p { margin-top: 1rem; }
-  .highlight { color: var(--accent); }
-  .highlight2 { color: var(--accent2); }
-
-  .about-right h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-  }
-  .about-right p {
-    font-family: var(--mono);
-    font-size: .8rem;
-    color: var(--muted);
-    line-height: 1.9;
-    margin-bottom: 1rem;
-  }
-
-  .info-list { list-style: none; margin-top: 1.5rem; }
-  .info-list li {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    padding: .65rem 0;
-    border-bottom: 1px solid var(--border);
-    font-family: var(--mono);
-    font-size: .75rem;
-  }
-  .info-list .key { color: var(--muted); min-width: 100px; }
-  .info-list .val { color: var(--text); }
-  .info-list a { color: var(--accent); text-decoration: none; }
-  .info-list a:hover { text-decoration: underline; }
-
-  /* Projects */
-  #projects { background: var(--surface); }
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 1.5rem;
-  }
-  .project-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 1.8rem;
-    position: relative;
-    overflow: hidden;
-    transition: border-color .3s, transform .3s;
-    cursor: none;
-  }
-  .project-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    transform: scaleX(0);
-    transition: transform .3s;
-    transform-origin: left;
-  }
-  .project-card:hover { border-color: rgba(0,229,255,0.3); transform: translateY(-3px); }
-  .project-card:hover::before { transform: scaleX(1); }
-
-  .project-card.featured {
-    grid-column: span 2;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    align-items: start;
-  }
-  .project-meta {
-    display: flex;
-    gap: .6rem;
-    margin-bottom: 1rem;
-    flex-wrap: wrap;
-  }
-  .tag {
-    font-family: var(--mono);
-    font-size: .62rem;
-    padding: .2rem .6rem;
-    border-radius: 2px;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-  }
-  .tag-green { background: rgba(0,229,255,0.08); color: var(--accent); border: 1px solid rgba(0,229,255,0.2); }
-  .tag-orange { background: rgba(255,107,53,0.08); color: var(--accent2); border: 1px solid rgba(255,107,53,0.2); }
-  .tag-dim { background: rgba(255,255,255,0.04); color: var(--muted); border: 1px solid var(--border); }
-  .tag-live { background: rgba(40,200,64,0.1); color: #28c840; border: 1px solid rgba(40,200,64,0.3); }
-
-  .project-card h3 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: .8rem;
-    line-height: 1.3;
-  }
-  .project-card p {
-    font-family: var(--mono);
-    font-size: .76rem;
-    color: var(--muted);
-    line-height: 1.8;
-    margin-bottom: 1.2rem;
-  }
-  .tech-stack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .4rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--border);
-  }
-  .tech-pill {
-    font-family: var(--mono);
-    font-size: .6rem;
-    color: var(--text);
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border);
-    padding: .2rem .55rem;
-    border-radius: 20px;
-    letter-spacing: .05em;
-  }
-
-  .project-number {
-    font-family: var(--mono);
-    font-size: 3.5rem;
-    font-weight: 700;
-    color: rgba(0,229,255,0.10);
-    line-height: 1;
-    position: absolute;
-    bottom: 1rem;
-    right: 1.5rem;
-  }
-
-  /* Experience */
-  .exp-timeline { position: relative; }
-  .exp-timeline::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 8px; bottom: 0;
-    width: 1px;
-    background: var(--border);
-  }
-  .exp-item {
-    padding-left: 2.5rem;
-    padding-bottom: 3rem;
-    position: relative;
-  }
-  .exp-item::before {
-    content: '';
-    position: absolute;
-    left: -4px; top: 8px;
-    width: 9px; height: 9px;
-    background: var(--accent);
-    border-radius: 50%;
-    box-shadow: 0 0 0 3px rgba(0,229,255,0.15);
-  }
-  .exp-item:last-child { padding-bottom: 0; }
-  .exp-period {
-    font-family: var(--mono);
-    font-size: .68rem;
-    color: var(--accent);
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    margin-bottom: .5rem;
-  }
-  .exp-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: .2rem;
-  }
-  .exp-company {
-    font-family: var(--mono);
-    font-size: .75rem;
-    color: var(--muted);
-    margin-bottom: 1.2rem;
-  }
-  .exp-company span { color: var(--accent2); }
-  .exp-bullets { list-style: none; }
-  .exp-bullets li {
-    font-family: var(--mono);
-    font-size: .76rem;
-    color: var(--muted);
-    line-height: 1.8;
-    padding-left: 1.2rem;
-    position: relative;
-    margin-bottom: .5rem;
-  }
-  .exp-bullets li::before {
-    content: '▸';
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    font-size: .65rem;
-    top: .1rem;
-  }
-
-  /* Skills */
-  #skills { background: var(--surface); }
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.2rem;
-  }
-  .skill-group {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 1.6rem;
-    transition: border-color .3s;
-  }
-  .skill-group:hover { border-color: rgba(0,229,255,0.2); }
-  .skill-group-title {
-    font-family: var(--mono);
-    font-size: .68rem;
-    color: var(--accent);
-    letter-spacing: .15em;
-    text-transform: uppercase;
-    margin-bottom: 1.2rem;
-    display: flex;
-    align-items: center;
-    gap: .5rem;
-  }
-  .skill-group-title::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-  .skill-chips { display: flex; flex-wrap: wrap; gap: .5rem; }
-  .skill-chip {
-    font-family: var(--mono);
-    font-size: .68rem;
-    color: var(--text);
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border);
-    padding: .3rem .75rem;
-    border-radius: 2px;
-    transition: all .2s;
-  }
-  .skill-chip:hover { border-color: var(--accent); color: var(--accent); }
-
-  /* Contact */
-  #contact {
-    text-align: center;
-    padding: 8rem 0;
-  }
-  #contact h2 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1rem; }
-  #contact p {
-    font-family: var(--mono);
-    font-size: .82rem;
-    color: var(--muted);
-    margin-bottom: 2.5rem;
-    line-height: 1.8;
-  }
-  .contact-links {
-    display: flex;
-    justify-content: center;
-    gap: 1.2rem;
-    flex-wrap: wrap;
-  }
-
-  /* Footer */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 2rem 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: var(--mono);
-    font-size: .68rem;
-    color: var(--dim);
-  }
-
-  /* Animate in */
-  .fade-up {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity .6s ease, transform .6s ease;
-  }
-  .fade-up.visible { opacity: 1; transform: none; }
-
-  /* Responsive */
-  @media (max-width: 900px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { gap: 1.5rem; }
-    .hero-inner { grid-template-columns: 1fr; }
-    .hero-visual { display: none; }
-    .about-grid { grid-template-columns: 1fr !important; }
-    .project-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
-    .stats-bar { grid-template-columns: 1fr 1fr; }
-    footer { flex-direction: column; gap: .5rem; text-align: center; }
-  }
-  @media (max-width: 600px) {
-    .nav-links { display: none; }
-    section { padding: 5rem 0; }
+  :root{
+    --cream:#F2E9DA;
+    --cream-soft:#EAE0CD;
+    --card:#FBF6EC;
+    --red:#C23B26;
+    --red-deep:#8E2618;
+    --red-dark:#6E1B10;
+    --ink:#2A2118;
+    --paper:#FBF4E9;
+    --pink-ghost:#E7B6A6;
+    --line:rgba(42,33,24,0.14);
+    --line-onred:rgba(251,244,233,0.22);
+    --shadow:0 10px 30px rgba(110,27,16,0.12);
+    --radius:26px;
+  }
+ 
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Plus Jakarta Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.bubble{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    margin:0;
+    letter-spacing:0.2px;
+  }
+  a{color:inherit;}
+  p{line-height:1.65;}
+  section{position:relative; scroll-margin-top:86px; overflow:hidden;}
+  .wrap{max-width:1140px; margin:0 auto; padding:0 28px;}
+  img,svg{display:block;}
+ 
+  ::selection{background:var(--red); color:var(--paper);}
+ 
+  /* ---------- asterisk mark ---------- */
+  .ast{position:absolute; width:34px; height:34px; opacity:0.9;}
+  .ast svg{width:100%; height:100%;}
+  .ast path{fill:currentColor;}
+  .ast.lg{width:56px; height:56px;}
+  .ast.sm{width:20px; height:20px;}
+ 
+  /* ---------- nav ---------- */
+  .nav{
+    position:sticky; top:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 28px;
+    background:rgba(242,233,218,0.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-mark{display:flex; align-items:center; gap:10px; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:1.15rem; color:var(--red-deep);}
+  .nav-mark .dot{width:34px;height:34px;border-radius:50%;background:var(--red); color:var(--paper); display:flex; align-items:center; justify-content:center; font-size:0.85rem;}
+  .nav-links{display:flex; gap:30px; list-style:none; margin:0; padding:0;}
+  .nav-links a{
+    text-decoration:none; font-weight:600; font-size:0.95rem; color:var(--ink);
+    position:relative; padding-bottom:4px; opacity:0.72; transition:opacity .2s ease;
+  }
+  .nav-links a::after{
+    content:""; position:absolute; left:0; right:0; bottom:-2px; height:3px;
+    border-radius:3px; background:var(--red); transform:scaleX(0); transform-origin:left;
+    transition:transform .25s ease;
+  }
+  .nav-links a.active, .nav-links a:hover{opacity:1;}
+  .nav-links a.active::after{transform:scaleX(1);}
+  .nav-cta{
+    display:inline-flex; align-items:center; gap:8px; background:var(--red); color:var(--paper);
+    padding:10px 20px; border-radius:999px; font-weight:700; font-size:0.9rem; text-decoration:none;
+    box-shadow:var(--shadow); transition:transform .2s ease;
+  }
+  .nav-cta:hover{transform:translateY(-2px);}
+  .burger{display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px; z-index:120;}
+  .burger span{width:26px; height:3px; background:var(--ink); border-radius:3px; transition:.25s ease;}
+ 
+  .mobile-menu{
+    position:fixed; inset:0; background:var(--red); z-index:110;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:28px;
+    transform:translateY(-100%); transition:transform .35s ease;
+  }
+  .mobile-menu.open{transform:translateY(0);}
+  .mobile-menu a{color:var(--paper); font-family:'Baloo 2',sans-serif; font-size:2rem; text-decoration:none;}
+ 
+  /* ---------- hero ---------- */
+  .hero{background:var(--cream); padding:72px 0 60px;}
+  .hero .wrap{display:grid; grid-template-columns:1.15fr 0.85fr; gap:40px; align-items:center;}
+  .eyebrow-row{display:flex; align-items:center; gap:14px; margin-bottom:18px; color:var(--red-deep); font-weight:600;}
+  .badge-loc{display:inline-flex; align-items:center; gap:8px; padding:7px 16px; border-radius:999px; background:var(--card); border:1px solid var(--line); font-size:0.85rem;}
+  .badge-loc svg{width:14px;height:14px;}
+ 
+  .hero h1{
+    font-size:clamp(3.1rem, 8vw, 6rem);
+    line-height:0.92;
+    color:var(--red-deep);
+  }
+  .hero h1 span{display:block;}
+  .hero h1 .accent{color:var(--red);}
+  .hero-role{
+    font-family:'Baloo 2',sans-serif; font-weight:600; font-size:clamp(1.2rem,2.4vw,1.6rem);
+    color:var(--ink); margin-top:18px;
+  }
+  .hero p.lede{max-width:46ch; margin-top:16px; font-size:1.04rem; color:#443627; white-space:pre-line;}
+ 
+  .hero-actions{display:flex; flex-wrap:wrap; gap:14px; margin-top:30px;}
+  .btn{
+    font-family:'Baloo 2',sans-serif; font-weight:600; font-size:1rem;
+    padding:14px 26px; border-radius:999px; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .btn-primary{background:var(--red); color:var(--paper); box-shadow:var(--shadow);}
+  .btn-primary:hover{transform:translateY(-3px);}
+  .btn-ghost{background:transparent; color:var(--red-deep); border:2px solid var(--red-deep);}
+  .btn-ghost:hover{background:var(--red-deep); color:var(--paper);}
+ 
+  .contact-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
+  .contact-pill{
+    display:inline-flex; align-items:center; gap:8px; padding:8px 14px; border-radius:999px;
+    background:var(--card); border:1px solid var(--line); font-size:0.82rem; font-weight:600; text-decoration:none; color:var(--ink);
+  }
+  .contact-pill svg{width:14px;height:14px; color:var(--red);}
+ 
+  .hero-visual{position:relative; height:420px;}
+  .blob{
+    position:absolute; inset:0; margin:auto; width:88%; height:88%;
+    background:linear-gradient(150deg, var(--red) 0%, var(--red-deep) 100%);
+    border-radius:44% 56% 62% 38% / 40% 46% 54% 60%;
+    box-shadow:var(--shadow);
+    animation:blobmove 14s ease-in-out infinite;
+  }
+  @keyframes blobmove{
+    0%,100%{border-radius:44% 56% 62% 38% / 40% 46% 54% 60%;}
+    50%{border-radius:58% 42% 40% 60% / 54% 60% 40% 46%;}
+  }
+  .arm-svg{position:absolute; inset:0; width:100%; height:100%;}
+  .arm-svg .draw{
+    fill:none; stroke:var(--paper); stroke-width:3.5; stroke-linecap:round; stroke-linejoin:round;
+    stroke-dasharray:900; stroke-dashoffset:900; animation:draw 2.4s ease forwards 0.4s;
+  }
+  .arm-svg .joint{fill:var(--paper); opacity:0; animation:pop .4s ease forwards;}
+  @keyframes draw{to{stroke-dashoffset:0;}}
+  @keyframes pop{to{opacity:1;}}
+  .spin-badge{
+    position:absolute; right:-6px; bottom:-6px; width:118px; height:118px;
+    animation:spin 16s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .spin-badge-core{
+    position:absolute; inset:0; margin:auto; width:52px; height:52px; border-radius:50%;
+    background:var(--paper); display:flex; align-items:center; justify-content:center;
+  }
+ 
+  .rest-ast{position:absolute;}
+  .hero .ast1{top:60px; right:6%; color:var(--red);}
+  .hero .ast2{bottom:40px; left:2%; color:var(--red-deep); }
+ 
+  /* ---------- section shells ---------- */
+  .sec-red{background:var(--red); color:var(--paper);}
+  .sec-cream{background:var(--cream);}
+  .sec-pad{padding:110px 0;}
+  .ghost-num{
+    position:absolute; top:-40px; right:-10px; font-family:'Baloo 2',sans-serif; font-weight:700;
+    font-size:clamp(9rem, 22vw, 15rem); line-height:1; color:transparent;
+    -webkit-text-stroke:2px rgba(251,244,233,0.18);
+    user-select:none; pointer-events:none;
+  }
+  .ghost-num.on-cream{-webkit-text-stroke:2px rgba(142,38,24,0.14);}
+  .kicker{
+    display:inline-flex; align-items:center; gap:10px; font-weight:700; margin-bottom:14px;
+    font-size:0.92rem; color:var(--pink-ghost);
+  }
+  .sec-cream .kicker{color:var(--red);}
+  .sec-title{font-size:clamp(2.3rem, 5vw, 3.4rem); line-height:1.02; max-width:14ch;}
+  .sec-red .sec-title{color:var(--paper);}
+  .sec-cream .sec-title{color:var(--red-deep);}
+ 
+  .reveal{opacity:0; transform:translateY(26px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.is-visible{opacity:1; transform:translateY(0);}
+ 
+  /* ---------- overview ---------- */
+  .overview-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:60px; align-items:start; position:relative; z-index:1;}
+  .overview-grid p{font-size:1.08rem; color:rgba(251,244,233,0.92); max-width:56ch;}
+  .stat-list{display:flex; flex-direction:column; gap:22px;}
+  .stat{display:flex; gap:16px; align-items:flex-start; padding-bottom:20px; border-bottom:1px solid var(--line-onred);}
+  .stat:last-child{border-bottom:none;}
+  .stat .num{font-family:'Baloo 2',sans-serif; font-size:2.4rem; font-weight:700; min-width:96px;}
+  .stat .label{font-weight:600; opacity:0.9; padding-top:8px; font-size:0.98rem;}
+ 
+  /* ---------- experience timeline ---------- */
+  .exp-wrap{position:relative; z-index:1;}
+  .exp-card{
+    background:#E7B6A6; border-radius:var(--radius); padding:40px; box-shadow:var(--shadow);
+    border:1px solid var(--line); position:relative;
+  }
+  .exp-head{display:flex; flex-wrap:wrap; justify-content:space-between; gap:14px; align-items:baseline; margin-bottom:18px;}
+  .exp-role{font-family:'Baloo 2',sans-serif; font-size:1.5rem; color:var(--red-deep); font-weight:700;}
+  .exp-company{font-weight:700; margin-top:4px;}
+  .exp-dates{
+    font-weight:700; font-size:0.85rem; background:var(--cream-soft); padding:6px 14px; border-radius:999px; white-space:nowrap;
+  }
+  .exp-list{margin:0; padding-left:20px; display:flex; flex-direction:column; gap:12px;}
+  .exp-list li{padding-left:4px;}
+ 
+  .story-timeline{margin-top:34px;}
+  .story-item{display:flex; gap:22px;}
+  .story-marker-col{display:flex; flex-direction:column; align-items:center; flex:none;}
+  .story-icon{
+    width:52px; height:52px; border-radius:16px; background:var(--red); color:var(--paper);
+    display:flex; align-items:center; justify-content:center; flex:none; position:relative; z-index:1;
+    box-shadow:0 6px 16px rgba(142,38,24,0.28);
+  }
+  .story-connector{flex:1; width:2px; min-height:28px; background:linear-gradient(var(--red), rgba(194,59,38,0.15)); margin:6px 0;}
+  .story-content{padding-top:6px; padding-bottom:34px;}
+  .story-item:last-child .story-content{padding-bottom:0;}
+  .story-index{font-family:'Baloo 2',sans-serif; font-size:0.78rem; font-weight:700; color:var(--red); letter-spacing:1.5px; opacity:0.65;}
+  .story-title{font-family:'Baloo 2',sans-serif; font-size:1.28rem; color:var(--red-deep); font-weight:700; margin-top:4px;}
+  .story-text{margin-top:8px; max-width:60ch; color:#443627; font-size:0.98rem;}
+  @media (max-width:560px){
+    .story-item{gap:14px;}
+    .story-icon{width:44px; height:44px; border-radius:13px;}
+    .story-icon svg{width:18px; height:18px;}
+  }
+ 
+  /* ---------- projects ---------- */
+  .proj-grid{display:flex; flex-direction:column; gap:18px; position:relative; z-index:1;}
+  .proj-card{
+    background:var(--card); color:var(--ink); border-radius:22px; overflow:hidden;
+    box-shadow:var(--shadow); border:1px solid rgba(0,0,0,0.04);
+  }
+  .proj-head{
+    display:flex; justify-content:space-between; align-items:center; gap:20px; width:100%;
+    padding:26px 30px; background:none; border:none; cursor:pointer; text-align:left; font:inherit; color:inherit;
+  }
+  .proj-title-block{display:flex; flex-direction:column; gap:6px;}
+  .proj-title{font-family:'Baloo 2',sans-serif; font-size:1.35rem; color:var(--red-deep); font-weight:700;}
+  .proj-tag{font-size:0.82rem; font-weight:600; opacity:0.7;}
+  .proj-chev{
+    width:34px; height:34px; border-radius:50%; background:var(--red); color:var(--paper); flex:none;
+    display:flex; align-items:center; justify-content:center; transition:transform .3s ease;
+  }
+  .proj-card.open .proj-chev{transform:rotate(135deg);}
+  .proj-body{max-height:0; overflow:hidden; transition:max-height .45s ease;}
+  .proj-body-in{padding:0 30px 30px;}
+  .proj-body-in ul{margin:0 0 18px; padding-left:20px; display:flex; flex-direction:column; gap:10px;}
+  .chip-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    font-size:0.78rem; font-weight:700; padding:7px 13px; border-radius:999px;
+    background:var(--cream-soft); color:var(--red-deep); border:1px solid rgba(142,38,24,0.15);
+  }
+ 
+  /* ---------- skills ---------- */
+  .skills-grid{display:grid; grid-template-columns:1fr 1fr; gap:26px; position:relative; z-index:1;}
+  .skill-card{background:var(--card); border-radius:22px; padding:30px 30px 26px; border:1px solid var(--line); box-shadow:var(--shadow);}
+  .skill-card h3{font-size:1.15rem; color:var(--red-deep); margin-bottom:16px;}
+  .skill-chips{display:flex; flex-wrap:wrap; gap:9px;}
+  .skill-chip{
+    font-size:0.85rem; font-weight:600; padding:8px 14px; border-radius:999px;
+    background:var(--cream); border:1px solid var(--line); cursor:default;
+    transition:background .2s ease, color .2s ease, transform .2s ease;
+  }
+  .skill-chip:hover{background:var(--red); color:var(--paper); transform:translateY(-2px);}
+ 
+  /* ---------- education ---------- */
+  .edu-card{
+    position:relative; z-index:1; max-width:720px; margin:0 auto;
+    background:var(--card); color:var(--ink); border-radius:var(--radius); padding:44px;
+    box-shadow:var(--shadow); text-align:left; display:flex; gap:24px; align-items:flex-start;
+  }
+  .edu-icon{
+    width:64px; height:64px; border-radius:18px; background:var(--red); color:var(--paper); flex:none;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .edu-icon svg{width:30px; height:30px;}
+  .edu-degree{font-family:'Baloo 2',sans-serif; font-size:1.4rem; color:var(--red-deep); font-weight:700;}
+  .edu-school{font-weight:700; margin-top:6px;}
+  .edu-meta{display:flex; gap:16px; flex-wrap:wrap; margin-top:12px; font-size:0.9rem; font-weight:600; opacity:0.75;}
+ 
+  /* ---------- contact/footer ---------- */
+  .contact-sec{text-align:center;}
+  .contact-sec h2{font-size:clamp(2.4rem, 6vw, 4rem); color:var(--red-deep); max-width:16ch; margin:0 auto 18px;}
+  .contact-sec p{max-width:52ch; margin:0 auto 34px; font-size:1.05rem; color:#443627;}
+  .contact-actions{display:flex; flex-wrap:wrap; justify-content:center; gap:14px; margin-bottom:40px;}
+  .footer-bar{
+    border-top:1px solid var(--line); padding:26px 0; display:flex; justify-content:space-between;
+    align-items:center; flex-wrap:wrap; gap:12px; font-size:0.85rem; font-weight:600; opacity:0.75;
+  }
+  .footer-mark{display:flex; align-items:center; gap:8px;}
+ 
+  @media (max-width:900px){
+    .nav-links{display:none;}
+    .nav-cta{display:none;}
+    .burger{display:flex;}
+    .hero .wrap{grid-template-columns:1fr; text-align:left;}
+    .hero-visual{height:300px; order:-1;}
+    .overview-grid{grid-template-columns:1fr;}
+    .skills-grid{grid-template-columns:1fr;}
+    .sec-pad{padding:80px 0;}
+    .edu-card{flex-direction:column;}
+  }
+  @media (max-width:520px){
+    .wrap{padding:0 20px;}
+    .exp-card{padding:26px;}
+    .proj-head{padding:20px;}
+    .proj-body-in{padding:0 20px 24px;}
+  }
+ 
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
   }
 </style>
 </head>
 <body>
-
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-<div class="grid-bg"></div>
-<div class="noise"></div>
-
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">V.VR</div>
+ 
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <div class="nav-mark"><span class="dot">V</span> Varadha VR</div>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#overview" data-nav>Overview</a></li>
+    <li><a href="#experience" data-nav>Experience</a></li>
+    <li><a href="#projects" data-nav>Projects</a></li>
+    <li><a href="#skills" data-nav>Skills</a></li>
+    <li><a href="#education" data-nav>Education</a></li>
   </ul>
+  <a class="nav-cta" href="#contact">Get in touch</a>
+  <button class="burger" id="burger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
 </nav>
-
-<main>
-<!-- HERO -->
-<section id="hero">
-  <div class="container">
-    <div class="hero-inner">
-      <div class="hero-left fade-up">
-        <div class="hero-tag">Available for opportunities</div>
-        <h1>Varadha<br><span>V R</span></h1>
-        <p class="hero-sub">Robotics Systems Engineer building and deploying production-grade robotics and automation systems end-to-end — from requirements and system architecture through hardware-software integration and live deployment. Industrial robotic arms, ROS2 motion planning, embedded systems, and backend development</p>
-        <div class="hero-actions">
-          <a href="#projects" class="btn btn-primary">View Projects</a>
-          <a href="mailto:varadhavr24@gmail.com" class="btn btn-ghost">Get in Touch</a>
-        </div>
-        <div class="stats-bar" style="margin-top:2.5rem">
-          <div class="stat">
-            <div class="stat-val">2+</div>
-            <div class="stat-label">Years Exp.</div>
-          </div>
-          <div class="stat">
-            <div class="stat-val">1000+</div>
-            <div class="stat-label">Students Trained </div>
-          </div>
-          <div class="stat">
-            <div class="stat-val">Full&#8209;stack</div>
-            <div class="stat-label">Robotic Systems</div>
-          </div>
+ 
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#overview">Overview</a>
+  <a href="#experience">Experience</a>
+  <a href="#projects">Projects</a>
+  <a href="#skills">Skills</a>
+  <a href="#education">Education</a>
+  <a href="#contact">Contact</a>
+</div>
+ 
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow-row">
+        <span class="badge-loc">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          Thrissur, Kerala
+        </span>
+      </div>
+      <h1><span>Varadha</span><span class="accent">VR</span></h1>
+      <div class="hero-role">Robotics Systems Engineer</div>
+      <p class="lede">I build intelligent, connected systems that transform technology into real-world experiences.
+Give me a problem, a few components, and enough time, I'll build something that shouldn't exist yet. I'm here to make machines think, systems connect, and ideas become reality.</p>
+ 
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#projects">See the work</a>
+        <a class="btn btn-ghost" href="#contact">Say hello</a>
+      </div>
+ 
+      <div class="contact-row">
+        <a class="contact-pill" href="mailto:varadhavr24@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          varadhavr24@gmail.com
+        </a>
+        <a class="contact-pill" href="https://github.com/Varadha24" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.3 9.41 7.88 10.94.58.11.79-.25.79-.56v-2.17c-3.2.7-3.88-1.36-3.88-1.36-.53-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.24 3.34.95.1-.74.4-1.24.73-1.52-2.55-.29-5.23-1.28-5.23-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.47.11-3.06 0 0 .96-.31 3.15 1.18A10.9 10.9 0 0 1 12 6.03c.97 0 1.94.13 2.85.38 2.18-1.49 3.14-1.18 3.14-1.18.62 1.59.23 2.77.11 3.06.74.81 1.18 1.84 1.18 3.1 0 4.42-2.69 5.39-5.25 5.67.41.35.78 1.04.78 2.1v3.12c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/>
+          </svg>
+          GitHub
+        </a>
+ 
+        <a class="contact-pill" href="https://linkedin.com/in/varadha-vr" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/><path d="M10 9v12M10 13a4 4 0 0 1 8 0v8"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+ 
+    <div class="hero-visual">
+      <span class="ast ast1 lg"><svg viewBox="0 0 40 40"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span>
+      <span class="ast ast2"><svg viewBox="0 0 40 40"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span>
+      <div class="blob"></div>
+      <svg class="arm-svg" viewBox="0 0 300 300">
+        <path class="draw" d="M60 240 h50 M85 240 V190 M85 190 L150 150 M150 150 L150 90 M150 90 L205 70 M205 70 L230 40"/>
+        <circle class="joint" cx="85" cy="190" r="7" style="animation-delay:1s"/>
+        <circle class="joint" cx="150" cy="150" r="7" style="animation-delay:1.4s"/>
+        <circle class="joint" cx="150" cy="90" r="7" style="animation-delay:1.8s"/>
+        <circle class="joint" cx="205" cy="70" r="7" style="animation-delay:2.1s"/>
+        <circle class="joint" cx="230" cy="40" r="9" style="animation-delay:2.4s"/>
+      </svg>
+      <div class="spin-badge">
+        <svg viewBox="0 0 120 120" width="118" height="118">
+          <defs><path id="circlePath" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
+          <text font-family="Plus Jakarta Sans" font-size="9.3" font-weight="700" fill="#2A2118" letter-spacing="2">
+            <textPath href="#circlePath">• DEBUGGING OWN LOGIC • BUILDING ROBOTS •</textPath>
+          </text>
+        </svg>
+        <div class="spin-badge-core">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C23B26" stroke-width="2"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="3.2"/></svg>
         </div>
       </div>
-      <div class="hero-visual fade-up" style="transition-delay:.15s">
-        <div class="orbit-container">
-          <div class="orbit-ring"><div class="orbit-dot"></div></div>
-          <div class="orbit-ring"><div class="orbit-dot"></div></div>
-          <div class="orbit-ring"></div>
-          <div class="orbit-center">
-            <div class="initials">VR</div>
-            <div class="role-label">Robotics Eng.</div>
+    </div>
+  </div>
+</header>
+ 
+<!-- ============ OVERVIEW ============ -->
+<section class="sec-red sec-pad" id="overview">
+  <span class="ghost-num">01</span>
+  <div class="wrap overview-grid">
+    <div class="reveal">
+      <div class="kicker"><span class="ast sm"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span> PERSONAL OVERVIEW</div>
+      <h2 class="sec-title">From concept to code, circuits to deployment.</h2>
+    </div>
+    <div class="reveal" style="transition-delay:0.1s">
+      <p>I'm a Robotics Systems Engineer with 2 years of hands-on experience designing, prototyping, and deploying integrated automation and IoT solutions.</p>
+      <p>Specialized in end-to-end system design: from client requirements and hardware-software integration through production deployment. Expert in industrial robotic arm programming, robotics product development, and computer vision.</p>
+      <p>Demonstrated ability to lead IoT product development, mentor technical teams, and translate complex automation challenges into scalable, reliable solutions.</p>
+      <div class="stat-list" style="margin-top:34px;">
+        <div class="stat"><span class="num">2+</span><span class="label">Years designing and building robotics &amp; IoT systems</span></div>
+        <div class="stat"><span class="num">E2E</span><span class="label">Robotics & IoT platforms, integrating hardware, software, and intelligent systems</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ============ EXPERIENCE ============ -->
+<section class="sec-cream sec-pad" id="experience">
+  <span class="ghost-num on-cream">02</span>
+  <div class="wrap">
+    <div class="reveal" style="margin-bottom:44px;">
+      <div class="kicker"><span class="ast sm"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span> Work Experience</div>
+      <h2 class="sec-title">Where I've built it</h2>
+    </div>
+    <div class="exp-wrap reveal" style="transition-delay:0.1s">
+      <div class="exp-card">
+        <div class="exp-head">
+          <div>
+            <div class="exp-role">Robotics Systems Engineer</div>
+            <div class="exp-company">Inker Robotics · Thrissur, Kerala</div>
           </div>
+          <span class="exp-dates">July 2024 — Present · 2 yrs</span>
+        </div>
+ 
+        <div class="story-timeline">
+ 
+          <div class="story-item">
+            <div class="story-marker-col">
+              <div class="story-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4M6 20v-4l4-3V7"/><path d="M10 7l5-2 2 2-4 2"/><circle cx="17" cy="6" r="2"/></svg>
+              </div>
+              <div class="story-connector"></div>
+            </div>
+            <div class="story-content">
+              <div class="story-title">Teaching arms to work the line</div>
+              <p class="story-text">Most of my week starts on the shop floor, not at a whiteboard. I commission, program, and deploy industrial robotic arms, while integrating the sensors, controllers, connectivity, and software around them, so a design on paper becomes a machine that repeats the same motion, correctly, thousands of times without anyone babysitting it.</p>
+            </div>
+          </div>
+ 
+          <div class="story-item">
+            <div class="story-marker-col">
+              <div class="story-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M14 9h4M14 13h4M6 18v2M18 18v2"/></svg>
+              </div>
+              <div class="story-connector"></div>
+            </div>
+            <div class="story-content">
+              <div class="story-title">Giving RTBS a face — and a memory</div>
+              <p class="story-text">I led the architecture behind RTBS, an AI face‑recognition ticketing platform, and built it to scale from a single walk‑in to a large group moving through access control at once. The harder problem was making it feel effortless: I layered in gamified engagement, tighter workflows, and progressive unlocks so the system rewarded people for showing up instead of just checking them in.</p>
+            </div>
+          </div>
+ 
+          <div class="story-item">
+            <div class="story-marker-col">
+              <div class="story-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.3 1 2.1V16h6v-.4c0-.8.4-1.5 1-2.1A6 6 0 0 0 12 3Z"/></svg>
+              </div>
+              <div class="story-connector"></div>
+            </div>
+            <div class="story-content">
+              <div class="story-title">Ideas that survive past the prototype</div>
+              <p class="story-text">Outside any single build, I lead IoT product development from a rough concept to a working proof-of-concept. Building the system, making the pieces work together, then writing the architecture, design specs, and workflows so someone else can actually ship it without reverse-engineering my head.</p>
+            </div>
+          </div>
+ 
+          <div class="story-item">
+            <div class="story-marker-col">
+              <div class="story-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M3 16l6-4 4 3 8-6M8 20h8"/></svg>
+              </div>
+              <div class="story-connector"></div>
+            </div>
+            <div class="story-content">
+              <div class="story-title">Teaching what I had to learn the hard way</div>
+              <p class="story-text">I run hands‑on IoT and Embedded Systems workshops and Faculty Development Programs for engineering students and faculty, turning the debugging scars from my own projects into sessions people can actually walk out and use.</p>
+            </div>
+          </div>
+ 
+          <div class="story-item">
+            <div class="story-marker-col">
+              <div class="story-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2 20c0-3 2.7-5 6-5s6 2 6 5M15.5 20c0-2.2-1.4-4-3.5-4.7"/></svg>
+              </div>
+            </div>
+            <div class="story-content">
+              <div class="story-title">Mentoring the next build</div>
+              <p class="story-text">I mentor interns and students through the full arc of a project from ideation, design, implementation, testing, up to the moment they stand in front of people and present something that actually works.</p>
+            </div>
+          </div>
+ 
         </div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="container">
-    <div class="section-label">Who I am</div>
-    <h2>Building machines that<br>think and <span style="color:var(--accent)">act</span></h2>
-    <div class="about-grid" style="display:grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items:start">
-      <div class="fade-up">
-        <div class="about-card">
-          <div class="about-card-header">
-            <div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div>
-            varadha_vr.profile
+ 
+<!-- ============ PROJECTS ============ -->
+<section class="sec-red sec-pad" id="projects">
+  <span class="ghost-num">03</span>
+  <div class="wrap">
+    <div class="reveal" style="margin-bottom:44px;">
+      <div class="kicker"><span class="ast sm"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span> FLAGSHIP PROJECTS</div>
+      <h2 class="sec-title">Systems I've taken from idea to production</h2>
+    </div>
+ 
+    <div class="proj-grid reveal" style="transition-delay:0.1s" id="projGrid">
+ 
+      <div class="proj-card">
+        <button class="proj-head" data-toggle>
+          <div class="proj-title-block">
+            <span class="proj-title">Robobooth — Automated Robotic Videography System</span>
+            <span class="proj-tag">Production‑deployed · Full‑stack system architect &amp; lead developer</span>
           </div>
-          <div class="about-card-body">
-            <p>// <span class="highlight">Role:</span> Robotics Systems Engineer</p>
-            <p>// <span class="highlight">Based in:</span> Thrissur, Kerala, India</p>
-            <p>// <span class="highlight">Current:</span> Inker Robotics Solutions Pvt. Ltd.</p>
-            <p>// <span class="highlight">Education:</span> B.Tech ECE, CUSAT (2020-2024)</p>
-            <p>// <span class="highlight2">Focus:</span> Industrial Robotic Arm Automation,<br>&nbsp;&nbsp;&nbsp;Embedded Systems, IoT</p>
+          <span class="proj-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
+        </button>
+        <div class="proj-body">
+          <div class="proj-body-in">
+            <ul>
+              <li>Architected an end‑to‑end system integrating a Doosan 6‑axis collaborative arm with real‑time camera control and automated video delivery.</li>
+              <li>Built a FastAPI backend orchestrating arm motion (DART platform), Android camera recording via ADB, and video sync with under 1 second of latency.</li>
+              <li>Designed real‑time hardware triggering through an Arduino relay, synchronizing camera and arm signals to millisecond‑level timing for a cinematic effect.</li>
+              <li>Implemented FFmpeg‑based post‑processing — slow motion, branding overlays, music — plus WhatsApp Cloud API delivery straight to each visitor.</li>
+              <li>Live in production with a 15‑second turnaround per video, consistent quality, and zero critical failures; now a recurring‑revenue flagship product.</li>
+            </ul>
+            <div class="chip-row">
+              <span class="chip">PYTHON</span><span class="chip">FastAPI</span><span class="chip">Android ADB</span><span class="chip">Video Encoding</span><span class="chip">FFmpeg</span><span class="chip">WhatsApp Cloud API</span>
+            </div>
           </div>
         </div>
-
-        <ul class="info-list" style="margin-top:1.5rem">
-          <li>
-            <span class="key">Email</span>
-            <span class="val"><a href="mailto:varadhavr24@gmail.com">varadhavr24@gmail.com</a></span>
-          </li>
-          <li>
-            <span class="key">LinkedIn</span>
-            <span class="val"><a href="https://linkedin.com/in/varadha-vr" target="_blank">linkedin.com/in/varadha-vr</a></span>
-          </li>
-          <li>
-            <span class="key">Location</span>
-            <span class="val">Thrissur, Kerala 🇮🇳</span>
-          </li>
-
-        </ul>
       </div>
-
-      <div class="about-right fade-up" style="transition-delay:.1s">
-        <h3>Systems Architect.<br>Robotics Engineer.<br>Trainer.</h3>
-        <p>I design and deploy production-grade robotics and automation systems end-to-end. From client requirements gathering and system architecture through hardware-software integration, embedded firmware, backend systems, and live deployment in production environments.</p>
-        <p>My work spans industrial robotic arm commissioning (Doosan, Epson, SCARA), ROS2 motion planning with MoveIt, IoT integration, embedded systems (ESP32/Arduino/Raspberry Pi), computer vision, and full-stack system engineering. I've delivered client-facing automation systems involving robotic control, vision pipelines, and real-time data processing.</p>
-        <p>Beyond engineering, I train 500+ students and faculty in Robotics and IoT. I focus on building systems that are not just functional, but intuitive for the people who use and build them. I've led IoT product development initiatives, mentored 20+ interns, and managed technical labs.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="container">
-    <div class="section-label">What I've built</div>
-    <h2>Projects</h2>
-    <p class="section-desc">A mix of client-commissioned systems, personal builds, and research-grade prototypes — spanning robotics, embedded systems, and system design.</p>
-
-    <div class="projects-grid">
-
-      <!-- Featured: Robobooth -->
-      <div class="project-card featured fade-up">
-      
-          <h3>Robobooth — Automated Robotic Videography System</h3>
-          <div class="project-meta">
-            <span class="tag tag-live">● Live in Production</span>
-            <span class="tag tag-green">Client Project</span>
-            <span class="tag tag-orange">Featured</span>
+ 
+      <div class="proj-card">
+        <button class="proj-head" data-toggle>
+          <div class="proj-title-block">
+            <span class="proj-title">AIoT Smart School Campus Monitoring System</span>
+            <span class="proj-tag">Complete system design &amp; documentation · Lead systems architect</span>
           </div>
-          <p>Fully automated client-commissioned system integrating a Doosan 6-axis robotic arm with camera control, video processing pipeline, and WhatsApp-based delivery. Designed complete system architecture — robotics, backend, frontend, and user delivery flow. Built Python + FastAPI backend with FFmpeg video processing and WhatsApp Cloud API integration. Arm controlled via DART platform.</p>
-          <div class="tech-stack">
-            <span class="tech-pill">Python</span><span class="tech-pill">FastAPI</span><span class="tech-pill">Flask</span><span class="tech-pill">Doosan 6-Axis</span><span class="tech-pill">FFmpeg</span><span class="tech-pill">WhatsApp API</span><span class="tech-pill">UX Design</span>
+          <span class="proj-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
+        </button>
+        <div class="proj-body">
+          <div class="proj-body-in">
+            <ul>
+              <li>Designed a modular IoT platform covering real‑time occupancy, attendance, environmental control, emergency response, and autonomous facility management.</li>
+              <li>Built a React + Three.js web UI with a 3D digital‑twin view, attendance tracking, live environmental monitoring, an admin dashboard, and an integrated AI chatbot.</li>
+              <li>Shipped a mobile app for real‑time power monitoring (voltage, current, energy), automatic fire‑detection alerts, an SOS button, and local WiFi operation.</li>
+              <li>Added smart parking with IR‑sensor slot monitoring and servo‑gate automation that opens on vehicle detection when slots are free, shown on an LCD status display.</li>
+              <li>Designed the architecture local‑first with offline functionality and cloud sync, backed by full documentation — pin mapping, flowcharts, troubleshooting, and a scalability roadmap.</li>
+            </ul>
+            <div class="chip-row">
+              <span class="chip">React</span><span class="chip">JavaScript</span><span class="chip">Mobile App Development</span><span class="chip">Real-Time Data Handling</span><span class="chip">ESP32</span>
+            </div>
           </div>
-       
-        <div class="project-number">01</div>
+        </div>
       </div>
-
-      <!-- AIoT Smart Campus -->
-      <div class="project-card fade-up" style="transition-delay:.05s">
-        <div class="project-meta">
-          <span class="tag tag-green">IoT + System Design</span>
+ 
+      <div class="proj-card">
+        <button class="proj-head" data-toggle>
+          <div class="proj-title-block">
+            <span class="proj-title">Vision‑Based Bionic Hand — Real‑Time Gesture Replication</span>
+            <span class="proj-tag">Fully functional prototype · Hardware design &amp; integration lead</span>
+          </div>
+          <span class="proj-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
+        </button>
+        <div class="proj-body">
+          <div class="proj-body-in">
+            <ul>
+              <li>Custom‑designed and 3D‑printed a robotic hand with 5‑joint articulation to demonstrate computer‑vision‑driven embedded control.</li>
+              <li>Implemented MediaPipe hand‑landmark detection, tracking 21 keypoints in real time at 60 FPS, with Python mapping gestures to servo angles via inverse kinematics.</li>
+              <li>Ran UART serial communication from Python through Arduino to servo control at a 100 ms update rate, handling hand rotation, scale variation, and partial occlusion.</li>
+            </ul>
+            <div class="chip-row">
+              <span class="chip">MediaPipe</span><span class="chip">Python</span><span class="chip">OpenCV</span><span class="chip">Arduino</span><span class="chip">UART</span>
+            </div>
+          </div>
         </div>
-        <h3>AIoT Smart Campus Monitoring</h3>
-        <p>Modular IoT platform for real-time campus monitoring, environmental control, emergency response, and autonomous facility management. System includes 3D digital twin (React + Three.js), RFID attendance tracking, environmental sensors (temp, humidity, air quality), mobile app with power monitoring and fire alerts, and smart parking with servo gate automation. Local-first architecture enables offline functionality with optional cloud sync.</p>
-        <div class="tech-stack">
-          <span class="tech-pill">ESP32</span><span class="tech-pill">React</span><span class="tech-pill">Three.js</span><span class="tech-pill">RFID RC522</span><span class="tech-pill">IoT Sensors</span><span class="tech-pill">Python</span>
-        </div>
-        <div class="project-number">02</div>
       </div>
-
-
-      <!-- Vision Robotic Hand -->
-      <div class="project-card fade-up" style="transition-delay:.1s">
-        <div class="project-meta">
-          <span class="tag tag-orange">Computer Vision + Embedded</span>
+ 
+      <div class="proj-card">
+        <button class="proj-head" data-toggle>
+          <div class="proj-title-block">
+            <span class="proj-title">Autonomous Disinfectant Robot — Hospital‑Grade UV‑C Disinfection</span>
+            <span class="proj-tag">Fully functional IoT system · System architect &amp; firmware developer</span>
+          </div>
+          <span class="proj-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
+        </button>
+        <div class="proj-body">
+          <div class="proj-body-in">
+            <ul>
+              <li>Designed an autonomous mobile platform for hospital surface and air UV‑C disinfection, removing the need for staff to enter contaminated areas.</li>
+              <li>Built SLAM‑based navigation with LiDAR mapping and localization for room‑to‑room autonomy, plus a mobile app so nurses can dispatch the robot to specific rooms.</li>
+              <li>Integrated ultrasonic + LiDAR collision avoidance and configurable UV‑C timing, with ESP32 and Arduino handling real‑time I/O on a 100 ms cycle.</li>
+            </ul>
+            <div class="chip-row">
+              <span class="chip">SLAM</span><span class="chip">LiDAR</span><span class="chip">ESP32</span><span class="chip">Arduino</span><span class="chip">Real-Time Control</span>
+            </div>
+          </div>
         </div>
-        <h3>Vision-Based Robotic Hand</h3>
-        <p>Custom-designed and 3D-printed robotic hand with 5-joint articulation that tracks and replicates human hand gestures in real time. Uses MediaPipe for hand landmark detection (21 keypoints at 60 FPS), Python gesture-to-servo mapping via inverse kinematics, and UART serial communication to Arduino. Handles hand rotation, scale variation, and partial occlusion gracefully.</p>
-        <div class="tech-stack">
-          <span class="tech-pill">MediaPipe</span><span class="tech-pill">OpenCV</span><span class="tech-pill">Python</span><span class="tech-pill">Arduino</span><span class="tech-pill">Servo Motors</span><span class="tech-pill">3D Printing</span>
-        </div>
-        <div class="project-number">03</div>
       </div>
-
-
-      <!-- Cooking Robot -->
-      <div class="project-card fade-up" style="transition-delay:.1s">
-        <div class="project-meta">
-          <span class="tag tag-orange">6-Axis Industrial</span>
-        </div>
-        <h3>Cooking Robot Demo — Epson 6-Axis</h3>
-        <p>Programmed an Epson 6-axis industrial robot for an automated cooking workflow demonstration. Developed pick-process-place motion logic, integrated IR sensor-based dispensing via robot I/O coordination, and optimised sequence for smooth continuous operation.</p>
-        <div class="tech-stack">
-          <span class="tech-pill">Commisioning</span><span class="tech-pill">Motion Logic</span><span class="tech-pill">I/O Coordination</span><span class="tech-pill">Epson RC+</span>
-        </div>
-        <div class="project-number">04</div>
-      </div>
-
-      <!-- Vision Color Sorting -->
-      <div class="project-card fade-up" style="transition-delay:.05s">
-        <div class="project-meta">
-          <span class="tag tag-green">Vision + Robotics</span>
-        </div>
-        <h3>Vision-Based Color Sorting</h3>
-        <p>Color sorting system using a 4-axis Dobot robotic arm with the Dobot camera. Computer vision pipeline identifies object colors and feeds coordinates to the arm for precise pick-and-place sorting operations.</p>
-        <div class="tech-stack">
-          <span class="tech-pill">Dobot 4-Axis</span><span class="tech-pill">Dobot Camera</span><span class="tech-pill">Computer Vision</span><span class="tech-pill">Pick & Place</span>
-        </div>
-        <div class="project-number">05</div>
-      </div>
-
-      <!-- RTBS -->
-      <div class="project-card fade-up" style="transition-delay:.1s">
-        <div class="project-meta">
-          <span class="tag tag-dim">System Design</span>
-          <span class="tag tag-orange">UX / Architecture</span>
-        </div>
-        <h3>RTBS — RoboPark Ticketing & Access Platform</h3>
-        <p>End-to-end system design for RoboPark's AI-enabled ticket booking and smart access control platform. Led requirements gathering, user flows, customer journeys, gamification strategy, admin features, SWOT analysis, bottleneck identification and resolution. Designed complete UI/UX in Figma and built frontend prototype. AI facial recognition planned for secure access. Documentation is dev-ready for direct handoff.</p>
-        <div class="tech-stack">
-          <span class="tech-pill">System Architecture</span><span class="tech-pill">UX Research</span><span class="tech-pill">Technical Documentation</span><span class="tech-pill">SWOT Analysis</span>
-        </div>
-        <div class="project-number">06</div>
-      </div>
-
-      <!-- B.Tech Major Project -->
-      <div class="project-card fade-up" style="transition-delay:.05s">
-        <div class="project-meta">
-          <span class="tag tag-dim">Academic Major Project</span>
-          <span class="tag tag-green">Autonomous Robotics</span>
-        </div>
-        <h3>Autonomous Disinfection Robot</h3>
-        <p>Hospital-grade autonomous mobile platform for UV-C-based surface and air disinfection. Eliminates manual staff exposure to contaminated areas. Features SLAM-based navigation (LiDAR mapping + localization), ultrasonic + LiDAR collision avoidance, configurable UV-C light control with timers, and mobile app interface for nurses to dispatch robot to specific rooms via uploaded hospital floor maps. ESP32 + Arduino real-time I/O at 100ms cycle.</p>
-        <div class="tech-stack">
-          <span class="tech-pill">LiDAR</span><span class="tech-pill">SLAM</span><span class="tech-pill">ROS2</span><span class="tech-pill">ESP32</span><span class="tech-pill">Arduino</span><span class="tech-pill">Mobile Chassis</span><span class="tech-pill">UV-C Control</span>
-        </div>
-        <div class="project-number">07</div>
-      </div>
-
+ 
     </div>
   </div>
 </section>
-
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="container">
-    <div class="section-label">Where I've worked</div>
-    <h2>Experience</h2>
-    <p class="section-desc">From internship in IoT to full-stack robotics systems engineering — a trajectory through hands-on automation engineering.</p>
-
-    <div style="display:grid; grid-template-columns: 1fr 2fr; gap:5rem;">
-      <div class="fade-up" style="font-family:var(--mono); font-size:.72rem; color:var(--muted);">
-        <p style="margin-bottom:1rem; color:var(--text)">Total experience</p>
-        <p style="font-size:2rem; font-weight:700; color:var(--accent); font-family:var(--sans); margin-bottom:.5rem">1+ yrs</p>
-        <p style="margin-bottom:2rem">in industry</p>
-        <div style="background:var(--card); border:1px solid var(--border); border-radius:4px; padding:1.2rem;">
-          <p style="color:var(--accent); margin-bottom:.8rem">// tech stack</p>
-          <p>ROS2 · Motion Planning</p>
-          <p>Arduino · ESP32 · Raspberry Pi · STM32</p>
-          <p>Python · FastAPI · Flask</p>
-          <p>C/C++ ·</p>
-          <p>OpenCV · MediaPipe</p>
-          <p>Doosan · Epson · SCARA · Dobot</p>
-          <p>Linux · Git · Figma</p>
+ 
+<!-- ============ SKILLS ============ -->
+<section class="sec-cream sec-pad" id="skills">
+  <span class="ghost-num on-cream">04</span>
+  <div class="wrap">
+    <div class="reveal" style="margin-bottom:44px;">
+      <div class="kicker"><span class="ast sm"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span> CORE COMPETENCIES</div>
+      <h2 class="sec-title">What I build with</h2>
+    </div>
+    <div class="skills-grid reveal" style="transition-delay:0.1s">
+      <div class="skill-card">
+        <h3>Robotics &amp; Automation</h3>
+        <div class="skill-chips">
+          <span class="skill-chip">ROS2</span><span class="skill-chip">Motion Planning</span><span class="skill-chip">Cobot Programming</span><span class="skill-chip">Kinesthetic Teaching</span><span class="skill-chip">I/O Control</span><span class="skill-chip">Robot Comissioning</span>
         </div>
       </div>
-
-      <div class="exp-timeline fade-up" style="transition-delay:.1s">
-        <div class="exp-item">
-          <div class="exp-period">Jan 2025 — Present · 1 yr 9 mos</div>
-          <div class="exp-title">Robotics Systems Engineer</div>
-          <div class="exp-company">Inker Robotics Solutions Pvt. Ltd. · <span>Thrissur, Kerala</span></div>
-          <ul class="exp-bullets">
-            <li>Designed and deployed production-level robotics automation systems end-to-end — from requirements analysis and system architecture through integration, testing, and deployment.</li>
-            <li>Architected and built Robobooth (production-deployed): Doosan 6-axis arm + FastAPI backend + FFmpeg video processing + WhatsApp API; <1s latency, 15s turnaround, flagship revenue-generating product.</li>
-            <li>Led RTBS (RoboPark Ticket Booking System): cloud-based visitor management with facial recognition, gamification, group access control; system architecture, Figma UX design, technical documentation.</li>
-            <li>Programmed and commissioned industrial robotic arms (Doosan 6-axis, Epson, SCARA) using ROS2/MoveIt for production applications ensuring high reliability and repeatability.</li>
-            <li>Built integrated hardware–software systems using ESP32, Arduino, Raspberry Pi, Python for real-world automation deployments.</li>
-            <li>Trained 500+ students and faculty through workshops, FDPs, and Industrial Visit programmes; built 6-month CIRCUITRY curriculum emphasizing practical hardware-software integration.</li>
-            <li>Managed RoboLab: hardware upgrades, maintenance, project integration, IoT product development initiatives and PoC prototyping.</li>
-          </ul>
+      <div class="skill-card">
+        <h3>Embedded Systems &amp; Microcontrollers</h3>
+        <div class="skill-chips">
+          <span class="skill-chip">ESP32</span><span class="skill-chip">Arduino</span><span class="skill-chip">Raspberry Pi</span><span class="skill-chip">STM32</span><span class="skill-chip">I2C / SPI / UART</span><span class="skill-chip">Relay Control</span><span class="skill-chip">Sensor Integration</span><span class="skill-chip">Circuit‑Level Debugging</span>
         </div>
-
-        <div class="exp-item">
-          <div class="exp-period">Jul 2024 — Dec 2024 · 6 mos</div>
-          <div class="exp-title">Robotics Engineer Trainee</div>
-          <div class="exp-company">Inker Robotics Solutions Pvt. Ltd. · <span>Thrissur, Kerala</span></div>
-          <ul class="exp-bullets">
-            <li>Built vision-based robotic systems using OpenCV and MediaPipe, translating real-time human gestures into robotic motion.</li>
-            <li>Developed automation workflows with industrial robotic arms (SCARA, 6-axis), implementing motion logic and hardware-triggered operations.</li>
-            <li>Programmed robotic systems for pick-and-place and process automation using I/O coordination and control logic.</li>
-            <li>Gained hands-on experience across diverse robotic platforms including industrial arms, humanoid, and mobile robots.</li>
-          </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Programming Languages &amp; Frameworks</h3>
+        <div class="skill-chips">
+          <span class="skill-chip">Python</span><span class="skill-chip">OpenCV</span><span class="skill-chip">MediaPipe</span><span class="skill-chip">C / C++</span><span class="skill-chip">Node.js</span><span class="skill-chip">React</span><span class="skill-chip">FFMPEG</span><span class="skill-chip">Linux</span>
         </div>
-
-        <div class="exp-item">
-          <div class="exp-period">May 2023 — Jul 2023 · 3 mos</div>
-          <div class="exp-title">IoT Developer Intern</div>
-          <div class="exp-company">Keltron (Kerala State Electronics Development Corporation) · <span>Kaloor, Kerala</span></div>
-          <ul class="exp-bullets">
-            <li>Developed IoT-based solutions integrating sensors and data streams for real-time monitoring.</li>
-            <li>Gained hands-on experience in data collection, validation, embedded systems protocols, microcontroller programming, sensor interfacing, and product design.</li>
-          </ul>
+      </div>
+      <div class="skill-card">
+        <h3>System Architecture &amp; Strategy</h3>
+        <div class="skill-chips">
+          <span class="skill-chip">Technical Documentation</span><span class="skill-chip">Requirements Analysis</span><span class="skill-chip">Strategic Planning</span><span class="skill-chip">Backend Development</span><span class="skill-chip">Full‑Stack IoT</span><span class="skill-chip">System Architecture</span><span class="skill-chip">Solution Design</span>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="container">
-    <div class="section-label">What I work with</div>
-    <h2>Technical Skills</h2>
-    <p class="section-desc">Full-stack robotics engineering — mechanical integration, embedded firmware, ROS2 motion planning, vision pipelines, and scalable backend systems.</p>
-
-    <div class="skills-grid">
-      <div class="skill-group fade-up">
-        <div class="skill-group-title">Robotics & Automation</div>
-        <div class="skill-chips">
-          <span class="skill-chip">ROS2</span>
-          <span class="skill-chip">Python</span>
-          <span class="skill-chip">Motion Planning</span>
-          <span class="skill-chip">Robot Commissioning</span>
-          <span class="skill-chip">I/O Control</span>
-         
-        </div>
+ 
+<!-- ============ EDUCATION ============ -->
+<section class="sec-red sec-pad" id="education">
+  <span class="ghost-num">05</span>
+  <div class="wrap">
+    <div class="reveal" style="margin-bottom:44px; text-align:center;">
+      <div class="kicker" style="justify-content:center;"><span class="ast sm"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span> EDUCATION</div>
+      <h2 class="sec-title" style="max-width:none; margin:0 auto;">Where it started</h2>
+    </div>
+    <div class="edu-card reveal" style="transition-delay:0.1s">
+      <div class="edu-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 9.5 12 4l10 5.5-10 5.5L2 9.5Z"/><path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg>
       </div>
-
-      <div class="skill-group fade-up" style="transition-delay:.05s">
-        <div class="skill-group-title">Embedded & Hardware</div>
-        <div class="skill-chips">
-          <span class="skill-chip">Arduino</span>
-          <span class="skill-chip">ESP32</span>
-          <span class="skill-chip">Raspberry Pi</span>
-         <span class="skill-chip">STM32</span>
-          <span class="skill-chip">Embedded C</span>
-          <span class="skill-chip">C++</span>
-          <span class="skill-chip">Sensor Integration</span>
-          <span class="skill-chip">Circuit Design</span>
-          <span class="skill-chip">I2C/SPI/UART</span>
-          <span class="skill-chip">Servo Control</span>
-        </div>
-      </div>
-
-      <div class="skill-group fade-up" style="transition-delay:.1s">
-        <div class="skill-group-title">Software & Backend</div>
-        <div class="skill-chips">
-          <span class="skill-chip">Python</span>
-          <span class="skill-chip">FastAPI</span>
-          <span class="skill-chip">Flask</span>
-          <span class="skill-chip">REST APIs</span>
-          <span class="skill-chip">FFmpeg</span>
-          <span class="skill-chip">OpenCV</span>
-          <span class="skill-chip">MediaPipe</span>
-          <span class="skill-chip">Linux</span>
-          <span class="skill-chip">Git</span>
-        </div>
-      </div>
-
-      <div class="skill-group fade-up" style="transition-delay:.15s">
-        <div class="skill-group-title">IoT & Systems</div>
-        <div class="skill-chips">
-          <span class="skill-chip">IoT Architecture</span>
-          <span class="skill-chip">MQTT</span>
-          <span class="skill-chip">Real-Time Systems</span>
-          <span class="skill-chip">Data Pipelines</span>
-          <span class="skill-chip">Cloud Integration</span>
-        </div>
-      </div>
-
-      <div class="skill-group fade-up" style="transition-delay:.05s">
-        <div class="skill-group-title">Design & UX</div>
-        <div class="skill-chips">
-          <span class="skill-chip">Technical Documentation</span>
-          <span class="skill-chip">Figma</span>
-          <span class="skill-chip">UI/UX Design</span>
-          <span class="skill-chip">System Architecture</span>
-          <span class="skill-chip">User Flow Design</span>
-        </div>
-      </div>
-
-      <div class="skill-group fade-up" style="transition-delay:.1s">
-        <div class="skill-group-title">Core Strengths</div>
-        <div class="skill-chips">
-          <span class="skill-chip">System Architecture</span>
-          <span class="skill-chip">End-to-End System Engineering</span>
-          <span class="skill-chip">Technical Documentation</span>
-          <span class="skill-chip">Client Requirement Analysis  </span>
-          <span class="skill-chip">Team Leadership  </span>
+      <div>
+        <div class="edu-degree">B.Tech — Electronics &amp; Communication Engineering</div>
+        <div class="edu-school">Cochin University of Science and Technology (CUSAT), Kochi</div>
+        <div class="edu-meta">
+          <span>Graduated 2024</span>
+          <span>·</span>
+          <span>CGPA 8.8 / 10</span>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="container">
-    <div class="section-label" style="justify-content:center">Let's connect</div>
-    <h2>Open to new<br><span style="color:var(--accent)">opportunities</span></h2>
-    <p>I'm actively exploring roles in Robotics, Embedded Systems, and Industrial Automation.<br>Bangalore is the preferred move — but open to Hyderabad, Pune, Chennai, Kochi, and Mumbai.</p>
-    <div class="contact-links">
-      <a href="mailto:varadhavr24@gmail.com" class="btn btn-primary">varadhavr24@gmail.com</a>
-      <a href="https://linkedin.com/in/varadha-vr" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
+ 
+<!-- ============ CONTACT ============ -->
+<section class="sec-cream sec-pad contact-sec" id="contact">
+  <div class="wrap reveal">
+    <div class="kicker" style="justify-content:center;"><span class="ast sm"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span> Let's talk</div>
+    <h2>Got a crazy idea? Good.</h2>
+    <p>Robots, intelligent systems, connected devices, automation or something that doesn't have a name yet. Bring the problem. I'll bring the engineering.</p>
+    <div class="contact-actions">
+      <a class="btn btn-primary" href="mailto:varadhavr24@gmail.com">Email me</a>
+      <a class="btn btn-ghost" href="https://linkedin.com/in/varadha-vr" target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </div>
+  <div class="wrap footer-bar">
+    <div class="footer-mark"><span class="ast sm" style="position:static; color:var(--red);"><svg viewBox="0 0 40 40"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span> Varadha VR · Thrissur, Kerala</div>
+    <div>Robotics Systems Engineer</div>
+  </div>
 </section>
-</main>
-
-<footer>
-  <span>VARADHA VR · Robotics Systems Engineer</span>
-  <span>Thrissur, Kerala · 2025</span>
-</footer>
-
+ 
 <script>
-// Cursor
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursorRing');
-let mx = 0, my = 0, rx = 0, ry = 0;
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-function animCursor() {
-  cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
-  rx += (mx - rx) * 0.13; ry += (my - ry) * 0.13;
-  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-  requestAnimationFrame(animCursor);
-}
-animCursor();
-
-// Fade-up on scroll
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.12 });
-document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
-
-// Immediate trigger for hero
-document.querySelectorAll('#hero .fade-up').forEach(el => el.classList.add('visible'));
+  // Mobile menu
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+ 
+  // Active nav link on scroll
+  const navLinks = document.querySelectorAll('[data-nav]');
+  const sections = document.querySelectorAll('section[id]');
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const match = document.querySelector('[data-nav][href="#' + entry.target.id + '"]');
+        if (match) match.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  sections.forEach(s => navObserver.observe(s));
+ 
+  // Reveal on scroll
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealEls = document.querySelectorAll('.reveal');
+  if (reduceMotion) {
+    revealEls.forEach(el => el.classList.add('is-visible'));
+  } else {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => revealObserver.observe(el));
+  }
+ 
+  // Project accordions
+  document.querySelectorAll('[data-toggle]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.proj-card');
+      const body = card.querySelector('.proj-body');
+      const isOpen = card.classList.contains('open');
+      if (isOpen) {
+        card.classList.remove('open');
+        body.style.maxHeight = null;
+      } else {
+        card.classList.add('open');
+        body.style.maxHeight = body.scrollHeight + 'px';
+      }
+    });
+  });
 </script>
 </body>
 </html>
+ 
