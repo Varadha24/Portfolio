@@ -166,6 +166,216 @@
   .rest-ast{position:absolute;}
   .hero .ast1{top:60px; right:6%; color:var(--red);}
   .hero .ast2{bottom:40px; left:2%; color:var(--red-deep); }
+
+  /* =====================================================
+   INTERACTIVE ROBOTIC ARM
+===================================================== */
+
+.robot-hero {
+  position: relative;
+  height: 440px;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Remove the old red blob */
+
+.robot-hero .blob {
+  display: none;
+}
+
+
+/* Remove old static arm */
+
+.robot-hero > .arm-svg:not(.interactive-arm) {
+  display: none;
+}
+
+
+/* Robot SVG */
+
+.interactive-arm {
+  position: relative;
+  z-index: 2;
+
+  width: min(100%, 440px);
+  height: 440px;
+
+  overflow: visible;
+
+  cursor: crosshair;
+
+  filter:
+    drop-shadow(
+      0 18px 28px
+      rgba(42, 33, 24, 0.12)
+    );
+}
+
+
+/* Technical label */
+
+.robot-label {
+  position: absolute;
+
+  top: 8px;
+  right: 10px;
+
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  font-family: "Plus Jakarta Sans", sans-serif;
+
+  font-size: 0.66rem;
+  font-weight: 800;
+
+  letter-spacing: 0.12em;
+
+  color: var(--red-deep);
+
+  white-space: nowrap;
+}
+
+
+.robot-status-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #C23B26;
+
+  box-shadow:
+    0 0 0 4px rgba(194,59,38,0.10);
+
+  animation: robotPulse 1.8s ease-in-out infinite;
+}
+
+
+@keyframes robotPulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.45;
+    transform: scale(0.75);
+  }
+
+}
+
+
+.robot-sub-label {
+  position: absolute;
+
+  top: 31px;
+  right: 10px;
+
+  z-index: 5;
+
+  font-family: monospace;
+
+  font-size: 0.55rem;
+
+  letter-spacing: 0.14em;
+
+  color: rgba(42,33,24,0.45);
+}
+
+
+/* Bottom instruction */
+
+.robot-caption {
+  position: absolute;
+
+  right: 24px;
+  bottom: 16px;
+
+  z-index: 5;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-end;
+
+  gap: 2px;
+
+  font-family: monospace;
+
+  font-size: 0.52rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.15em;
+
+  color: rgba(42,33,24,0.38);
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 900px) {
+
+  .robot-hero {
+    height: 350px;
+
+    order: -1;
+
+    margin-bottom: 10px;
+  }
+
+  .interactive-arm {
+    width: min(100%, 370px);
+    height: 350px;
+  }
+
+  .robot-label {
+    top: 0;
+    right: 12px;
+  }
+
+  .robot-sub-label {
+    top: 23px;
+    right: 12px;
+  }
+
+}
+
+
+@media (max-width: 520px) {
+
+  .robot-hero {
+    height: 320px;
+  }
+
+  .interactive-arm {
+    height: 320px;
+  }
+
+  .robot-label {
+    font-size: 0.55rem;
+  }
+
+  .robot-sub-label {
+    font-size: 0.46rem;
+  }
+
+  .robot-caption {
+    display: none;
+  }
+
+}
  
   /* ---------- section shells ---------- */
   .sec-red{background:var(--red); color:var(--paper);}
@@ -386,30 +596,615 @@ Give me a problem, a few components, and enough time, I'll build something that 
       </div>
     </div>
  
-    <div class="hero-visual">
-      <span class="ast ast1 lg"><svg viewBox="0 0 40 40"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span>
-      <span class="ast ast2"><svg viewBox="0 0 40 40"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span>
-      <div class="blob"></div>
-      <svg class="arm-svg" viewBox="0 0 300 300">
-        <path class="draw" d="M60 240 h50 M85 240 V190 M85 190 L150 150 M150 150 L150 90 M150 90 L205 70 M205 70 L230 40"/>
-        <circle class="joint" cx="85" cy="190" r="7" style="animation-delay:1s"/>
-        <circle class="joint" cx="150" cy="150" r="7" style="animation-delay:1.4s"/>
-        <circle class="joint" cx="150" cy="90" r="7" style="animation-delay:1.8s"/>
-        <circle class="joint" cx="205" cy="70" r="7" style="animation-delay:2.1s"/>
-        <circle class="joint" cx="230" cy="40" r="9" style="animation-delay:2.4s"/>
-      </svg>
-      <div class="spin-badge">
-        <svg viewBox="0 0 120 120" width="118" height="118">
-          <defs><path id="circlePath" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
-          <text font-family="Plus Jakarta Sans" font-size="9.3" font-weight="700" fill="#2A2118" letter-spacing="2">
-            <textPath href="#circlePath">• DEBUGGING OWN LOGIC • BUILDING ROBOTS •</textPath>
-          </text>
-        </svg>
-        <div class="spin-badge-core">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C23B26" stroke-width="2"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="3.2"/></svg>
-        </div>
-      </div>
-    </div>
+    <div class="hero-visual robot-hero">
+
+  <div class="robot-label">
+    <span class="robot-status-dot"></span>
+    INTERACTIVE ROBOTIC ARM
+  </div>
+
+  <div class="robot-sub-label">
+    2-LINK INVERSE KINEMATICS
+  </div>
+
+  <svg
+    id="robotArm"
+    class="interactive-arm"
+    viewBox="0 0 400 400"
+    aria-label="Interactive robotic arm"
+  >
+
+    <defs>
+
+      <linearGradient id="robotMetal" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#555b60"/>
+        <stop offset="45%" stop-color="#24282b"/>
+        <stop offset="100%" stop-color="#111315"/>
+      </linearGradient>
+
+      <linearGradient id="robotMetalLight" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#858b90"/>
+        <stop offset="45%" stop-color="#3f454a"/>
+        <stop offset="100%" stop-color="#17191b"/>
+      </linearGradient>
+
+      <linearGradient id="robotRed" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#ff6345"/>
+        <stop offset="100%" stop-color="#9c2114"/>
+      </linearGradient>
+
+      <filter id="robotShadow">
+        <feDropShadow
+          dx="0"
+          dy="4"
+          stdDeviation="4"
+          flood-opacity="0.25"
+        />
+      </filter>
+
+      <filter id="robotSmallShadow">
+        <feDropShadow
+          dx="0"
+          dy="2"
+          stdDeviation="2"
+          flood-opacity="0.25"
+        />
+      </filter>
+
+    </defs>
+
+
+    <!-- =========================
+         TECHNICAL GRID
+    ========================== -->
+
+    <g
+      stroke="#8e2618"
+      stroke-width="1"
+      opacity="0.08"
+    >
+      <line x1="50" y1="0" x2="50" y2="400"/>
+      <line x1="100" y1="0" x2="100" y2="400"/>
+      <line x1="150" y1="0" x2="150" y2="400"/>
+      <line x1="200" y1="0" x2="200" y2="400"/>
+      <line x1="250" y1="0" x2="250" y2="400"/>
+      <line x1="300" y1="0" x2="300" y2="400"/>
+      <line x1="350" y1="0" x2="350" y2="400"/>
+
+      <line x1="0" y1="50" x2="400" y2="50"/>
+      <line x1="0" y1="100" x2="400" y2="100"/>
+      <line x1="0" y1="150" x2="400" y2="150"/>
+      <line x1="0" y1="200" x2="400" y2="200"/>
+      <line x1="0" y1="250" x2="400" y2="250"/>
+      <line x1="0" y1="300" x2="400" y2="300"/>
+      <line x1="0" y1="350" x2="400" y2="350"/>
+    </g>
+
+
+    <!-- =========================
+         WORKSPACE
+    ========================== -->
+
+    <circle
+      cx="200"
+      cy="315"
+      r="235"
+      fill="none"
+      stroke="#8e2618"
+      stroke-width="1"
+      stroke-dasharray="4 8"
+      opacity="0.12"
+    />
+
+
+    <!-- =========================
+         FLOOR SHADOW
+    ========================== -->
+
+    <ellipse
+      cx="200"
+      cy="354"
+      rx="78"
+      ry="13"
+      fill="#2A2118"
+      opacity="0.12"
+    />
+
+
+    <!-- =========================
+         BASE
+    ========================== -->
+
+    <g filter="url(#robotShadow)">
+
+      <path
+        d="
+          M128 343
+          Q128 337 137 337
+          L263 337
+          Q272 337 272 343
+          L264 359
+          L136 359
+          Z
+        "
+        fill="url(#robotMetal)"
+        stroke="#151719"
+        stroke-width="2"
+      />
+
+      <circle cx="143" cy="359" r="8" fill="#17191b"/>
+      <circle cx="143" cy="359" r="4" fill="#f2e9da"/>
+
+      <circle cx="257" cy="359" r="8" fill="#17191b"/>
+      <circle cx="257" cy="359" r="4" fill="#f2e9da"/>
+
+
+      <!-- rotating base -->
+
+      <ellipse
+        cx="200"
+        cy="326"
+        rx="58"
+        ry="24"
+        fill="#16191b"
+      />
+
+      <ellipse
+        cx="200"
+        cy="321"
+        rx="53"
+        ry="21"
+        fill="url(#robotMetalLight)"
+      />
+
+      <ellipse
+        cx="200"
+        cy="319"
+        rx="42"
+        ry="16"
+        fill="#17191b"
+        opacity="0.35"
+      />
+
+
+      <!-- base bolts -->
+
+      <circle cx="160" cy="323" r="2.5" fill="#111315"/>
+      <circle cx="175" cy="333" r="2.5" fill="#111315"/>
+      <circle cx="200" cy="336" r="2.5" fill="#111315"/>
+      <circle cx="225" cy="333" r="2.5" fill="#111315"/>
+      <circle cx="240" cy="323" r="2.5" fill="#111315"/>
+
+
+      <!-- rear housing -->
+
+      <path
+        d="
+          M164 295
+          Q164 280 180 275
+          L220 275
+          Q236 280 236 295
+          L236 321
+          L164 321
+          Z
+        "
+        fill="url(#robotMetal)"
+        stroke="#151719"
+        stroke-width="2"
+      />
+
+      <rect
+        x="172"
+        y="291"
+        width="15"
+        height="20"
+        rx="3"
+        fill="url(#robotRed)"
+      />
+
+      <rect
+        x="207"
+        y="292"
+        width="18"
+        height="13"
+        rx="2"
+        fill="#111315"
+        opacity="0.4"
+      />
+
+    </g>
+
+
+    <!-- =========================
+         SHOULDER MOTOR
+    ========================== -->
+
+    <g id="shoulderJoint" filter="url(#robotSmallShadow)">
+
+      <ellipse
+        cx="-1"
+        cy="0"
+        rx="25"
+        ry="28"
+        fill="#151719"
+      />
+
+      <ellipse
+        cx="-6"
+        cy="0"
+        rx="18"
+        ry="22"
+        fill="url(#robotMetalLight)"
+        stroke="#151719"
+        stroke-width="2"
+      />
+
+      <circle
+        r="13"
+        fill="#111315"
+        stroke="#555b60"
+        stroke-width="4"
+      />
+
+      <circle
+        r="6"
+        fill="#151719"
+      />
+
+      <circle
+        r="2.5"
+        fill="#ff4d32"
+      />
+
+    </g>
+
+
+    <!-- =========================
+         LINK 1
+    ========================== -->
+
+    <g id="upperArm" filter="url(#robotShadow)">
+
+      <path
+        d="
+          M15 -15
+          L105 -15
+          Q116 -15 120 -7
+          L120 7
+          Q116 15 105 15
+          L15 15
+          Q4 15 4 0
+          Q4 -15 15 -15
+          Z
+        "
+        fill="url(#robotMetal)"
+        stroke="#151719"
+        stroke-width="2"
+      />
+
+      <path
+        d="
+          M20 -8
+          L98 -8
+          L105 0
+          L98 8
+          L20 8
+          Z
+        "
+        fill="#0f1113"
+        opacity="0.25"
+      />
+
+      <path
+        d="M25 -3 L98 -3"
+        stroke="#f2e9da"
+        stroke-width="2"
+        opacity="0.10"
+      />
+
+      <circle
+        cx="28"
+        cy="0"
+        r="3"
+        fill="#111315"
+        stroke="#858b90"
+        stroke-width="1"
+      />
+
+      <circle
+        cx="92"
+        cy="0"
+        r="3"
+        fill="#111315"
+        stroke="#858b90"
+        stroke-width="1"
+      />
+
+      <path
+        d="M26 10 C48 24 75 24 98 9"
+        fill="none"
+        stroke="#111315"
+        stroke-width="4"
+        stroke-linecap="round"
+      />
+
+    </g>
+
+
+    <!-- =========================
+         ELBOW
+    ========================== -->
+
+    <g id="elbowJoint" filter="url(#robotSmallShadow)">
+
+      <circle
+        r="21"
+        fill="#151719"
+      />
+
+      <circle
+        r="16"
+        fill="url(#robotMetalLight)"
+      />
+
+      <circle
+        r="10"
+        fill="#111315"
+        stroke="#858b90"
+        stroke-width="3"
+      />
+
+      <circle
+        r="4"
+        fill="#ff4d32"
+      />
+
+      <circle cx="-11" cy="0" r="2" fill="#111315"/>
+      <circle cx="11" cy="0" r="2" fill="#111315"/>
+
+    </g>
+
+
+    <!-- =========================
+         LINK 2
+    ========================== -->
+
+    <g id="foreArm" filter="url(#robotShadow)">
+
+      <path
+        d="
+          M5 -13
+          L70 -17
+          Q80 -14 82 0
+          Q80 14 70 17
+          L5 13
+          Q-3 8 -3 0
+          Q-3 -8 5 -13
+          Z
+        "
+        fill="url(#robotMetalLight)"
+        stroke="#151719"
+        stroke-width="2"
+      />
+
+      <path
+        d="
+          M18 -7
+          L64 -11
+          L75 0
+          L64 11
+          L18 7
+          Z
+        "
+        fill="#111315"
+        opacity="0.25"
+      />
+
+      <path
+        d="M20 0 L69 0"
+        stroke="#111315"
+        stroke-width="3"
+        opacity="0.25"
+      />
+
+      <path
+        d="
+          M46 -15
+          L56 -16
+          L59 16
+          L49 16
+          Z
+        "
+        fill="url(#robotRed)"
+        opacity="0.85"
+      />
+
+    </g>
+
+
+    <!-- =========================
+         LINK 3 — NEW WRIST LINK
+    ========================== -->
+
+    <g id="thirdLink" filter="url(#robotSmallShadow)">
+
+      <path
+        d="
+          M0 -8
+          L27 -9
+          Q32 -7 32 0
+          Q32 7 27 9
+          L0 8
+          Z
+        "
+        fill="url(#robotMetal)"
+        stroke="#151719"
+        stroke-width="2"
+      />
+
+      <path
+        d="
+          M5 -4
+          L23 -5
+          L27 0
+          L23 5
+          L5 4
+          Z
+        "
+        fill="#111315"
+        opacity="0.25"
+      />
+
+      <rect
+        x="17"
+        y="-6"
+        width="5"
+        height="12"
+        rx="1"
+        fill="url(#robotRed)"
+      />
+
+      <circle cx="6" cy="0" r="2.2" fill="#111315"/>
+      <circle cx="25" cy="0" r="2.2" fill="#111315"/>
+
+    </g>
+
+
+    <!-- =========================
+         END EFFECTOR / CLAW
+    ========================== -->
+
+    <g id="wrist" filter="url(#robotSmallShadow)">
+
+      <circle
+        cx="0"
+        cy="0"
+        r="12"
+        fill="#151719"
+      />
+
+      <circle
+        cx="0"
+        cy="0"
+        r="7"
+        fill="url(#robotMetalLight)"
+        stroke="#151719"
+        stroke-width="2"
+      />
+
+      <circle
+        cx="0"
+        cy="0"
+        r="3"
+        fill="#ff4d32"
+      />
+
+
+      <!-- claw mount -->
+
+      <rect
+        x="8"
+        y="-6"
+        width="13"
+        height="12"
+        rx="3"
+        fill="#151719"
+      />
+
+
+      <!-- upper claw -->
+
+      <path
+        d="
+          M18 -4
+          L31 -15
+          Q36 -18 40 -14
+          L44 -9
+          L38 -3
+          L27 1
+        "
+        fill="none"
+        stroke="#151719"
+        stroke-width="7"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+
+
+      <!-- lower claw -->
+
+      <path
+        d="
+          M18 4
+          L31 15
+          Q36 18 40 14
+          L44 9
+          L38 3
+          L27 -1
+        "
+        fill="none"
+        stroke="#151719"
+        stroke-width="7"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+
+
+      <circle
+        cx="42"
+        cy="-11"
+        r="3"
+        fill="#ff4d32"
+      />
+
+      <circle
+        cx="42"
+        cy="11"
+        r="3"
+        fill="#ff4d32"
+      />
+
+    </g>
+
+
+    <!-- =========================
+         TARGET
+    ========================== -->
+
+    <g
+      id="armTarget"
+      stroke="#C23B26"
+      fill="none"
+      opacity="0.75"
+    >
+
+      <circle
+        r="14"
+        stroke-width="1.5"
+        stroke-dasharray="3 4"
+      />
+
+      <circle
+        r="4"
+        fill="#C23B26"
+        stroke="none"
+      />
+
+      <line x1="-22" x2="-7" stroke-width="1.5"/>
+      <line x1="7" x2="22" stroke-width="1.5"/>
+      <line y1="-22" y2="-7" stroke-width="1.5"/>
+      <line y1="7" y2="22" stroke-width="1.5"/>
+
+    </g>
+
+  </svg>
+
+  <div class="robot-caption">
+    <span>MOVE POINTER</span>
+    <span>TO CONTROL</span>
+  </div>
+
+</div>
   </div>
 </header>
  
@@ -768,6 +1563,443 @@ Give me a problem, a few components, and enough time, I'll build something that 
       }
     });
   });
+  /* =====================================================
+   INTERACTIVE ROBOTIC ARM
+   Smooth 3-link visual IK
+===================================================== */
+
+(function () {
+
+  const svg = document.getElementById("robotArm");
+
+  if (!svg) return;
+
+
+  const upperArm = document.getElementById("upperArm");
+  const foreArm = document.getElementById("foreArm");
+  const thirdLink = document.getElementById("thirdLink");
+
+  const shoulder = document.getElementById("shoulderJoint");
+  const elbow = document.getElementById("elbowJoint");
+
+  const wrist = document.getElementById("wrist");
+  const targetMarker = document.getElementById("armTarget");
+
+
+  /* =================================================
+     ARM PARAMETERS
+  ================================================= */
+
+  const BASE_X = 200;
+  const BASE_Y = 315;
+
+  const L1 = 130;
+
+  const L2 = 78;
+
+  const L3 = 27;
+
+  const EFFECTIVE_L2 = L2 + L3;
+
+
+  /* =================================================
+     POINTER TARGET
+  ================================================= */
+
+  const target = {
+    x: 275,
+    y: 130
+  };
+
+
+  /* Current animated target */
+
+  const current = {
+    x: 275,
+    y: 130
+  };
+
+
+  /* =================================================
+     UTILITY
+  ================================================= */
+
+  function radiansToDegrees(rad) {
+    return rad * 180 / Math.PI;
+  }
+
+
+  /* =================================================
+     IK SOLVER
+  ================================================= */
+
+  function solveIK(tx, ty) {
+
+    const dx = tx - BASE_X;
+    const dy = ty - BASE_Y;
+
+    const distance =
+      Math.hypot(dx, dy);
+
+
+    /* Prevent impossible positions */
+
+    const d = Math.min(
+      Math.max(distance, 42),
+      L1 + EFFECTIVE_L2 - 2
+    );
+
+
+    const targetAngle =
+      Math.atan2(dy, dx);
+
+
+    const elbowCos =
+      (
+        L1 * L1 +
+        d * d -
+        EFFECTIVE_L2 * EFFECTIVE_L2
+      )
+      /
+      (
+        2 * L1 * d
+      );
+
+
+    const elbowAngle =
+      Math.acos(
+        Math.max(
+          -1,
+          Math.min(
+            1,
+            elbowCos
+          )
+        )
+      );
+
+
+    const theta1 =
+      targetAngle - elbowAngle;
+
+
+    /* Elbow position */
+
+    const elbowX =
+      BASE_X +
+      L1 *
+      Math.cos(theta1);
+
+
+    const elbowY =
+      BASE_Y +
+      L1 *
+      Math.sin(theta1);
+
+
+    /* Final claw target */
+
+    const targetX =
+      BASE_X +
+      d *
+      Math.cos(targetAngle);
+
+
+    const targetY =
+      BASE_Y +
+      d *
+      Math.sin(targetAngle);
+
+
+    /* End of Link 2 */
+
+    const wristX =
+      targetX -
+      L3 *
+      Math.cos(targetAngle);
+
+
+    const wristY =
+      targetY -
+      L3 *
+      Math.sin(targetAngle);
+
+
+    return {
+      elbowX,
+      elbowY,
+
+      wristX,
+      wristY,
+
+      targetX,
+      targetY,
+
+      theta1,
+
+      secondAngle:
+        targetAngle
+    };
+
+  }
+
+
+  /* =================================================
+     RENDER
+  ================================================= */
+
+  function render() {
+
+    const result =
+      solveIK(
+        current.x,
+        current.y
+      );
+
+
+    const {
+      elbowX,
+      elbowY,
+
+      wristX,
+      wristY,
+
+      targetX,
+      targetY,
+
+      theta1,
+      secondAngle
+
+    } = result;
+
+
+    /* -----------------------------------------------
+       LINK 1
+    ----------------------------------------------- */
+
+    upperArm.setAttribute(
+      "transform",
+
+      `
+      translate(${BASE_X} ${BASE_Y})
+      rotate(${radiansToDegrees(theta1)})
+      `
+    );
+
+
+    /* -----------------------------------------------
+       ELBOW
+    ----------------------------------------------- */
+
+    elbow.setAttribute(
+      "transform",
+
+      `
+      translate(${elbowX} ${elbowY})
+      `
+    );
+
+
+    /* -----------------------------------------------
+       LINK 2
+    ----------------------------------------------- */
+
+    foreArm.setAttribute(
+      "transform",
+
+      `
+      translate(${elbowX} ${elbowY})
+      rotate(${radiansToDegrees(secondAngle)})
+      `
+    );
+
+
+    /* -----------------------------------------------
+       LINK 3
+    ----------------------------------------------- */
+
+    thirdLink.setAttribute(
+      "transform",
+
+      `
+      translate(${wristX} ${wristY})
+      rotate(${radiansToDegrees(secondAngle)})
+      `
+    );
+
+
+    /* -----------------------------------------------
+       SHOULDER
+    ----------------------------------------------- */
+
+    shoulder.setAttribute(
+      "transform",
+
+      `
+      translate(${BASE_X} ${BASE_Y})
+      `
+    );
+
+
+    /* -----------------------------------------------
+       END EFFECTOR
+    ----------------------------------------------- */
+
+    wrist.setAttribute(
+      "transform",
+
+      `
+      translate(${targetX} ${targetY})
+      rotate(${radiansToDegrees(secondAngle)})
+      `
+    );
+
+
+    /* -----------------------------------------------
+       TARGET
+    ----------------------------------------------- */
+
+    targetMarker.setAttribute(
+      "transform",
+
+      `
+      translate(${target.x} ${target.y})
+      `
+    );
+
+  }
+
+
+  /* =================================================
+     POINTER MOVEMENT
+  ================================================= */
+
+  function pointerMove(event) {
+
+    const rect =
+      svg.getBoundingClientRect();
+
+
+    target.x =
+      (
+        (event.clientX - rect.left)
+        /
+        rect.width
+      ) * 400;
+
+
+    target.y =
+      (
+        (event.clientY - rect.top)
+        /
+        rect.height
+      ) * 400;
+
+
+    /*
+      Keep pointer target inside SVG
+    */
+
+    target.x =
+      Math.max(
+        45,
+        Math.min(
+          355,
+          target.x
+        )
+      );
+
+
+    target.y =
+      Math.max(
+        35,
+        Math.min(
+          330,
+          target.y
+        )
+      );
+
+  }
+
+
+  /* =================================================
+     TOUCH SUPPORT
+  ================================================= */
+
+  function touchMove(event) {
+
+    if (!event.touches.length) return;
+
+    const touch =
+      event.touches[0];
+
+    pointerMove({
+      clientX: touch.clientX,
+      clientY: touch.clientY
+    });
+
+  }
+
+
+  /* =================================================
+     SMOOTH ANIMATION
+  ================================================= */
+
+  function animate() {
+
+    current.x +=
+      (
+        target.x -
+        current.x
+      ) * 0.11;
+
+
+    current.y +=
+      (
+        target.y -
+        current.y
+      ) * 0.11;
+
+
+    render();
+
+
+    requestAnimationFrame(
+      animate
+    );
+
+  }
+
+
+  /* =================================================
+     EVENTS
+  ================================================= */
+
+  svg.addEventListener(
+    "pointermove",
+    pointerMove
+  );
+
+
+  svg.addEventListener(
+    "touchmove",
+    touchMove,
+    {
+      passive: true
+    }
+  );
+
+
+  /* =================================================
+     START
+  ================================================= */
+
+  render();
+
+  requestAnimationFrame(
+    animate
+  );
+
+})();
 </script>
 </body>
 </html>
