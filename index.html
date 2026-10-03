@@ -111,18 +111,23 @@
   .stat:last-child{border-bottom:none;}
   .stat .num{font-family:'Baloo 2',sans-serif; font-size:2.4rem; font-weight:700; min-width:96px; color:var(--teal);}
   .stat .label{font-weight:600; opacity:0.9; padding-top:8px; font-size:0.98rem;}
-  #overview{padding-bottom:0;}
-#overview .overview-grid{grid-template-columns:1fr 1fr; align-items:stretch;}
-#overview .overview-grid > div:first-child{display:flex; flex-direction:column; justify-content:space-between;}
-#overview .overview-grid > div:last-child{padding-bottom:110px;}
+  /* ABOUT: edit these two numbers to change spacing */
+#overview{--ov-top:48px; --ov-bottom:48px; padding:0;}
 
-.about-photo{margin:0; width:100%; max-width:520px;}
+#overview .overview-grid{grid-template-columns:1fr 1fr; gap:48px; align-items:end;}
+#overview .about-text{align-self:center; padding:var(--ov-top) 0 var(--ov-bottom);}
+#overview .about-text .kicker{margin-bottom:18px;}
+#overview .stat-list{margin-top:24px;}
+#overview .stat:last-child{padding-bottom:0;}
+
+.about-photo{margin:0; width:100%; max-width:520px; align-self:end;}
 .about-photo img{display:block; width:100%; height:auto;}
 
 @media (max-width:900px){
-  #overview{padding-bottom:80px;}
-  #overview .overview-grid > div:last-child{padding-bottom:0;}
-  .about-photo{max-width:340px; margin:20px auto 0;}
+  #overview{padding-top:var(--ov-top);}
+  #overview .overview-grid{grid-template-columns:1fr; gap:0;}
+  #overview .about-text{padding:28px 0 var(--ov-bottom);}
+  .about-photo{max-width:340px; margin:0 auto;}
 }
 
 
@@ -207,7 +212,7 @@
 <nav class="nav">
   <div class="nav-mark"><span class="dot">V</span> Varadha VR</div>
   <ul class="nav-links">
-    <li><a href="#overview" data-nav>Overview</a></li>
+    <li><a href="#overview" data-nav>About</a></li>
     <li><a href="#projects" data-nav>Projects</a></li>
     <li><a href="#experience" data-nav>Experience</a></li>
     <li><a href="#skills" data-nav>Skills</a></li>
@@ -218,7 +223,7 @@
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#overview">Overview</a>
+  <a href="#overview">About</a>
   <a href="#projects">Projects</a>
   <a href="#experience">Experience</a>
   <a href="#skills">Skills</a>
@@ -362,27 +367,25 @@ Give me a problem, a few components, and enough time, I'll build something that 
 </header>
 
 <!-- 01 OVERVIEW -->
+
 <section class="sec-dark sec-pad" id="overview">
   <span class="ghost-num">01</span>
+  <h2 class="sec-title">ABOUT ME</h2>
   <div class="wrap overview-grid">
-    <div class="reveal">
-      <div class="kicker"><span class="ast"><svg viewBox="0 0 40 40"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span> ABOUT ME</div>
-      <figure class="about-photo"> 
-        <img src="asset/photo-me.png" alt="Varadha V R" loading="lazy">
-      </figure>
-    </div>
-    <div class="reveal" style="transition-delay:0.1s">
+    <figure class="about-photo reveal">
+      <img src="asset/photo-me.png" alt="Varadha V R" loading="lazy">
+    </figure>
+    <div class="about-text reveal" style="transition-delay:0.1s">
       <p>I'm a Robotics Systems Engineer with 2+ years of hands-on experience designing, prototyping, and deploying integrated automation and IoT solutions.</p>
       <p>Specialized in end-to-end system design: from client requirements and hardware-software integration through production deployment. Expert in industrial robotic arm programming, robotics product development, and computer vision.</p>
       <p>Demonstrated ability to lead IoT product development, mentor technical teams, and translate complex automation challenges into scalable, reliable solutions.</p>
-      <div class="stat-list" style="margin-top:34px;">
+      <div class="stat-list">
         <div class="stat"><span class="num">2+</span><span class="label">Years designing and building robotics &amp; IoT systems</span></div>
         <div class="stat"><span class="num">E2E</span><span class="label">Robotics &amp; IoT platforms, integrating hardware, software, and intelligent systems</span></div>
       </div>
     </div>
   </div>
 </section>
-
 <!-- 02 PROJECTS -->
 <section class="sec-light sec-pad" id="projects">
   <span class="ghost-num on-light">02</span>
