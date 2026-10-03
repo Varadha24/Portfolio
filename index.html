@@ -112,22 +112,28 @@
   .stat .num{font-family:'Baloo 2',sans-serif; font-size:2.4rem; font-weight:700; min-width:96px; color:var(--teal);}
   .stat .label{font-weight:600; opacity:0.9; padding-top:8px; font-size:0.98rem;}
   /* ABOUT: edit these two numbers to change spacing */
+  /* ABOUT: edit these two numbers to change spacing */
 #overview{--ov-top:48px; --ov-bottom:48px; padding:0;}
 
 #overview .overview-grid{grid-template-columns:1fr 1fr; gap:48px; align-items:end;}
+
+/* left: label on top, photo under it, photo sits flush on section bottom */
+#overview .about-visual{align-self:end; display:flex; flex-direction:column; padding-top:var(--ov-top);}
+#overview .about-visual .kicker{margin-bottom:18px;}
+.about-photo{margin:0; width:100%; max-width:520px;}
+.about-photo img{display:block; width:100%; height:auto;}
+
+/* right: text only, centered beside photo */
 #overview .about-text{align-self:center; padding:var(--ov-top) 0 var(--ov-bottom);}
-#overview .about-text .kicker{margin-bottom:18px;}
 #overview .stat-list{margin-top:24px;}
 #overview .stat:last-child{padding-bottom:0;}
 
-.about-photo{margin:0; width:100%; max-width:520px; align-self:end;}
-.about-photo img{display:block; width:100%; height:auto;}
-
 @media (max-width:900px){
-  #overview{padding-top:var(--ov-top);}
   #overview .overview-grid{grid-template-columns:1fr; gap:0;}
+  #overview .about-visual{align-items:center;}
+  #overview .about-visual .kicker{align-self:flex-start;}
+  .about-photo{max-width:340px;}
   #overview .about-text{padding:28px 0 var(--ov-bottom);}
-  .about-photo{max-width:340px; margin:0 auto;}
 }
 
 
@@ -371,11 +377,13 @@ Give me a problem, a few components, and enough time, I'll build something that 
 <section class="sec-dark sec-pad" id="overview">
   <span class="ghost-num">01</span>
   <div class="wrap overview-grid">
-    <figure class="about-photo reveal">
-      <img src="asset/photo-me.png" alt="Varadha V R" loading="lazy">
-    </figure>
-    <div class="about-text reveal" style="transition-delay:0.1s">
+    <div class="about-visual reveal">
       <div class="kicker"><span class="ast"><svg viewBox="0 0 40 40"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span> ABOUT ME</div>
+      <figure class="about-photo">
+        <img src="asset/photo-me.png" alt="Varadha V R" loading="lazy">
+      </figure>
+    </div>
+    <div class="about-text reveal" style="transition-delay:0.1s">
       <p>I'm a Robotics Systems Engineer with 2+ years of hands-on experience designing, prototyping, and deploying integrated automation and IoT solutions.</p>
       <p>Specialized in end-to-end system design: from client requirements and hardware-software integration through production deployment. Expert in industrial robotic arm programming, robotics product development, and computer vision.</p>
       <p>Demonstrated ability to lead IoT product development, mentor technical teams, and translate complex automation challenges into scalable, reliable solutions.</p>
@@ -386,6 +394,7 @@ Give me a problem, a few components, and enough time, I'll build something that 
     </div>
   </div>
 </section>
+  
 <!-- 02 PROJECTS -->
 <section class="sec-light sec-pad" id="projects">
   <span class="ghost-num on-light">02</span>
