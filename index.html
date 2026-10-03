@@ -96,7 +96,8 @@
   .sec-pad{padding:76px 0;}
   .ghost-num{position:absolute; top:-40px; right:-10px; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:clamp(9rem,22vw,15rem); line-height:1; color:transparent; -webkit-text-stroke:2px rgba(183,195,208,0.16); user-select:none; pointer-events:none;}
   .ghost-num.on-light{-webkit-text-stroke:2px rgba(28,34,48,0.08);}
-.kicker{display:inline-flex; align-items:center; gap:12px; font-weight:800; margin-bottom:16px; font-size:1.2rem; letter-spacing:0.6px; color:var(--sky);}  .sec-light .kicker{color:var(--accent-ink);}
+.kicker{display:inline-flex; align-items:center; gap:10px; font-weight:700; margin-bottom:14px; font-size:1.0rem; letter-spacing:0.4px; color:var(--sky);}
+  .sec-light .kicker{color:var(--accent-ink);}  
   .sec-title{font-size:clamp(1.9rem,4vw,2.7rem); line-height:1.05; max-width:20ch;}
   .sec-dark .sec-title{color:var(--paper);}
   .sec-light .sec-title{color:var(--navy);}
@@ -178,8 +179,9 @@
   .story-item:last-child .story-content{padding-bottom:0;}
   .story-index{font-family:'Baloo 2',sans-serif; font-size:0.78rem; font-weight:700; color:var(--navy); letter-spacing:1.5px; opacity:0.65;}
   .story-title{font-family:'Baloo 2',sans-serif; font-size:1.28rem; color:var(--navy); font-weight:700; margin-top:2px;}
-  .story-text{margin-top:8px; max-width:none; color:#3D4A5C; font-size:1rem;}  @media (max-width:560px){
-    .story-item{gap:14px;} .story-icon{width:44px; height:44px; border-radius:13px;} .story-icon svg{width:18px; height:18px;}
+.story-text{margin-top:8px; max-width:none; color:#3D4A5C; font-size:1rem;}
+@media (max-width:560px){
+  .story-item{gap:14px;} .story-icon{width:44px; height:44px; border-radius:13px;} .story-icon svg{width:18px; height:18px;}
   }
 
   /* skills */
