@@ -9,381 +9,179 @@
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --cream:#F2E9DA;
-    --cream-soft:#EAE0CD;
-    --card:#FBF6EC;
-    --red:#C23B26;
-    --red-deep:#8E2618;
-    --red-dark:#6E1B10;
-    --ink:#2A2118;
-    --paper:#FBF4E9;
-    --pink-ghost:#E7B6A6;
-    --line:rgba(42,33,24,0.14);
-    --line-onred:rgba(251,244,233,0.22);
-    --shadow:0 10px 30px rgba(110,27,16,0.12);
+    /* palette: #1C2230 #3D4A5C #B7C3D0 #EEF2F6 #C46A5A + white base */
+    --navy:#1C2230;
+    --teal:#C46A5A;
+    --accent-ink:#A8503F;
+    --mist:#FFFFFF;
+    --soft:#EEF2F6;
+    --abyss:#1C2230;
+    --sky:#B7C3D0;
+    --slate:#3D4A5C;
+    --card:#FFFFFF;
+    --paper:#EEF2F6;
+    --line:rgba(28,34,48,0.12);
+    --line-ondark:rgba(183,195,208,0.22);
+    --shadow:0 10px 30px rgba(28,34,48,0.10);
     --radius:26px;
   }
-
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--cream);
-    color:var(--ink);
-    font-family:'Plus Jakarta Sans', sans-serif;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  h1,h2,h3,.bubble{
-    font-family:'Baloo 2', sans-serif;
-    font-weight:700;
-    margin:0;
-    letter-spacing:0.2px;
-  }
+  body{margin:0; background:var(--mist); color:var(--abyss); font-family:'Plus Jakarta Sans',sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden;}
+  h1,h2,h3{font-family:'Baloo 2',sans-serif; font-weight:700; margin:0; letter-spacing:0.2px;}
   a{color:inherit;}
   p{line-height:1.65;}
   section{position:relative; scroll-margin-top:86px; overflow:hidden;}
   .wrap{max-width:1140px; margin:0 auto; padding:0 28px;}
   img,svg{display:block;}
+  ::selection{background:var(--teal); color:var(--paper);}
 
-  ::selection{background:var(--red); color:var(--paper);}
-
-  /* ---------- asterisk mark ---------- */
-  .ast{position:absolute; width:34px; height:34px; opacity:0.9;}
+  .ast{width:20px; height:20px;}
   .ast svg{width:100%; height:100%;}
   .ast path{fill:currentColor;}
-  .ast.lg{width:56px; height:56px;}
-  .ast.sm{width:20px; height:20px; position:static;}
 
-  /* ---------- nav ---------- */
-  .nav{
-    position:sticky; top:0; z-index:100;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:16px 28px;
-    background:rgba(242,233,218,0.82);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav-mark{display:flex; align-items:center; gap:10px; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:1.15rem; color:var(--red-deep);}
-  .nav-mark .dot{width:34px;height:34px;border-radius:50%;background:var(--red); color:var(--paper); display:flex; align-items:center; justify-content:center; font-size:0.85rem;}
+  /* nav */
+  .nav{position:sticky; top:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:16px 28px; background:rgba(255,255,255,0.88); backdrop-filter:blur(10px); border-bottom:1px solid var(--line);}
+  .nav-mark{display:flex; align-items:center; gap:10px; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:1.15rem; color:var(--navy);}
+  .nav-mark .dot{width:34px;height:34px;border-radius:50%;background:var(--navy); color:var(--mist); display:flex; align-items:center; justify-content:center; font-size:0.85rem;}
   .nav-links{display:flex; gap:30px; list-style:none; margin:0; padding:0;}
-  .nav-links a{
-    text-decoration:none; font-weight:600; font-size:0.95rem; color:var(--ink);
-    position:relative; padding-bottom:4px; opacity:0.72; transition:opacity .2s ease;
-  }
-  .nav-links a::after{
-    content:""; position:absolute; left:0; right:0; bottom:-2px; height:3px;
-    border-radius:3px; background:var(--red); transform:scaleX(0); transform-origin:left;
-    transition:transform .25s ease;
-  }
-  .nav-links a.active, .nav-links a:hover{opacity:1;}
+  .nav-links a{text-decoration:none; font-weight:600; font-size:0.95rem; position:relative; padding-bottom:4px; opacity:0.72; transition:opacity .2s ease;}
+  .nav-links a::after{content:""; position:absolute; left:0; right:0; bottom:-2px; height:3px; border-radius:3px; background:var(--teal); transform:scaleX(0); transform-origin:left; transition:transform .25s ease;}
+  .nav-links a.active,.nav-links a:hover{opacity:1;}
   .nav-links a.active::after{transform:scaleX(1);}
-  .nav-cta{
-    display:inline-flex; align-items:center; gap:8px; background:var(--red); color:var(--paper);
-    padding:10px 20px; border-radius:999px; font-weight:700; font-size:0.9rem; text-decoration:none;
-    box-shadow:var(--shadow); transition:transform .2s ease;
-  }
+  .nav-cta{display:inline-flex; align-items:center; background:var(--navy); color:var(--mist); padding:10px 20px; border-radius:999px; font-weight:700; font-size:0.9rem; text-decoration:none; box-shadow:var(--shadow); transition:transform .2s ease;}
   .nav-cta:hover{transform:translateY(-2px);}
   .burger{display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px; z-index:120;}
-  .burger span{width:26px; height:3px; background:var(--ink); border-radius:3px; transition:.25s ease;}
-
-  .mobile-menu{
-    position:fixed; inset:0; background:var(--red); z-index:110;
-    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:28px;
-    transform:translateY(-100%); transition:transform .35s ease;
-  }
+  .burger span{width:26px; height:3px; background:var(--abyss); border-radius:3px;}
+  .mobile-menu{position:fixed; inset:0; background:var(--navy); z-index:110; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:28px; transform:translateY(-100%); transition:transform .35s ease;}
   .mobile-menu.open{transform:translateY(0);}
-  .mobile-menu a{color:var(--paper); font-family:'Baloo 2',sans-serif; font-size:2rem; text-decoration:none;}
+  .mobile-menu a{color:var(--mist); font-family:'Baloo 2',sans-serif; font-size:2rem; text-decoration:none;}
 
-  /* ---------- hero ---------- */
-  .hero{background:var(--cream); padding:72px 0 60px;}
+  /* hero */
+  .hero{background:#fff; padding:72px 0 60px;}
   .hero .wrap{display:grid; grid-template-columns:1.15fr 0.85fr; gap:40px; align-items:center;}
-  .eyebrow-row{display:flex; align-items:center; gap:14px; margin-bottom:18px; color:var(--red-deep); font-weight:600;}
-  .badge-loc{display:inline-flex; align-items:center; gap:8px; padding:7px 16px; border-radius:999px; background:var(--card); border:1px solid var(--line); font-size:0.85rem;}
+  .eyebrow-row{margin-bottom:18px;}
+  .badge-loc{display:inline-flex; align-items:center; gap:8px; padding:7px 16px; border-radius:999px; background:var(--soft); border:1px solid var(--line); font-size:0.85rem; font-weight:600; color:var(--navy);}
   .badge-loc svg{width:14px;height:14px;}
-
-  .hero h1{
-    font-size:clamp(3.1rem, 8vw, 6rem);
-    line-height:0.92;
-    color:var(--red-deep);
-  }
-  .hero h1 span{display:block;}
-  .hero h1 .accent{color:var(--red);}
-  .hero-role{
-    font-family:'Baloo 2',sans-serif; font-weight:600; font-size:clamp(1.2rem,2.4vw,1.6rem);
-    color:var(--ink); margin-top:18px;
-  }
-  .hero p.lede{max-width:46ch; margin-top:16px; font-size:1.04rem; color:#443627; white-space:pre-line;}
-
+  .hero h1{font-size:clamp(3.1rem,8vw,6rem); line-height:0.92; color:var(--navy);}
+  .hero-role{font-family:'Baloo 2',sans-serif; font-weight:600; font-size:clamp(1.2rem,2.4vw,1.6rem); color:var(--teal); margin-top:18px;}
+  .hero p.lede{max-width:46ch; margin-top:16px; font-size:1.04rem; color:#3D4A5C; white-space:pre-line;}
   .hero-actions{display:flex; flex-wrap:wrap; gap:14px; margin-top:30px;}
-  .btn{
-    font-family:'Baloo 2',sans-serif; font-weight:600; font-size:1rem;
-    padding:14px 26px; border-radius:999px; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
-    transition:transform .2s ease, box-shadow .2s ease;
-  }
-  .btn-primary{background:var(--red); color:var(--paper); box-shadow:var(--shadow);}
-  .btn-primary:hover{transform:translateY(-3px);}
-  .btn-ghost{background:transparent; color:var(--red-deep); border:2px solid var(--red-deep);}
-  .btn-ghost:hover{background:var(--red-deep); color:var(--paper);}
-
+  .btn{font-family:'Baloo 2',sans-serif; font-weight:600; font-size:1rem; padding:14px 26px; border-radius:999px; text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:transform .2s ease, background .2s ease, color .2s ease;}
+  .btn-primary{background:var(--navy); color:var(--mist); box-shadow:var(--shadow);}
+  .btn-primary:hover{transform:translateY(-3px); background:var(--teal); color:#fff;}
+  .btn-ghost{background:transparent; color:var(--navy); border:2px solid var(--navy);}
+  .btn-ghost:hover{background:var(--navy); color:var(--mist);}
   .contact-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
-  .contact-pill{
-    display:inline-flex; align-items:center; gap:8px; padding:8px 14px; border-radius:999px;
-    background:var(--card); border:1px solid var(--line); font-size:0.82rem; font-weight:600; text-decoration:none; color:var(--ink);
-  }
-  .contact-pill svg{width:14px;height:14px; color:var(--red);}
+  .contact-pill{display:inline-flex; align-items:center; gap:8px; padding:8px 14px; border-radius:999px; background:var(--soft); border:1px solid var(--line); font-size:0.82rem; font-weight:600; text-decoration:none; color:var(--abyss);}
+  .contact-pill svg{width:14px;height:14px; color:var(--teal);}
 
-  .hero-visual{position:relative; height:420px;}
-  .blob{
-    position:absolute; inset:0; margin:auto; width:88%; height:88%;
-    background:linear-gradient(150deg, var(--red) 0%, var(--red-deep) 100%);
-    border-radius:44% 56% 62% 38% / 40% 46% 54% 60%;
-    box-shadow:var(--shadow);
-    animation:blobmove 14s ease-in-out infinite;
-  }
-  @keyframes blobmove{
-    0%,100%{border-radius:44% 56% 62% 38% / 40% 46% 54% 60%;}
-    50%{border-radius:58% 42% 40% 60% / 54% 60% 40% 46%;}
-  }
-  .arm-svg{position:absolute; inset:0; width:100%; height:100%;}
-  .arm-svg .draw{
-    fill:none; stroke:var(--paper); stroke-width:3.5; stroke-linecap:round; stroke-linejoin:round;
-    stroke-dasharray:900; stroke-dashoffset:900; animation:draw 2.4s ease forwards 0.4s;
-  }
-  .arm-svg .joint{fill:var(--paper); opacity:0; animation:pop .4s ease forwards;}
-  @keyframes draw{to{stroke-dashoffset:0;}}
-  @keyframes pop{to{opacity:1;}}
-  .spin-badge{
-    position:absolute; right:-6px; bottom:-6px; width:118px; height:118px;
-    animation:spin 16s linear infinite;
-  }
-  @keyframes spin{to{transform:rotate(360deg);}}
-  .spin-badge-core{
-    position:absolute; inset:0; margin:auto; width:52px; height:52px; border-radius:50%;
-    background:var(--paper); display:flex; align-items:center; justify-content:center;
-  }
-
-  .rest-ast{position:absolute;}
-  .hero .ast1{top:60px; right:6%; color:var(--red);}
-  .hero .ast2{bottom:40px; left:2%; color:var(--red-deep); }
-
-  /* =====================================================
-     INTERACTIVE ROBOTIC ARM
-  ===================================================== */
-  .robot-hero{
-    position:relative;
-    height:440px;
-    overflow:visible;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-  .robot-hero .blob{display:none;}
-  .robot-hero > .arm-svg:not(.interactive-arm){display:none;}
-
-  .interactive-arm{
-    position:relative;
-    z-index:2;
-    width:min(100%, 440px);
-    height:440px;
-    overflow:visible;
-    cursor:crosshair;
-    filter:drop-shadow(0 18px 28px rgba(42,33,24,0.12));
-  }
-
-  .robot-label{
-    position:absolute; top:8px; right:10px; z-index:5;
-    display:flex; align-items:center; gap:7px;
-    font-family:"Plus Jakarta Sans", sans-serif;
-    font-size:0.66rem; font-weight:800; letter-spacing:0.12em;
-    color:var(--red-deep); white-space:nowrap;
-  }
-  .robot-status-dot{
-    width:7px; height:7px; border-radius:50%;
-    background:#C23B26;
-    box-shadow:0 0 0 4px rgba(194,59,38,0.10);
-    animation:robotPulse 1.8s ease-in-out infinite;
-  }
-  @keyframes robotPulse{
-    0%,100%{opacity:1; transform:scale(1);}
-    50%{opacity:0.45; transform:scale(0.75);}
-  }
-  .robot-sub-label{
-    position:absolute; top:31px; right:10px; z-index:5;
-    font-family:monospace; font-size:0.55rem; letter-spacing:0.14em;
-    color:rgba(42,33,24,0.45);
-  }
-  .robot-caption{
-    position:absolute; right:24px; bottom:16px; z-index:5;
-    display:flex; flex-direction:column; align-items:flex-end; gap:2px;
-    font-family:monospace; font-size:0.52rem; font-weight:700; letter-spacing:0.15em;
-    color:rgba(42,33,24,0.38);
-  }
-
+  /* robot */
+  .robot-hero{position:relative; height:440px; display:flex; align-items:center; justify-content:center;}
+  .interactive-arm{position:relative; z-index:2; width:min(100%,440px); height:440px; overflow:visible; cursor:crosshair; filter:drop-shadow(0 18px 28px rgba(28,34,48,0.2));}
+  .robot-caption{position:absolute; right:24px; bottom:16px; z-index:5; display:flex; flex-direction:column; align-items:flex-end; gap:2px; font-family:monospace; font-size:0.52rem; font-weight:700; letter-spacing:0.15em; color:rgba(28,34,48,0.45);}
   @media (max-width:900px){
     .robot-hero{height:350px; order:-1; margin-bottom:10px;}
-    .interactive-arm{width:min(100%, 370px); height:350px;}
-    .robot-label{top:0; right:12px;}
-    .robot-sub-label{top:23px; right:12px;}
+    .interactive-arm{width:min(100%,370px); height:350px;}
   }
   @media (max-width:520px){
-    .robot-hero{height:320px;}
-    .interactive-arm{height:320px;}
-    .robot-label{font-size:0.55rem;}
-    .robot-sub-label{font-size:0.46rem;}
-    .robot-caption{display:none;}
+    .robot-hero{height:320px;} .interactive-arm{height:320px;} .robot-caption{display:none;}
   }
 
-  /* ---------- section shells ---------- */
-  .sec-red{background:var(--red); color:var(--paper);}
-  .sec-cream{background:var(--cream);}
+  /* sections */
+  .sec-dark{background:var(--navy); color:var(--paper);}
+  .sec-light{background:var(--soft);}
+  #contact{background:#fff;}
   .sec-pad{padding:110px 0;}
-  .ghost-num{
-    position:absolute; top:-40px; right:-10px; font-family:'Baloo 2',sans-serif; font-weight:700;
-    font-size:clamp(9rem, 22vw, 15rem); line-height:1; color:transparent;
-    -webkit-text-stroke:2px rgba(251,244,233,0.18);
-    user-select:none; pointer-events:none;
-  }
-  .ghost-num.on-cream{-webkit-text-stroke:2px rgba(142,38,24,0.14);}
-  .kicker{
-    display:inline-flex; align-items:center; gap:10px; font-weight:700; margin-bottom:14px;
-    font-size:0.92rem; color:var(--pink-ghost);
-  }
-  .sec-cream .kicker{color:var(--red);}
-  .sec-title{font-size:clamp(2.3rem, 5vw, 3.4rem); line-height:1.02; max-width:14ch;}
-  .sec-red .sec-title{color:var(--paper);}
-  .sec-cream .sec-title{color:var(--red-deep);}
-
+  .ghost-num{position:absolute; top:-40px; right:-10px; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:clamp(9rem,22vw,15rem); line-height:1; color:transparent; -webkit-text-stroke:2px rgba(183,195,208,0.16); user-select:none; pointer-events:none;}
+  .ghost-num.on-light{-webkit-text-stroke:2px rgba(28,34,48,0.08);}
+  .kicker{display:inline-flex; align-items:center; gap:10px; font-weight:700; margin-bottom:14px; font-size:0.92rem; color:var(--sky);}
+  .sec-light .kicker{color:var(--accent-ink);}
+  .sec-title{font-size:clamp(2.3rem,5vw,3.4rem); line-height:1.02; max-width:14ch;}
+  .sec-dark .sec-title{color:var(--paper);}
+  .sec-light .sec-title{color:var(--navy);}
   .reveal{opacity:0; transform:translateY(26px); transition:opacity .7s ease, transform .7s ease;}
   .reveal.is-visible{opacity:1; transform:translateY(0);}
 
-  /* ---------- overview ---------- */
+  /* overview */
   .overview-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:60px; align-items:start; position:relative; z-index:1;}
-  .overview-grid p{font-size:1.08rem; color:rgba(251,244,233,0.92); max-width:56ch;}
+  .overview-grid p{font-size:1.08rem; color:rgba(238,242,246,0.92); max-width:56ch;}
   .stat-list{display:flex; flex-direction:column; gap:22px;}
-  .stat{display:flex; gap:16px; align-items:flex-start; padding-bottom:20px; border-bottom:1px solid var(--line-onred);}
+  .stat{display:flex; gap:16px; align-items:flex-start; padding-bottom:20px; border-bottom:1px solid var(--line-ondark);}
   .stat:last-child{border-bottom:none;}
-  .stat .num{font-family:'Baloo 2',sans-serif; font-size:2.4rem; font-weight:700; min-width:96px;}
+  .stat .num{font-family:'Baloo 2',sans-serif; font-size:2.4rem; font-weight:700; min-width:96px; color:var(--teal);}
   .stat .label{font-weight:600; opacity:0.9; padding-top:8px; font-size:0.98rem;}
 
-  /* ---------- experience timeline ---------- */
-  .exp-wrap{position:relative; z-index:1;}
-  .exp-card{
-    background:#E7B6A6; border-radius:var(--radius); padding:40px; box-shadow:var(--shadow);
-    border:1px solid var(--line); position:relative;
-  }
-  .exp-head{display:flex; flex-wrap:wrap; justify-content:space-between; gap:14px; align-items:baseline; margin-bottom:18px;}
-  .exp-role{font-family:'Baloo 2',sans-serif; font-size:1.5rem; color:var(--red-deep); font-weight:700;}
-  .exp-company{font-weight:700; margin-top:4px;}
-  .exp-dates{
-    font-weight:700; font-size:0.85rem; background:var(--cream-soft); padding:6px 14px; border-radius:999px; white-space:nowrap;
-  }
-  .exp-list{margin:0; padding-left:20px; display:flex; flex-direction:column; gap:12px;}
-  .exp-list li{padding-left:4px;}
+  /* projects (light section, card grid) */
+  .proj-grid{display:grid; grid-template-columns:1fr 1fr; gap:26px; position:relative; z-index:1;}
+  .proj-card{background:var(--card); border-radius:22px; padding:32px 32px 28px; border:1px solid var(--line); box-shadow:var(--shadow); display:flex; flex-direction:column; transition:transform .25s ease;}
+  .proj-card:hover{transform:translateY(-4px);}
+  .proj-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;}
+  .proj-icon{width:52px; height:52px; border-radius:16px; background:var(--navy); color:var(--mist); display:flex; align-items:center; justify-content:center; box-shadow:0 6px 16px rgba(28,34,48,0.25);}
+  .proj-idx{font-family:'Baloo 2',sans-serif; font-size:0.85rem; font-weight:700; letter-spacing:1.5px; color:var(--accent-ink); opacity:0.85;}
+  .proj-title{font-family:'Baloo 2',sans-serif; font-size:1.5rem; color:var(--navy); font-weight:700; line-height:1.1;}
+  .proj-tag{font-size:0.82rem; font-weight:700; color:var(--accent-ink); margin-top:6px;}
+  .proj-desc{margin:14px 0 0; font-size:0.97rem; color:#3D4A5C;}
+  .proj-card ul{margin:14px 0 20px; padding-left:20px; display:flex; flex-direction:column; gap:9px; font-size:0.94rem; line-height:1.55; color:#3D4A5C;}
+  .proj-card ul li::marker{color:var(--teal);}
+  .chip-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:auto;}
+  .chip{font-size:0.78rem; font-weight:700; padding:7px 13px; border-radius:999px; background:var(--soft); color:var(--navy); border:1px solid rgba(28,34,48,0.14); transition:background .2s ease, color .2s ease;}
+  .chip:hover{background:var(--teal); color:#fff;}
 
+  /* experience (dark section) */
+  .exp-card{position:relative; z-index:1; background:var(--sky); color:var(--abyss); border-radius:var(--radius); padding:40px; box-shadow:0 14px 40px rgba(0,0,0,0.3);}
+  .exp-head{display:flex; flex-wrap:wrap; justify-content:space-between; gap:14px; align-items:baseline; margin-bottom:18px;}
+  .exp-role{font-family:'Baloo 2',sans-serif; font-size:1.5rem; color:var(--navy); font-weight:700;}
+  .exp-company{font-weight:700; margin-top:4px;}
+  .exp-dates{font-weight:700; font-size:0.85rem; background:var(--mist); color:var(--navy); padding:6px 14px; border-radius:999px; white-space:nowrap;}
   .story-timeline{margin-top:34px;}
   .story-item{display:flex; gap:22px;}
   .story-marker-col{display:flex; flex-direction:column; align-items:center; flex:none;}
-  .story-icon{
-    width:52px; height:52px; border-radius:16px; background:var(--red); color:var(--paper);
-    display:flex; align-items:center; justify-content:center; flex:none; position:relative; z-index:1;
-    box-shadow:0 6px 16px rgba(142,38,24,0.28);
-  }
-  .story-connector{flex:1; width:2px; min-height:28px; background:linear-gradient(var(--red), rgba(194,59,38,0.15)); margin:6px 0;}
+  .story-icon{width:52px; height:52px; border-radius:16px; background:var(--navy); color:var(--mist); display:flex; align-items:center; justify-content:center; flex:none; box-shadow:0 6px 16px rgba(28,34,48,0.28);}
+  .story-connector{flex:1; width:2px; min-height:28px; background:linear-gradient(var(--navy), rgba(28,34,48,0.15)); margin:6px 0;}
   .story-content{padding-top:6px; padding-bottom:34px;}
   .story-item:last-child .story-content{padding-bottom:0;}
-  .story-index{font-family:'Baloo 2',sans-serif; font-size:0.78rem; font-weight:700; color:var(--red); letter-spacing:1.5px; opacity:0.65;}
-  .story-title{font-family:'Baloo 2',sans-serif; font-size:1.28rem; color:var(--red-deep); font-weight:700; margin-top:4px;}
-  .story-text{margin-top:8px; max-width:60ch; color:#443627; font-size:0.98rem;}
+  .story-index{font-family:'Baloo 2',sans-serif; font-size:0.78rem; font-weight:700; color:var(--navy); letter-spacing:1.5px; opacity:0.65;}
+  .story-title{font-family:'Baloo 2',sans-serif; font-size:1.28rem; color:var(--navy); font-weight:700; margin-top:2px;}
+  .story-text{margin-top:8px; max-width:62ch; color:#3D4A5C; font-size:0.98rem;}
   @media (max-width:560px){
-    .story-item{gap:14px;}
-    .story-icon{width:44px; height:44px; border-radius:13px;}
-    .story-icon svg{width:18px; height:18px;}
+    .story-item{gap:14px;} .story-icon{width:44px; height:44px; border-radius:13px;} .story-icon svg{width:18px; height:18px;}
   }
 
-  /* ---------- projects ---------- */
-  .proj-grid{display:flex; flex-direction:column; gap:18px; position:relative; z-index:1;}
-  .proj-card{
-    background:var(--card); color:var(--ink); border-radius:22px; overflow:hidden;
-    box-shadow:var(--shadow); border:1px solid rgba(0,0,0,0.04);
-  }
-  .proj-head{
-    display:flex; justify-content:space-between; align-items:center; gap:20px; width:100%;
-    padding:26px 30px; background:none; border:none; cursor:pointer; text-align:left; font:inherit; color:inherit;
-  }
-  .proj-title-block{display:flex; flex-direction:column; gap:6px;}
-  .proj-title{font-family:'Baloo 2',sans-serif; font-size:1.35rem; color:var(--red-deep); font-weight:700;}
-  .proj-tag{font-size:0.82rem; font-weight:600; opacity:0.7;}
-  .proj-chev{
-    width:34px; height:34px; border-radius:50%; background:var(--red); color:var(--paper); flex:none;
-    display:flex; align-items:center; justify-content:center; transition:transform .3s ease;
-  }
-  .proj-card.open .proj-chev{transform:rotate(135deg);}
-  .proj-body{max-height:0; overflow:hidden; transition:max-height .45s ease;}
-  .proj-body-in{padding:0 30px 30px;}
-  .proj-body-in ul{margin:0 0 18px; padding-left:20px; display:flex; flex-direction:column; gap:10px;}
-  .chip-row{display:flex; flex-wrap:wrap; gap:8px;}
-  .chip{
-    font-size:0.78rem; font-weight:700; padding:7px 13px; border-radius:999px;
-    background:var(--cream-soft); color:var(--red-deep); border:1px solid rgba(142,38,24,0.15);
-  }
-
-  /* ---------- skills ---------- */
+  /* skills */
   .skills-grid{display:grid; grid-template-columns:1fr 1fr; gap:26px; position:relative; z-index:1;}
   .skill-card{background:var(--card); border-radius:22px; padding:30px 30px 26px; border:1px solid var(--line); box-shadow:var(--shadow);}
-  .skill-card h3{font-size:1.15rem; color:var(--red-deep); margin-bottom:16px;}
+  .skill-card h3{font-size:1.15rem; color:var(--navy); margin-bottom:16px;}
   .skill-chips{display:flex; flex-wrap:wrap; gap:9px;}
-  .skill-chip{
-    font-size:0.85rem; font-weight:600; padding:8px 14px; border-radius:999px;
-    background:var(--cream); border:1px solid var(--line); cursor:default;
-    transition:background .2s ease, color .2s ease, transform .2s ease;
-  }
-  .skill-chip:hover{background:var(--red); color:var(--paper); transform:translateY(-2px);}
+  .skill-chip{font-size:0.85rem; font-weight:600; padding:8px 14px; border-radius:999px; background:var(--soft); border:1px solid var(--line); cursor:default; transition:background .2s ease, color .2s ease, transform .2s ease;}
+  .skill-chip:hover{background:var(--teal); color:#fff; transform:translateY(-2px);}
 
-  /* ---------- education ---------- */
-  .edu-card{
-    position:relative; z-index:1; max-width:720px; margin:0 auto;
-    background:var(--card); color:var(--ink); border-radius:var(--radius); padding:44px;
-    box-shadow:var(--shadow); text-align:left; display:flex; gap:24px; align-items:flex-start;
-  }
-  .edu-icon{
-    width:64px; height:64px; border-radius:18px; background:var(--red); color:var(--paper); flex:none;
-    display:flex; align-items:center; justify-content:center;
-  }
+  /* education */
+  .edu-card{position:relative; z-index:1; max-width:720px; margin:0 auto; background:var(--card); color:var(--abyss); border-radius:var(--radius); padding:44px; box-shadow:0 14px 40px rgba(0,0,0,0.3); display:flex; gap:24px; align-items:flex-start;}
+  .edu-icon{width:64px; height:64px; border-radius:18px; background:var(--navy); color:var(--mist); flex:none; display:flex; align-items:center; justify-content:center;}
   .edu-icon svg{width:30px; height:30px;}
-  .edu-degree{font-family:'Baloo 2',sans-serif; font-size:1.4rem; color:var(--red-deep); font-weight:700;}
+  .edu-degree{font-family:'Baloo 2',sans-serif; font-size:1.4rem; color:var(--navy); font-weight:700;}
   .edu-school{font-weight:700; margin-top:6px;}
   .edu-meta{display:flex; gap:16px; flex-wrap:wrap; margin-top:12px; font-size:0.9rem; font-weight:600; opacity:0.75;}
 
-  /* ---------- contact/footer ---------- */
+  /* contact */
   .contact-sec{text-align:center;}
-  .contact-sec h2{font-size:clamp(2.4rem, 6vw, 4rem); color:var(--red-deep); max-width:16ch; margin:0 auto 18px;}
-  .contact-sec p{max-width:52ch; margin:0 auto 34px; font-size:1.05rem; color:#443627;}
+  .contact-sec h2{font-size:clamp(2.4rem,6vw,4rem); color:var(--navy); max-width:16ch; margin:0 auto 18px;}
+  .contact-sec p{max-width:52ch; margin:0 auto 34px; font-size:1.05rem; color:#3D4A5C;}
   .contact-actions{display:flex; flex-wrap:wrap; justify-content:center; gap:14px; margin-bottom:40px;}
-  .footer-bar{
-    border-top:1px solid var(--line); padding:26px 0; display:flex; justify-content:space-between;
-    align-items:center; flex-wrap:wrap; gap:12px; font-size:0.85rem; font-weight:600; opacity:0.75;
-  }
-  .footer-mark{display:flex; align-items:center; gap:8px;}
+  .footer-bar{border-top:1px solid var(--line); padding:26px 0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:0.85rem; font-weight:600; opacity:0.8;}
+  .footer-mark{display:flex; align-items:center; gap:8px; color:var(--navy);}
 
   @media (max-width:900px){
-    .nav-links{display:none;}
-    .nav-cta{display:none;}
+    .nav-links,.nav-cta{display:none;}
     .burger{display:flex;}
-    .hero .wrap{grid-template-columns:1fr; text-align:left;}
-    .hero-visual{height:300px; order:-1;}
-    .overview-grid{grid-template-columns:1fr;}
-    .skills-grid{grid-template-columns:1fr;}
+    .hero .wrap,.overview-grid,.skills-grid,.proj-grid{grid-template-columns:1fr;}
     .sec-pad{padding:80px 0;}
     .edu-card{flex-direction:column;}
   }
   @media (max-width:520px){
-    .wrap{padding:0 20px;}
-    .exp-card{padding:26px;}
-    .proj-head{padding:20px;}
-    .proj-body-in{padding:0 20px 24px;}
+    .wrap{padding:0 20px;} .exp-card{padding:26px;} .proj-card{padding:26px 22px;}
   }
-
   @media (prefers-reduced-motion: reduce){
     *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
   }
@@ -391,13 +189,13 @@
 </head>
 <body>
 
-<!-- ============ NAV ============ -->
+<!-- NAV -->
 <nav class="nav">
   <div class="nav-mark"><span class="dot">V</span> Varadha VR</div>
   <ul class="nav-links">
     <li><a href="#overview" data-nav>Overview</a></li>
-    <li><a href="#experience" data-nav>Experience</a></li>
     <li><a href="#projects" data-nav>Projects</a></li>
+    <li><a href="#experience" data-nav>Experience</a></li>
     <li><a href="#skills" data-nav>Skills</a></li>
     <li><a href="#education" data-nav>Education</a></li>
   </ul>
@@ -407,14 +205,14 @@
 
 <div class="mobile-menu" id="mobileMenu">
   <a href="#overview">Overview</a>
-  <a href="#experience">Experience</a>
   <a href="#projects">Projects</a>
+  <a href="#experience">Experience</a>
   <a href="#skills">Skills</a>
   <a href="#education">Education</a>
   <a href="#contact">Contact</a>
 </div>
 
-<!-- ============ HERO ============ -->
+<!-- HERO -->
 <header class="hero">
   <div class="wrap">
     <div>
@@ -424,28 +222,23 @@
           Thrissur, Kerala
         </span>
       </div>
-      <h1><span>Varadha V R</span></h1>
+      <h1>Varadha V R</h1>
       <div class="hero-role">Robotics Engineer</div>
       <p class="lede">I build intelligent, connected systems that transform technology into real-world experiences.
 Give me a problem, a few components, and enough time, I'll build something that shouldn't exist yet. I'm here to make machines think, systems connect, and ideas become reality.</p>
-
       <div class="hero-actions">
         <a class="btn btn-primary" href="#projects">See the work</a>
         <a class="btn btn-ghost" href="#contact">Say hello</a>
       </div>
-
       <div class="contact-row">
         <a class="contact-pill" href="mailto:varadhavr24@gmail.com">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
           varadhavr24@gmail.com
         </a>
         <a class="contact-pill" href="https://github.com/Varadha24" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.3 9.41 7.88 10.94.58.11.79-.25.79-.56v-2.17c-3.2.7-3.88-1.36-3.88-1.36-.53-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.24 3.34.95.1-.74.4-1.24.73-1.52-2.55-.29-5.23-1.28-5.23-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.47.11-3.06 0 0 .96-.31 3.15 1.18A10.9 10.9 0 0 1 12 6.03c.97 0 1.94.13 2.85.38 2.18-1.49 3.14-1.18 3.14-1.18.62 1.59.23 2.77.11 3.06.74.81 1.18 1.84 1.18 3.1 0 4.42-2.69 5.39-5.25 5.67.41.35.78 1.04.78 2.1v3.12c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/>
-          </svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.3 9.41 7.88 10.94.58.11.79-.25.79-.56v-2.17c-3.2.7-3.88-1.36-3.88-1.36-.53-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.24 3.34.95.1-.74.4-1.24.73-1.52-2.55-.29-5.23-1.28-5.23-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.47.11-3.06 0 0 .96-.31 3.15 1.18A10.9 10.9 0 0 1 12 6.03c.97 0 1.94.13 2.85.38 2.18-1.49 3.14-1.18 3.14-1.18.62 1.59.23 2.77.11 3.06.74.81 1.18 1.84 1.18 3.1 0 4.42-2.69 5.39-5.25 5.67.41.35.78 1.04.78 2.1v3.12c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
           GitHub
         </a>
-
         <a class="contact-pill" href="https://linkedin.com/in/varadha-vr" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/><path d="M10 9v12M10 13a4 4 0 0 1 8 0v8"/></svg>
           LinkedIn
@@ -454,479 +247,347 @@ Give me a problem, a few components, and enough time, I'll build something that 
     </div>
 
     <div class="hero-visual robot-hero">
-
-
       <svg id="robotArm" class="interactive-arm" viewBox="0 0 400 400" aria-label="Interactive robotic arm">
-
         <defs>
           <linearGradient id="robotMetal" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#555b60"/>
-            <stop offset="45%" stop-color="#24282b"/>
-            <stop offset="100%" stop-color="#111315"/>
+            <stop offset="0%" stop-color="#5a6577"/><stop offset="45%" stop-color="#262d3c"/><stop offset="100%" stop-color="#1C2230"/>
           </linearGradient>
-
           <linearGradient id="robotMetalLight" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#858b90"/>
-            <stop offset="45%" stop-color="#3f454a"/>
-            <stop offset="100%" stop-color="#17191b"/>
+            <stop offset="0%" stop-color="#8c97a8"/><stop offset="45%" stop-color="#3D4A5C"/><stop offset="100%" stop-color="#161b27"/>
           </linearGradient>
-
           <linearGradient id="robotRed" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#ff6345"/>
-            <stop offset="100%" stop-color="#9c2114"/>
+            <stop offset="0%" stop-color="#E08A79"/><stop offset="100%" stop-color="#C46A5A"/>
           </linearGradient>
-
-          <filter id="robotShadow">
-            <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.25"/>
-          </filter>
-
-          <filter id="robotSmallShadow">
-            <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.25"/>
-          </filter>
+          <filter id="robotShadow"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.25"/></filter>
+          <filter id="robotSmallShadow"><feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.25"/></filter>
         </defs>
 
-        <!-- TECHNICAL GRID -->
-        <g stroke="#8e2618" stroke-width="1" opacity="0.08">
-          <line x1="50" y1="0" x2="50" y2="400"/>
-          <line x1="100" y1="0" x2="100" y2="400"/>
-          <line x1="150" y1="0" x2="150" y2="400"/>
-          <line x1="200" y1="0" x2="200" y2="400"/>
-          <line x1="250" y1="0" x2="250" y2="400"/>
-          <line x1="300" y1="0" x2="300" y2="400"/>
-          <line x1="350" y1="0" x2="350" y2="400"/>
-
-          <line x1="0" y1="50" x2="400" y2="50"/>
-          <line x1="0" y1="100" x2="400" y2="100"/>
-          <line x1="0" y1="150" x2="400" y2="150"/>
-          <line x1="0" y1="200" x2="400" y2="200"/>
-          <line x1="0" y1="250" x2="400" y2="250"/>
-          <line x1="0" y1="300" x2="400" y2="300"/>
-          <line x1="0" y1="350" x2="400" y2="350"/>
+        <g stroke="#1C2230" stroke-width="1" opacity="0.1">
+          <line x1="50" y1="0" x2="50" y2="400"/><line x1="100" y1="0" x2="100" y2="400"/><line x1="150" y1="0" x2="150" y2="400"/><line x1="200" y1="0" x2="200" y2="400"/><line x1="250" y1="0" x2="250" y2="400"/><line x1="300" y1="0" x2="300" y2="400"/><line x1="350" y1="0" x2="350" y2="400"/>
+          <line x1="0" y1="50" x2="400" y2="50"/><line x1="0" y1="100" x2="400" y2="100"/><line x1="0" y1="150" x2="400" y2="150"/><line x1="0" y1="200" x2="400" y2="200"/><line x1="0" y1="250" x2="400" y2="250"/><line x1="0" y1="300" x2="400" y2="300"/><line x1="0" y1="350" x2="400" y2="350"/>
         </g>
 
-        <!-- WORKSPACE -->
-        <circle cx="200" cy="315" r="235" fill="none" stroke="#8e2618" stroke-width="1" stroke-dasharray="4 8" opacity="0.12"/>
+        <circle cx="200" cy="315" r="235" fill="none" stroke="#1C2230" stroke-width="1" stroke-dasharray="4 8" opacity="0.18"/>
+        <ellipse cx="200" cy="354" rx="78" ry="13" fill="#1C2230" opacity="0.18"/>
 
-        <!-- FLOOR SHADOW -->
-        <ellipse cx="200" cy="354" rx="78" ry="13" fill="#2A2118" opacity="0.12"/>
-
-        <!-- BASE -->
         <g filter="url(#robotShadow)">
-
-          <path d="M128 343 Q128 337 137 337 L263 337 Q272 337 272 343 L264 359 L136 359 Z"
-                fill="url(#robotMetal)" stroke="#151719" stroke-width="2"/>
-
-          <circle cx="143" cy="359" r="8" fill="#17191b"/>
-          <circle cx="143" cy="359" r="4" fill="#f2e9da"/>
-
-          <circle cx="257" cy="359" r="8" fill="#17191b"/>
-          <circle cx="257" cy="359" r="4" fill="#f2e9da"/>
-
-          <!-- rotating base -->
-          <ellipse cx="200" cy="326" rx="58" ry="24" fill="#16191b"/>
+          <path d="M128 343 Q128 337 137 337 L263 337 Q272 337 272 343 L264 359 L136 359 Z" fill="url(#robotMetal)" stroke="#1C2230" stroke-width="2"/>
+          <circle cx="143" cy="359" r="8" fill="#1C2230"/><circle cx="143" cy="359" r="4" fill="#EEF2F6"/>
+          <circle cx="257" cy="359" r="8" fill="#1C2230"/><circle cx="257" cy="359" r="4" fill="#EEF2F6"/>
+          <ellipse cx="200" cy="326" rx="58" ry="24" fill="#151a26"/>
           <ellipse cx="200" cy="321" rx="53" ry="21" fill="url(#robotMetalLight)"/>
-          <ellipse cx="200" cy="319" rx="42" ry="16" fill="#17191b" opacity="0.35"/>
-
-          <!-- base bolts -->
-          <circle cx="160" cy="323" r="2.5" fill="#111315"/>
-          <circle cx="175" cy="333" r="2.5" fill="#111315"/>
-          <circle cx="200" cy="336" r="2.5" fill="#111315"/>
-          <circle cx="225" cy="333" r="2.5" fill="#111315"/>
-          <circle cx="240" cy="323" r="2.5" fill="#111315"/>
-
-          <!-- rear housing -->
-          <path d="M164 295 Q164 280 180 275 L220 275 Q236 280 236 295 L236 321 L164 321 Z"
-                fill="url(#robotMetal)" stroke="#151719" stroke-width="2"/>
-
+          <ellipse cx="200" cy="319" rx="42" ry="16" fill="#1C2230" opacity="0.35"/>
+          <circle cx="160" cy="323" r="2.5" fill="#1C2230"/><circle cx="175" cy="333" r="2.5" fill="#1C2230"/><circle cx="200" cy="336" r="2.5" fill="#1C2230"/><circle cx="225" cy="333" r="2.5" fill="#1C2230"/><circle cx="240" cy="323" r="2.5" fill="#1C2230"/>
+          <path d="M164 295 Q164 280 180 275 L220 275 Q236 280 236 295 L236 321 L164 321 Z" fill="url(#robotMetal)" stroke="#1C2230" stroke-width="2"/>
           <rect x="172" y="291" width="15" height="20" rx="3" fill="url(#robotRed)"/>
-          <rect x="207" y="292" width="18" height="13" rx="2" fill="#111315" opacity="0.4"/>
+          <rect x="207" y="292" width="18" height="13" rx="2" fill="#1C2230" opacity="0.4"/>
         </g>
 
-        <!-- SHOULDER MOTOR -->
         <g id="shoulderJoint" filter="url(#robotSmallShadow)">
-          <ellipse cx="-1" cy="0" rx="25" ry="28" fill="#151719"/>
-          <ellipse cx="-6" cy="0" rx="18" ry="22" fill="url(#robotMetalLight)" stroke="#151719" stroke-width="2"/>
-          <circle r="13" fill="#111315" stroke="#555b60" stroke-width="4"/>
-          <circle r="6" fill="#151719"/>
-          <circle r="2.5" fill="#ff4d32"/>
+          <ellipse cx="-1" cy="0" rx="25" ry="28" fill="#151a26"/>
+          <ellipse cx="-6" cy="0" rx="18" ry="22" fill="url(#robotMetalLight)" stroke="#1C2230" stroke-width="2"/>
+          <circle r="13" fill="#1C2230" stroke="#5a6577" stroke-width="4"/>
+          <circle r="6" fill="#151a26"/>
+          <circle r="2.5" fill="#E08A79"/>
         </g>
 
-        <!-- LINK 1 (upper arm, drawn length ~120) -->
         <g id="upperArm" filter="url(#robotShadow)">
-          <path d="M15 -15 L105 -15 Q116 -15 120 -7 L120 7 Q116 15 105 15 L15 15 Q4 15 4 0 Q4 -15 15 -15 Z"
-                fill="url(#robotMetal)" stroke="#151719" stroke-width="2"/>
-          <path d="M20 -8 L98 -8 L105 0 L98 8 L20 8 Z" fill="#0f1113" opacity="0.25"/>
-          <path d="M25 -3 L98 -3" stroke="#f2e9da" stroke-width="2" opacity="0.10"/>
-          <circle cx="28" cy="0" r="3" fill="#111315" stroke="#858b90" stroke-width="1"/>
-          <circle cx="92" cy="0" r="3" fill="#111315" stroke="#858b90" stroke-width="1"/>
-          <path d="M26 10 C48 24 75 24 98 9" fill="none" stroke="#111315" stroke-width="4" stroke-linecap="round"/>
+          <path d="M15 -15 L105 -15 Q116 -15 120 -7 L120 7 Q116 15 105 15 L15 15 Q4 15 4 0 Q4 -15 15 -15 Z" fill="url(#robotMetal)" stroke="#1C2230" stroke-width="2"/>
+          <path d="M20 -8 L98 -8 L105 0 L98 8 L20 8 Z" fill="#1C2230" opacity="0.25"/>
+          <path d="M25 -3 L98 -3" stroke="#EEF2F6" stroke-width="2" opacity="0.12"/>
+          <circle cx="28" cy="0" r="3" fill="#1C2230" stroke="#8c97a8" stroke-width="1"/>
+          <circle cx="92" cy="0" r="3" fill="#1C2230" stroke="#8c97a8" stroke-width="1"/>
+          <path d="M26 10 C48 24 75 24 98 9" fill="none" stroke="#1C2230" stroke-width="4" stroke-linecap="round"/>
         </g>
 
-        <!-- ELBOW -->
         <g id="elbowJoint" filter="url(#robotSmallShadow)">
-          <circle r="21" fill="#151719"/>
+          <circle r="21" fill="#151a26"/>
           <circle r="16" fill="url(#robotMetalLight)"/>
-          <circle r="10" fill="#111315" stroke="#858b90" stroke-width="3"/>
-          <circle r="4" fill="#ff4d32"/>
-          <circle cx="-11" cy="0" r="2" fill="#111315"/>
-          <circle cx="11" cy="0" r="2" fill="#111315"/>
+          <circle r="10" fill="#1C2230" stroke="#8c97a8" stroke-width="3"/>
+          <circle r="4" fill="#E08A79"/>
+          <circle cx="-11" cy="0" r="2" fill="#1C2230"/><circle cx="11" cy="0" r="2" fill="#1C2230"/>
         </g>
 
-        <!-- LINK 2 (forearm, drawn length ~82) -->
         <g id="foreArm" filter="url(#robotShadow)">
-          <path d="M5 -13 L70 -17 Q80 -14 82 0 Q80 14 70 17 L5 13 Q-3 8 -3 0 Q-3 -8 5 -13 Z"
-                fill="url(#robotMetalLight)" stroke="#151719" stroke-width="2"/>
-          <path d="M18 -7 L64 -11 L75 0 L64 11 L18 7 Z" fill="#111315" opacity="0.25"/>
-          <path d="M20 0 L69 0" stroke="#111315" stroke-width="3" opacity="0.25"/>
-          <path d="M46 -15 L56 -16 L59 16 L49 16 Z" fill="url(#robotRed)" opacity="0.85"/>
+          <path d="M5 -13 L70 -17 Q80 -14 82 0 Q80 14 70 17 L5 13 Q-3 8 -3 0 Q-3 -8 5 -13 Z" fill="url(#robotMetalLight)" stroke="#1C2230" stroke-width="2"/>
+          <path d="M18 -7 L64 -11 L75 0 L64 11 L18 7 Z" fill="#1C2230" opacity="0.25"/>
+          <path d="M20 0 L69 0" stroke="#1C2230" stroke-width="3" opacity="0.25"/>
+          <path d="M46 -15 L56 -16 L59 16 L49 16 Z" fill="url(#robotRed)" opacity="0.9"/>
         </g>
 
-        <!-- LINK 3 (wrist link, drawn length ~32) -->
         <g id="thirdLink" filter="url(#robotSmallShadow)">
-          <path d="M0 -8 L27 -9 Q32 -7 32 0 Q32 7 27 9 L0 8 Z"
-                fill="url(#robotMetal)" stroke="#151719" stroke-width="2"/>
-          <path d="M5 -4 L23 -5 L27 0 L23 5 L5 4 Z" fill="#111315" opacity="0.25"/>
+          <path d="M0 -8 L27 -9 Q32 -7 32 0 Q32 7 27 9 L0 8 Z" fill="url(#robotMetal)" stroke="#1C2230" stroke-width="2"/>
+          <path d="M5 -4 L23 -5 L27 0 L23 5 L5 4 Z" fill="#1C2230" opacity="0.25"/>
           <rect x="17" y="-6" width="5" height="12" rx="1" fill="url(#robotRed)"/>
-          <circle cx="6" cy="0" r="2.2" fill="#111315"/>
-          <circle cx="25" cy="0" r="2.2" fill="#111315"/>
-
-          <!-- joint cap where forearm meets link 3 -->
-          <circle cx="0" cy="0" r="9" fill="#151719"/>
-          <circle cx="0" cy="0" r="4.5" fill="url(#robotMetalLight)" stroke="#151719" stroke-width="1.5"/>
-          <circle cx="0" cy="0" r="1.8" fill="#ff4d32"/>
+          <circle cx="6" cy="0" r="2.2" fill="#1C2230"/><circle cx="25" cy="0" r="2.2" fill="#1C2230"/>
+          <circle cx="0" cy="0" r="9" fill="#151a26"/>
+          <circle cx="0" cy="0" r="4.5" fill="url(#robotMetalLight)" stroke="#1C2230" stroke-width="1.5"/>
+          <circle cx="0" cy="0" r="1.8" fill="#E08A79"/>
         </g>
 
-        <!-- END EFFECTOR / CLAW -->
         <g id="wrist" filter="url(#robotSmallShadow)">
-          <circle cx="0" cy="0" r="12" fill="#151719"/>
-          <circle cx="0" cy="0" r="7" fill="url(#robotMetalLight)" stroke="#151719" stroke-width="2"/>
-          <circle cx="0" cy="0" r="3" fill="#ff4d32"/>
-
-          <!-- claw mount -->
-          <rect x="8" y="-6" width="13" height="12" rx="3" fill="#151719"/>
-
-          <!-- upper claw -->
-          <path d="M18 -4 L31 -15 Q36 -18 40 -14 L44 -9 L38 -3 L27 1"
-                fill="none" stroke="#151719" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-
-          <!-- lower claw -->
-          <path d="M18 4 L31 15 Q36 18 40 14 L44 9 L38 3 L27 -1"
-                fill="none" stroke="#151719" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-
-          <circle cx="42" cy="-11" r="3" fill="#ff4d32"/>
-          <circle cx="42" cy="11" r="3" fill="#ff4d32"/>
+          <circle cx="0" cy="0" r="12" fill="#151a26"/>
+          <circle cx="0" cy="0" r="7" fill="url(#robotMetalLight)" stroke="#1C2230" stroke-width="2"/>
+          <circle cx="0" cy="0" r="3" fill="#E08A79"/>
+          <rect x="8" y="-6" width="13" height="12" rx="3" fill="#151a26"/>
+          <path d="M18 -4 L31 -15 Q36 -18 40 -14 L44 -9 L38 -3 L27 1" fill="none" stroke="#151a26" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M18 4 L31 15 Q36 18 40 14 L44 9 L38 3 L27 -1" fill="none" stroke="#151a26" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="42" cy="-11" r="3" fill="#E08A79"/><circle cx="42" cy="11" r="3" fill="#E08A79"/>
         </g>
 
-        <!-- TARGET -->
-        <g id="armTarget" stroke="#C23B26" fill="none" opacity="0.75">
+        <g id="armTarget" stroke="#C46A5A" fill="none" opacity="0.85">
           <circle r="14" stroke-width="1.5" stroke-dasharray="3 4"/>
-          <circle r="4" fill="#C23B26" stroke="none"/>
-          <line x1="-22" x2="-7" stroke-width="1.5"/>
-          <line x1="7" x2="22" stroke-width="1.5"/>
-          <line y1="-22" y2="-7" stroke-width="1.5"/>
-          <line y1="7" y2="22" stroke-width="1.5"/>
+          <circle r="4" fill="#C46A5A" stroke="none"/>
+          <line x1="-22" x2="-7" stroke-width="1.5"/><line x1="7" x2="22" stroke-width="1.5"/>
+          <line y1="-22" y2="-7" stroke-width="1.5"/><line y1="7" y2="22" stroke-width="1.5"/>
         </g>
-
       </svg>
-
-      <div class="robot-caption">
-        <span>MOVE POINTER</span>
-        <span>TO CONTROL</span>
-      </div>
-
+      <div class="robot-caption"><span>MOVE POINTER</span><span>TO CONTROL</span></div>
     </div>
   </div>
 </header>
 
-<!-- ============ OVERVIEW ============ -->
-<section class="sec-red sec-pad" id="overview">
+<!-- 01 OVERVIEW -->
+<section class="sec-dark sec-pad" id="overview">
   <span class="ghost-num">01</span>
   <div class="wrap overview-grid">
     <div class="reveal">
-      <div class="kicker"><span class="ast sm"><svg viewBox="0 0 40 40"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span> ABOUT ME</div>
+      <div class="kicker"><span class="ast"><svg viewBox="0 0 40 40"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span> ABOUT ME</div>
       <h2 class="sec-title">From concept to code, circuits to deployment.</h2>
     </div>
     <div class="reveal" style="transition-delay:0.1s">
-      <p>I'm a Robotics Systems Engineer with 2 years of hands-on experience designing, prototyping, and deploying integrated automation and IoT solutions.</p>
+      <p>I'm a Robotics Systems Engineer with 2+ years of hands-on experience designing, prototyping, and deploying integrated automation and IoT solutions.</p>
       <p>Specialized in end-to-end system design: from client requirements and hardware-software integration through production deployment. Expert in industrial robotic arm programming, robotics product development, and computer vision.</p>
       <p>Demonstrated ability to lead IoT product development, mentor technical teams, and translate complex automation challenges into scalable, reliable solutions.</p>
       <div class="stat-list" style="margin-top:34px;">
         <div class="stat"><span class="num">2+</span><span class="label">Years designing and building robotics &amp; IoT systems</span></div>
-        <div class="stat"><span class="num">E2E</span><span class="label">Robotics & IoT platforms, integrating hardware, software, and intelligent systems</span></div>
+        <div class="stat"><span class="num">E2E</span><span class="label">Robotics &amp; IoT platforms, integrating hardware, software, and intelligent systems</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ EXPERIENCE ============ -->
-<section class="sec-cream sec-pad" id="experience">
-  <span class="ghost-num on-cream">02</span>
+<!-- 02 PROJECTS -->
+<section class="sec-light sec-pad" id="projects">
+  <span class="ghost-num on-light">02</span>
   <div class="wrap">
     <div class="reveal" style="margin-bottom:44px;">
-      <div class="kicker"><span class="ast sm"><svg viewBox="0 0 40 40"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span> Work Experience</div>
-      <h2 class="sec-title">Where I've built it</h2>
-    </div>
-    <div class="exp-wrap reveal" style="transition-delay:0.1s">
-      <div class="exp-card">
-        <div class="exp-head">
-          <div>
-            <div class="exp-role">Robotics Systems Engineer</div>
-            <div class="exp-company">Inker Robotics · Thrissur, Kerala</div>
-          </div>
-          <span class="exp-dates">July 2024 — Present · 2 yrs</span>
-        </div>
-
-        <div class="story-timeline">
-
-          <div class="story-item">
-            <div class="story-marker-col">
-              <div class="story-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4M6 20v-4l4-3V7"/><path d="M10 7l5-2 2 2-4 2"/><circle cx="17" cy="6" r="2"/></svg>
-              </div>
-              <div class="story-connector"></div>
-            </div>
-            <div class="story-content">
-              <div class="story-title">Teaching arms to work the line</div>
-              <p class="story-text">Most of my week starts on the shop floor, not at a whiteboard. I commission, program, and deploy industrial robotic arms, while integrating the sensors, controllers, connectivity, and software around them, so a design on paper becomes a machine that repeats the same motion, correctly, thousands of times without anyone babysitting it.</p>
-            </div>
-          </div>
-
-          <div class="story-item">
-            <div class="story-marker-col">
-              <div class="story-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M14 9h4M14 13h4M6 18v2M18 18v2"/></svg>
-              </div>
-              <div class="story-connector"></div>
-            </div>
-            <div class="story-content">
-              <div class="story-title">Giving RTBS a face — and a memory</div>
-              <p class="story-text">I led the architecture behind RTBS, an AI face‑recognition ticketing platform, and built it to scale from a single walk‑in to a large group moving through access control at once. The harder problem was making it feel effortless: I layered in gamified engagement, tighter workflows, and progressive unlocks so the system rewarded people for showing up instead of just checking them in.</p>
-            </div>
-          </div>
-
-          <div class="story-item">
-            <div class="story-marker-col">
-              <div class="story-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.3 1 2.1V16h6v-.4c0-.8.4-1.5 1-2.1A6 6 0 0 0 12 3Z"/></svg>
-              </div>
-              <div class="story-connector"></div>
-            </div>
-            <div class="story-content">
-              <div class="story-title">Ideas that survive past the prototype</div>
-              <p class="story-text">Outside any single build, I lead IoT product development from a rough concept to a working proof-of-concept. Building the system, making the pieces work together, then writing the architecture, design specs, and workflows so someone else can actually ship it without reverse-engineering my head.</p>
-            </div>
-          </div>
-
-          <div class="story-item">
-            <div class="story-marker-col">
-              <div class="story-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M3 16l6-4 4 3 8-6M8 20h8"/></svg>
-              </div>
-              <div class="story-connector"></div>
-            </div>
-            <div class="story-content">
-              <div class="story-title">Teaching what I had to learn the hard way</div>
-              <p class="story-text">I run hands‑on IoT and Embedded Systems workshops and Faculty Development Programs for engineering students and faculty, turning the debugging scars from my own projects into sessions people can actually walk out and use.</p>
-            </div>
-          </div>
-
-          <div class="story-item">
-            <div class="story-marker-col">
-              <div class="story-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2 20c0-3 2.7-5 6-5s6 2 6 5M15.5 20c0-2.2-1.4-4-3.5-4.7"/></svg>
-              </div>
-            </div>
-            <div class="story-content">
-              <div class="story-title">Mentoring the next build</div>
-              <p class="story-text">I mentor interns and students through the full arc of a project from ideation, design, implementation, testing, up to the moment they stand in front of people and present something that actually works.</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ PROJECTS ============ -->
-<section class="sec-red sec-pad" id="projects">
-  <span class="ghost-num">03</span>
-  <div class="wrap">
-    <div class="reveal" style="margin-bottom:44px;">
-      <div class="kicker"><span class="ast sm"><svg viewBox="0 0 40 40"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span> PROJECTS</div>
+      <div class="kicker"><span class="ast"><svg viewBox="0 0 40 40"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span> PROJECTS</div>
       <h2 class="sec-title">Systems I've taken from idea to production</h2>
     </div>
 
-    <div class="proj-grid reveal" style="transition-delay:0.1s" id="projGrid">
+    <div class="proj-grid reveal" style="transition-delay:0.1s">
 
       <div class="proj-card">
-        <button class="proj-head" data-toggle>
-          <div class="proj-title-block">
-            <span class="proj-title">Robobooth — Automated Robotic Videography System</span>
-            <span class="proj-tag">Production‑deployed · Full‑stack system architect &amp; lead developer</span>
-          </div>
-          <span class="proj-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
-        </button>
-        <div class="proj-body">
-          <div class="proj-body-in">
-            <ul>
-              <li>Architected an end‑to‑end system integrating a Doosan 6‑axis collaborative arm with real‑time camera control and automated video delivery.</li>
-              <li>Built a FastAPI backend orchestrating arm motion (DART platform), Android camera recording via ADB, and video sync with under 1 second of latency.</li>
-              <li>Designed real‑time hardware triggering through an Arduino relay, synchronizing camera and arm signals to millisecond‑level timing for a cinematic effect.</li>
-              <li>Implemented FFmpeg‑based post‑processing — slow motion, branding overlays, music — plus WhatsApp Cloud API delivery straight to each visitor.</li>
-              <li>Live in production with a 15‑second turnaround per video, consistent quality, and zero critical failures; now a recurring‑revenue flagship product.</li>
-            </ul>
-            <div class="chip-row">
-              <span class="chip">PYTHON</span><span class="chip">FastAPI</span><span class="chip">Android ADB</span><span class="chip">Video Encoding</span><span class="chip">FFmpeg</span><span class="chip">WhatsApp Cloud API</span>
-            </div>
-          </div>
+        <div class="proj-top">
+          <div class="proj-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4M6 20v-4l4-3V7"/><path d="M10 7l5-2 2 2-4 2"/><circle cx="17" cy="6" r="2"/></svg></div>
+          <span class="proj-idx">01</span>
         </div>
+        <h3 class="proj-title">Robobooth</h3>
+        <div class="proj-tag">Automated Robotic Videography System</div>
+        <p class="proj-desc">An end-to-end robotic videography system integrating a Doosan 6-axis collaborative robotic arm, camera control, embedded triggering, backend orchestration, and automated content delivery.</p>
+        <ul>
+          <li>Developed a FastAPI backend coordinating robotic motion through DART and Android camera recording through ADB.</li>
+          <li>Designed Arduino-based relay triggering to synchronize robotic motion and camera operation.</li>
+          <li>Implemented FFmpeg-based video processing with slow motion, branding overlays, and music.</li>
+          <li>Deployed the system for automated production sessions and rapid video turnaround.</li>
+        </ul>
+        <div class="chip-row"><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">Android ADB</span><span class="chip">FFmpeg</span><span class="chip">Doosan Cobot</span><span class="chip">Arduino</span></div>
       </div>
 
       <div class="proj-card">
-        <button class="proj-head" data-toggle>
-          <div class="proj-title-block">
-            <span class="proj-title">AIoT Smart School Campus Monitoring System</span>
-            <span class="proj-tag">Complete system design &amp; documentation · Lead systems architect</span>
-          </div>
-          <span class="proj-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
-        </button>
-        <div class="proj-body">
-          <div class="proj-body-in">
-            <ul>
-              <li>Designed a modular IoT platform covering real‑time occupancy, attendance, environmental control, emergency response, and autonomous facility management.</li>
-              <li>Built a React + Three.js web UI with a 3D digital‑twin view, attendance tracking, live environmental monitoring, an admin dashboard, and an integrated AI chatbot.</li>
-              <li>Shipped a mobile app for real‑time power monitoring (voltage, current, energy), automatic fire‑detection alerts, an SOS button, and local WiFi operation.</li>
-              <li>Added smart parking with IR‑sensor slot monitoring and servo‑gate automation that opens on vehicle detection when slots are free, shown on an LCD status display.</li>
-              <li>Designed the architecture local‑first with offline functionality and cloud sync, backed by full documentation — pin mapping, flowcharts, troubleshooting, and a scalability roadmap.</li>
-            </ul>
-            <div class="chip-row">
-              <span class="chip">React</span><span class="chip">JavaScript</span><span class="chip">Mobile App Development</span><span class="chip">Real-Time Data Handling</span><span class="chip">ESP32</span>
-            </div>
-          </div>
+        <div class="proj-top">
+          <div class="proj-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M14 9h4M14 13h4M6 18v2M18 18v2"/></svg></div>
+          <span class="proj-idx">02</span>
         </div>
+        <h3 class="proj-title">Robopark</h3>
+        <div class="proj-tag">Smart Ticketing Platform</div>
+        <p class="proj-desc">Designed an end-to-end smart ticketing platform covering online booking, in-park activities, biometric authentication, and post-visit engagement.</p>
+        <ul>
+          <li>Designed scalable booking journeys for individual and group/bulk bookings.</li>
+          <li>Developed face-recognition and companion-identification workflows.</li>
+          <li>Defined system flowcharts, decision trees, API requirements, notification logic, and backend data schemas.</li>
+          <li>Designed gamification frameworks including points, leaderboards, and rally competitions.</li>
+        </ul>
+        <div class="chip-row"><span class="chip">Face Recognition</span><span class="chip">System Design</span><span class="chip">API Design</span><span class="chip">Data Schemas</span><span class="chip">Gamification</span></div>
       </div>
 
       <div class="proj-card">
-        <button class="proj-head" data-toggle>
-          <div class="proj-title-block">
-            <span class="proj-title">Vision‑Based Bionic Hand — Real‑Time Gesture Replication</span>
-            <span class="proj-tag">Fully functional prototype · Hardware design &amp; integration lead</span>
-          </div>
-          <span class="proj-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
-        </button>
-        <div class="proj-body">
-          <div class="proj-body-in">
-            <ul>
-              <li>Custom‑designed and 3D‑printed a robotic hand with 5‑joint articulation to demonstrate computer‑vision‑driven embedded control.</li>
-              <li>Implemented MediaPipe hand‑landmark detection, tracking 21 keypoints in real time at 60 FPS, with Python mapping gestures to servo angles via inverse kinematics.</li>
-              <li>Ran UART serial communication from Python through Arduino to servo control at a 100 ms update rate, handling hand rotation, scale variation, and partial occlusion.</li>
-            </ul>
-            <div class="chip-row">
-              <span class="chip">MediaPipe</span><span class="chip">Python</span><span class="chip">OpenCV</span><span class="chip">Arduino</span><span class="chip">UART</span>
-            </div>
-          </div>
+        <div class="proj-top">
+          <div class="proj-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21v-6h6v6"/><path d="M9 11h6"/></svg></div>
+          <span class="proj-idx">03</span>
         </div>
+        <h3 class="proj-title">AIoT Smart School Campus</h3>
+        <div class="proj-tag">Campus Monitoring &amp; Digital Twin</div>
+        <p class="proj-desc">Designed a modular IoT platform for real-time monitoring of attendance, occupancy, environmental conditions, energy, parking, and emergency-response systems.</p>
+        <ul>
+          <li>Integrated ESP32-based sensing nodes with a web application through WebSocket communication.</li>
+          <li>Developed a 3D digital-twin interface for visualizing campus systems and live sensor data.</li>
+          <li>Designed the architecture as modular subsystems for future expansion.</li>
+        </ul>
+        <div class="chip-row"><span class="chip">ESP32</span><span class="chip">WebSocket</span><span class="chip">React</span><span class="chip">Three.js</span><span class="chip">Real-Time Data</span></div>
       </div>
 
       <div class="proj-card">
-        <button class="proj-head" data-toggle>
-          <div class="proj-title-block">
-            <span class="proj-title">Autonomous Disinfectant Robot — Hospital‑Grade UV‑C Disinfection</span>
-            <span class="proj-tag">Fully functional IoT system · System architect &amp; firmware developer</span>
-          </div>
-          <span class="proj-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
-        </button>
-        <div class="proj-body">
-          <div class="proj-body-in">
-            <ul>
-              <li>Designed an autonomous mobile platform for hospital surface and air UV‑C disinfection, removing the need for staff to enter contaminated areas.</li>
-              <li>Built SLAM‑based navigation with LiDAR mapping and localization for room‑to‑room autonomy, plus a mobile app so nurses can dispatch the robot to specific rooms.</li>
-              <li>Integrated ultrasonic + LiDAR collision avoidance and configurable UV‑C timing, with ESP32 and Arduino handling real‑time I/O on a 100 ms cycle.</li>
-            </ul>
-            <div class="chip-row">
-              <span class="chip">SLAM</span><span class="chip">LiDAR</span><span class="chip">ESP32</span><span class="chip">Arduino</span><span class="chip">Real-Time Control</span>
-            </div>
-          </div>
+        <div class="proj-top">
+          <div class="proj-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V5a1.5 1.5 0 0 1 3 0v6M11 10V3.5a1.5 1.5 0 0 1 3 0V10M14 10V5a1.5 1.5 0 0 1 3 0v9a6 6 0 0 1-6 6h-1a6 6 0 0 1-5-3l-2-4a1.5 1.5 0 0 1 2.5-1.5L8 14"/></svg></div>
+          <span class="proj-idx">04</span>
         </div>
+        <h3 class="proj-title">Vision-Based Bionic Hand</h3>
+        <div class="proj-tag">Real-Time Gesture Replication</div>
+        <p class="proj-desc">Developed a computer-vision-controlled robotic hand exploring real-time gesture replication and dexterous manipulation.</p>
+        <ul>
+          <li>Designed and 3D-printed a 5-joint robotic hand with embedded servo control.</li>
+          <li>Implemented MediaPipe hand-landmark detection for 21-point hand tracking.</li>
+          <li>Developed Python-based gesture-to-servo mapping and inverse-kinematics control.</li>
+          <li>Implemented UART communication between Python, Arduino, and servo hardware.</li>
+        </ul>
+        <div class="chip-row"><span class="chip">MediaPipe</span><span class="chip">Python</span><span class="chip">OpenCV</span><span class="chip">Arduino</span><span class="chip">UART</span></div>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- ============ SKILLS ============ -->
-<section class="sec-cream sec-pad" id="skills">
-  <span class="ghost-num on-cream">04</span>
+<!-- 03 EXPERIENCE -->
+<section class="sec-dark sec-pad" id="experience">
+  <span class="ghost-num">03</span>
   <div class="wrap">
     <div class="reveal" style="margin-bottom:44px;">
-      <div class="kicker"><span class="ast sm"><svg viewBox="0 0 40 40"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span> TECHNICAL SKILLS</div>
+      <div class="kicker"><span class="ast"><svg viewBox="0 0 40 40"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span> WORK EXPERIENCE</div>
+      <h2 class="sec-title">Where I've built it</h2>
+    </div>
+    <div class="exp-card reveal" style="transition-delay:0.1s">
+      <div class="exp-head">
+        <div>
+          <div class="exp-role">Robotics Systems Engineer</div>
+          <div class="exp-company">Inker Robotics · Thrissur, Kerala</div>
+        </div>
+        <span class="exp-dates">July 2024 — September 2026 · 2+ yrs</span>
+      </div>
+
+      <div class="story-timeline">
+
+        <div class="story-item">
+          <div class="story-marker-col">
+            <div class="story-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4M6 20v-4l4-3V7"/><path d="M10 7l5-2 2 2-4 2"/><circle cx="17" cy="6" r="2"/></svg></div>
+            <div class="story-connector"></div>
+          </div>
+          <div class="story-content">
+            <div class="story-index">01</div>
+            <div class="story-title">Robotics &amp; Automation</div>
+            <p class="story-text">Programmed, commissioned, and deployed industrial robotic arms, integrating sensors, controllers, hardware, and software for real-world automation applications.</p>
+          </div>
+        </div>
+
+        <div class="story-item">
+          <div class="story-marker-col">
+            <div class="story-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="9" y="14" width="6" height="6" rx="1"/><path d="M7 10v2h10v-2M12 12v2"/></svg></div>
+            <div class="story-connector"></div>
+          </div>
+          <div class="story-content">
+            <div class="story-index">02</div>
+            <div class="story-title">End-to-End Systems</div>
+            <p class="story-text">Designed and developed robotics and IoT solutions from requirements and system architecture through hardware–software integration, testing, debugging, and deployment.</p>
+          </div>
+        </div>
+
+        <div class="story-item">
+          <div class="story-marker-col">
+            <div class="story-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.3 1 2.1V16h6v-.4c0-.8.4-1.5 1-2.1A6 6 0 0 0 12 3Z"/></svg></div>
+            <div class="story-connector"></div>
+          </div>
+          <div class="story-content">
+            <div class="story-index">03</div>
+            <div class="story-title">Product &amp; PoC Development</div>
+            <p class="story-text">Built and validated Proof-of-Concept systems across robotics, IoT, and computer vision, combining embedded systems, sensors, robotic hardware, software, and AI technologies.</p>
+          </div>
+        </div>
+
+        <div class="story-item">
+          <div class="story-marker-col">
+            <div class="story-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M14 9h4M14 13h4M6 18v2M18 18v2"/></svg></div>
+            <div class="story-connector"></div>
+          </div>
+          <div class="story-content">
+            <div class="story-index">04</div>
+            <div class="story-title">RTBS / Smart Ticketing</div>
+            <p class="story-text">Led the design and development planning of Robopark's smart ticketing platform, covering booking architecture, biometric authentication, workflows, API requirements, notifications, and gamification.</p>
+          </div>
+        </div>
+
+        <div class="story-item">
+          <div class="story-marker-col">
+            <div class="story-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2 20c0-3 2.7-5 6-5s6 2 6 5M15.5 20c0-2.2-1.4-4-3.5-4.7"/></svg></div>
+          </div>
+          <div class="story-content">
+            <div class="story-index">05</div>
+            <div class="story-title">Training &amp; Mentoring</div>
+            <p class="story-text">Owned the IoT domain within the Academic Department, conducting internships, workshops, FDPs, industrial visits, and hands-on technical sessions for engineering students and faculty.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 SKILLS -->
+<section class="sec-light sec-pad" id="skills">
+  <span class="ghost-num on-light">04</span>
+  <div class="wrap">
+    <div class="reveal" style="margin-bottom:44px;">
+      <div class="kicker"><span class="ast"><svg viewBox="0 0 40 40"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span> TECHNICAL SKILLS</div>
       <h2 class="sec-title">What I build with</h2>
     </div>
     <div class="skills-grid reveal" style="transition-delay:0.1s">
       <div class="skill-card">
         <h3>Robotics &amp; Automation</h3>
-        <div class="skill-chips">
-          <span class="skill-chip">ROS2</span><span class="skill-chip">Motion Planning</span><span class="skill-chip">Cobot Programming</span><span class="skill-chip">Kinesthetic Teaching</span><span class="skill-chip">I/O Control</span><span class="skill-chip">Robot Comissioning</span>
-        </div>
+        <div class="skill-chips"><span class="skill-chip">ROS2</span><span class="skill-chip">Motion Planning</span><span class="skill-chip">Cobot Programming</span><span class="skill-chip">Kinesthetic Teaching</span><span class="skill-chip">I/O Control</span><span class="skill-chip">Robot Comissioning</span></div>
       </div>
       <div class="skill-card">
         <h3>Embedded Systems &amp; Microcontrollers</h3>
-        <div class="skill-chips">
-          <span class="skill-chip">ESP32</span><span class="skill-chip">Arduino</span><span class="skill-chip">Raspberry Pi</span><span class="skill-chip">STM32</span><span class="skill-chip">I2C / SPI / UART</span><span class="skill-chip">Relay Control</span><span class="skill-chip">Sensor Integration</span>
-        </div>
+        <div class="skill-chips"><span class="skill-chip">ESP32</span><span class="skill-chip">Arduino</span><span class="skill-chip">Raspberry Pi</span><span class="skill-chip">STM32</span><span class="skill-chip">I2C / SPI / UART</span><span class="skill-chip">Relay Control</span><span class="skill-chip">Sensor Integration</span></div>
       </div>
       <div class="skill-card">
         <h3>Programming Languages &amp; Frameworks</h3>
-        <div class="skill-chips">
-          <span class="skill-chip">Python</span><span class="skill-chip">OpenCV</span><span class="skill-chip">MediaPipe</span><span class="skill-chip">C / C++</span><span class="skill-chip">Node.js</span><span class="skill-chip">React</span><span class="skill-chip">FFMPEG</span><span class="skill-chip">Linux</span>
-        </div>
+        <div class="skill-chips"><span class="skill-chip">Python</span><span class="skill-chip">OpenCV</span><span class="skill-chip">MediaPipe</span><span class="skill-chip">C / C++</span><span class="skill-chip">Node.js</span><span class="skill-chip">React</span><span class="skill-chip">FFMPEG</span><span class="skill-chip">Linux</span></div>
       </div>
       <div class="skill-card">
         <h3>IoT &amp; Real-Time Systems</h3>
-        <div class="skill-chips">
-          <span class="skill-chip">IoT Architecture</span><span class="skill-chip">MQTT</span><span class="skill-chip">Real-Time Systems</span><span class="skill-chip">Data Pipelines</span><span class="skill-chip">D2D Communication</span>
-        </div>
+        <div class="skill-chips"><span class="skill-chip">IoT Architecture</span><span class="skill-chip">MQTT</span><span class="skill-chip">Real-Time Systems</span><span class="skill-chip">Data Pipelines</span><span class="skill-chip">D2D Communication</span></div>
       </div>
       <div class="skill-card">
         <h3>System Architecture &amp; Strategy</h3>
-        <div class="skill-chips">
-          <span class="skill-chip">System Architecture</span><span class="skill-chip">Requirements Analysis</span><span class="skill-chip">Solution Design</span><span class="skill-chip">Technical Documentation</span><span class="skill-chip">Backend Development</span><span class="skill-chip">Strategic Planning</span><span class="skill-chip">Team Leadership</span>
-        </div>
+        <div class="skill-chips"><span class="skill-chip">System Architecture</span><span class="skill-chip">Requirements Analysis</span><span class="skill-chip">Solution Design</span><span class="skill-chip">Technical Documentation</span><span class="skill-chip">Backend Development</span><span class="skill-chip">Strategic Planning</span><span class="skill-chip">Team Leadership</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ EDUCATION ============ -->
-<section class="sec-red sec-pad" id="education">
+<!-- 05 EDUCATION -->
+<section class="sec-dark sec-pad" id="education">
   <span class="ghost-num">05</span>
   <div class="wrap">
     <div class="reveal" style="margin-bottom:44px; text-align:center;">
-      <div class="kicker" style="justify-content:center;"><span class="ast sm"><svg viewBox="0 0 40 40"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span> EDUCATION</div>
+      <div class="kicker" style="justify-content:center;"><span class="ast"><svg viewBox="0 0 40 40"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span> EDUCATION</div>
       <h2 class="sec-title" style="max-width:none; margin:0 auto;">Where it started</h2>
     </div>
     <div class="edu-card reveal" style="transition-delay:0.1s">
-      <div class="edu-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 9.5 12 4l10 5.5-10 5.5L2 9.5Z"/><path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg>
-      </div>
+      <div class="edu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 9.5 12 4l10 5.5-10 5.5L2 9.5Z"/><path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg></div>
       <div>
         <div class="edu-degree">B.Tech — Electronics &amp; Communication Engineering</div>
         <div class="edu-school">Cochin University of Science and Technology (CUSAT), Kochi</div>
-        <div class="edu-meta">
-          <span>Graduated 2024</span>
-          <span>·</span>
-          <span>CGPA 8.8 / 10</span>
-        </div>
+        <div class="edu-meta"><span>Graduated 2024</span><span>·</span><span>CGPA 8.8 / 10</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ CONTACT ============ -->
-<section class="sec-cream sec-pad contact-sec" id="contact">
+<!-- CONTACT -->
+<section class="sec-light sec-pad contact-sec" id="contact">
   <div class="wrap reveal">
-    <div class="kicker" style="justify-content:center;"><span class="ast sm"><svg viewBox="0 0 40 40"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span> Let's talk</div>
+    <div class="kicker" style="justify-content:center;"><span class="ast"><svg viewBox="0 0 40 40"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span> Let's talk</div>
     <h2>Got a crazy idea? Good.</h2>
     <p>Robots, intelligent systems, connected devices, automation or something that doesn't have a name yet. Bring the problem. I'll bring the engineering.</p>
     <div class="contact-actions">
@@ -935,186 +596,95 @@ Give me a problem, a few components, and enough time, I'll build something that 
     </div>
   </div>
   <div class="wrap footer-bar">
-    <div class="footer-mark"><span class="ast sm" style="position:static; color:var(--red);"><svg viewBox="0 0 40 40"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span> Varadha VR · Thrissur, Kerala</div>
+    <div class="footer-mark"><span class="ast"><svg viewBox="0 0 40 40"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span> Varadha VR · Thrissur, Kerala</div>
     <div>Robotics Engineer</div>
   </div>
 </section>
 
 <script>
-  // Mobile menu
   const burger = document.getElementById('burger');
   const mobileMenu = document.getElementById('mobileMenu');
   burger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
   mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
 
-  // Active nav link on scroll
   const navLinks = document.querySelectorAll('[data-nav]');
-  const sections = document.querySelectorAll('section[id]');
   const navObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         navLinks.forEach(l => l.classList.remove('active'));
-        const match = document.querySelector('[data-nav][href="#' + entry.target.id + '"]');
-        if (match) match.classList.add('active');
+        const m = document.querySelector('[data-nav][href="#' + entry.target.id + '"]');
+        if (m) m.classList.add('active');
       }
     });
   }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
-  sections.forEach(s => navObserver.observe(s));
+  document.querySelectorAll('section[id]').forEach(s => navObserver.observe(s));
 
-  // Reveal on scroll
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const revealEls = document.querySelectorAll('.reveal');
-  if (reduceMotion) {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     revealEls.forEach(el => el.classList.add('is-visible'));
   } else {
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-    revealEls.forEach(el => revealObserver.observe(el));
+    const ro = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); ro.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => ro.observe(el));
   }
 
-  // Project accordions
-  document.querySelectorAll('[data-toggle]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const card = btn.closest('.proj-card');
-      const body = card.querySelector('.proj-body');
-      const isOpen = card.classList.contains('open');
-      if (isOpen) {
-        card.classList.remove('open');
-        body.style.maxHeight = null;
-      } else {
-        card.classList.add('open');
-        body.style.maxHeight = body.scrollHeight + 'px';
-      }
-    });
-  });
-
-  /* =====================================================
-     INTERACTIVE ROBOTIC ARM
-     3 links: upper arm + forearm solve to a wrist point,
-     link 3 starts AT that wrist point, claw sits at END
-     of link 3. Chain always connected.
-  ===================================================== */
+  /* INTERACTIVE ROBOTIC ARM — 3 links, always connected */
   (function () {
-
     const svg = document.getElementById("robotArm");
     if (!svg) return;
-
-    const upperArm   = document.getElementById("upperArm");
-    const foreArm    = document.getElementById("foreArm");
-    const thirdLink  = document.getElementById("thirdLink");
-    const shoulder   = document.getElementById("shoulderJoint");
-    const elbow      = document.getElementById("elbowJoint");
-    const wrist      = document.getElementById("wrist");
+    const upperArm = document.getElementById("upperArm");
+    const foreArm = document.getElementById("foreArm");
+    const thirdLink = document.getElementById("thirdLink");
+    const shoulder = document.getElementById("shoulderJoint");
+    const elbow = document.getElementById("elbowJoint");
+    const wrist = document.getElementById("wrist");
     const targetMarker = document.getElementById("armTarget");
 
-    /* ---------- ARM PARAMETERS ---------- */
-    const BASE_X = 200;
-    const BASE_Y = 315;
-
-    const L1 = 130;  // upper arm
-    const L2 = 80;   // forearm  (drawn path ends ~x=82)
-    const L3 = 30;   // link 3   (drawn path ends ~x=32)
-
-    /* ---------- POINTER TARGET ---------- */
-    const target  = { x: 275, y: 130 };
+    const BASE_X = 200, BASE_Y = 315;
+    const L1 = 130, L2 = 80, L3 = 30;
+    const target = { x: 275, y: 130 };
     const current = { x: 275, y: 130 };
+    const deg = r => r * 180 / Math.PI;
 
-    function radiansToDegrees(rad) {
-      return rad * 180 / Math.PI;
-    }
-
-    /* ---------- IK SOLVER ---------- */
     function solveIK(tx, ty) {
-
-      const dx = tx - BASE_X;
-      const dy = ty - BASE_Y;
-
-      // direction base -> cursor = direction of link 3 + claw
+      const dx = tx - BASE_X, dy = ty - BASE_Y;
       const phi = Math.atan2(dy, dx);
-
-      // wrist must sit L3 short of the cursor
       const dist = Math.hypot(dx, dy);
-      const dw = Math.min(
-        Math.max(dist - L3, Math.abs(L1 - L2) + 5),
-        L1 + L2 - 2
-      );
-
-      // 2-link IK to wrist point
+      const dw = Math.min(Math.max(dist - L3, Math.abs(L1 - L2) + 5), L1 + L2 - 2);
       const cosA = (L1 * L1 + dw * dw - L2 * L2) / (2 * L1 * dw);
       const elbowAngle = Math.acos(Math.max(-1, Math.min(1, cosA)));
-
       const theta1 = phi - elbowAngle;
-
       const elbowX = BASE_X + L1 * Math.cos(theta1);
       const elbowY = BASE_Y + L1 * Math.sin(theta1);
-
-      // wrist point on ray base -> cursor
       const wristX = BASE_X + dw * Math.cos(phi);
       const wristY = BASE_Y + dw * Math.sin(phi);
-
-      // forearm truly points elbow -> wrist
       const theta2 = Math.atan2(wristY - elbowY, wristX - elbowX);
-
-      // claw at END of link 3 (from wrist, not cursor)
       const endX = wristX + L3 * Math.cos(phi);
       const endY = wristY + L3 * Math.sin(phi);
-
       return { elbowX, elbowY, wristX, wristY, endX, endY, theta1, theta2, phi };
     }
 
-    /* ---------- RENDER ---------- */
     function render() {
-
-      const { elbowX, elbowY, wristX, wristY, endX, endY, theta1, theta2, phi } =
-        solveIK(current.x, current.y);
-
-      upperArm.setAttribute("transform",
-        `translate(${BASE_X} ${BASE_Y}) rotate(${radiansToDegrees(theta1)})`);
-
-      elbow.setAttribute("transform",
-        `translate(${elbowX} ${elbowY})`);
-
-      foreArm.setAttribute("transform",
-        `translate(${elbowX} ${elbowY}) rotate(${radiansToDegrees(theta2)})`);
-
-      thirdLink.setAttribute("transform",
-        `translate(${wristX} ${wristY}) rotate(${radiansToDegrees(phi)})`);
-
-      shoulder.setAttribute("transform",
-        `translate(${BASE_X} ${BASE_Y})`);
-
-      wrist.setAttribute("transform",
-        `translate(${endX} ${endY}) rotate(${radiansToDegrees(phi)})`);
-
-      targetMarker.setAttribute("transform",
-        `translate(${target.x} ${target.y})`);
+      const s = solveIK(current.x, current.y);
+      upperArm.setAttribute("transform", `translate(${BASE_X} ${BASE_Y}) rotate(${deg(s.theta1)})`);
+      elbow.setAttribute("transform", `translate(${s.elbowX} ${s.elbowY})`);
+      foreArm.setAttribute("transform", `translate(${s.elbowX} ${s.elbowY}) rotate(${deg(s.theta2)})`);
+      thirdLink.setAttribute("transform", `translate(${s.wristX} ${s.wristY}) rotate(${deg(s.phi)})`);
+      shoulder.setAttribute("transform", `translate(${BASE_X} ${BASE_Y})`);
+      wrist.setAttribute("transform", `translate(${s.endX} ${s.endY}) rotate(${deg(s.phi)})`);
+      targetMarker.setAttribute("transform", `translate(${target.x} ${target.y})`);
     }
 
-    /* ---------- POINTER ---------- */
-    function pointerMove(event) {
-
-      const rect = svg.getBoundingClientRect();
-
-      target.x = ((event.clientX - rect.left) / rect.width) * 400;
-      target.y = ((event.clientY - rect.top) / rect.height) * 400;
-
-      target.x = Math.max(45, Math.min(355, target.x));
-      target.y = Math.max(35, Math.min(330, target.y));
+    function pointerMove(e) {
+      const r = svg.getBoundingClientRect();
+      target.x = Math.max(45, Math.min(355, ((e.clientX - r.left) / r.width) * 400));
+      target.y = Math.max(35, Math.min(330, ((e.clientY - r.top) / r.height) * 400));
     }
-
-    function touchMove(event) {
-      if (!event.touches.length) return;
-      const touch = event.touches[0];
-      pointerMove({ clientX: touch.clientX, clientY: touch.clientY });
+    function touchMove(e) {
+      if (!e.touches.length) return;
+      pointerMove({ clientX: e.touches[0].clientX, clientY: e.touches[0].clientY });
     }
-
-    /* ---------- SMOOTH ANIMATION ---------- */
     function animate() {
       current.x += (target.x - current.x) * 0.11;
       current.y += (target.y - current.y) * 0.11;
@@ -1124,10 +694,8 @@ Give me a problem, a few components, and enough time, I'll build something that 
 
     svg.addEventListener("pointermove", pointerMove);
     svg.addEventListener("touchmove", touchMove, { passive: true });
-
     render();
     requestAnimationFrame(animate);
-
   })();
 </script>
 </body>
