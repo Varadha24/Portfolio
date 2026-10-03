@@ -36,7 +36,7 @@
   img,svg{display:block;}
   ::selection{background:var(--teal); color:var(--paper);}
 
-  .ast{width:20px; height:20px;}
+  .ast{width:24px; height:24px;}
   .ast svg{width:100%; height:100%;}
   .ast path{fill:currentColor;}
 
@@ -59,7 +59,7 @@
   .mobile-menu a{color:var(--mist); font-family:'Baloo 2',sans-serif; font-size:2rem; text-decoration:none;}
 
   /* hero */
-  .hero{background:#fff; padding:72px 0 60px;}
+  .hero{background:#fff; padding:32px 0 48px;}
   .hero .wrap{display:grid; grid-template-columns:1.15fr 0.85fr; gap:40px; align-items:center;}
   .eyebrow-row{margin-bottom:18px;}
   .badge-loc{display:inline-flex; align-items:center; gap:8px; padding:7px 16px; border-radius:999px; background:var(--soft); border:1px solid var(--line); font-size:0.85rem; font-weight:600; color:var(--navy);}
@@ -96,7 +96,7 @@
   .sec-pad{padding:76px 0;}
   .ghost-num{position:absolute; top:-40px; right:-10px; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:clamp(9rem,22vw,15rem); line-height:1; color:transparent; -webkit-text-stroke:2px rgba(183,195,208,0.16); user-select:none; pointer-events:none;}
   .ghost-num.on-light{-webkit-text-stroke:2px rgba(28,34,48,0.08);}
-  .kicker{display:inline-flex; align-items:center; gap:10px; font-weight:700; margin-bottom:14px; font-size:0.92rem; color:var(--sky);}
+  .kicker{display:inline-flex; align-items:center; gap:12px; font-weight:800; margin-bottom:16px; font-size:1.2rem; color:var(--sky);}
   .sec-light .kicker{color:var(--accent-ink);}
   .sec-title{font-size:clamp(1.9rem,4vw,2.7rem); line-height:1.05; max-width:20ch;}
   .sec-dark .sec-title{color:var(--paper);}
@@ -174,8 +174,8 @@
   .story-item{display:flex; gap:22px;}
   .story-marker-col{display:flex; flex-direction:column; align-items:center; flex:none;}
   .story-icon{width:52px; height:52px; border-radius:16px; background:var(--navy); color:var(--mist); display:flex; align-items:center; justify-content:center; flex:none; box-shadow:0 6px 16px rgba(28,34,48,0.28);}
-  .story-connector{flex:1; width:2px; min-height:28px; background:linear-gradient(var(--navy), rgba(28,34,48,0.15)); margin:6px 0;}
-  .story-content{padding-top:6px; padding-bottom:34px;}
+  .story-connector{flex:1; width:2px; min-height:12px; background:linear-gradient(var(--navy), rgba(28,34,48,0.15)); margin:4px 0;}
+  .story-content{padding-top:6px; padding-bottom:16px;}
   .story-item:last-child .story-content{padding-bottom:0;}
   .story-index{font-family:'Baloo 2',sans-serif; font-size:0.78rem; font-weight:700; color:var(--navy); letter-spacing:1.5px; opacity:0.65;}
   .story-title{font-family:'Baloo 2',sans-serif; font-size:1.28rem; color:var(--navy); font-weight:700; margin-top:2px;}
@@ -304,7 +304,6 @@ Give me a problem, a few components, and enough time, I'll build something that 
           <line x1="0" y1="50" x2="400" y2="50"/><line x1="0" y1="100" x2="400" y2="100"/><line x1="0" y1="150" x2="400" y2="150"/><line x1="0" y1="200" x2="400" y2="200"/><line x1="0" y1="250" x2="400" y2="250"/><line x1="0" y1="300" x2="400" y2="300"/><line x1="0" y1="350" x2="400" y2="350"/>
         </g>
 
-        <circle cx="200" cy="315" r="235" fill="none" stroke="#1C2230" stroke-width="1" stroke-dasharray="4 8" opacity="0.18"/>
         <ellipse cx="200" cy="354" rx="78" ry="13" fill="#1C2230" opacity="0.18"/>
 
         <g filter="url(#robotShadow)">
@@ -379,7 +378,6 @@ Give me a problem, a few components, and enough time, I'll build something that 
           <line y1="-22" y2="-7" stroke-width="1.5"/><line y1="7" y2="22" stroke-width="1.5"/>
         </g>
       </svg>
-      <div class="robot-caption"><span>MOVE POINTER</span><span>TO CONTROL</span></div>
     </div>
   </div>
 </header>
@@ -435,19 +433,20 @@ Give me a problem, a few components, and enough time, I'll build something that 
       </div>
 
       <div class="proj-card">
-        <div class="proj-top">
-          <div class="proj-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M14 9h4M14 13h4M6 18v2M18 18v2"/></svg></div>
-          <div class="proj-meta">
-            <h3 class="proj-title">Robopark</h3>
-            <div class="proj-tag">Smart Ticketing Platform</div>
-          </div>
-          <span class="proj-idx">02 <svg class="proj-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
-        </div>
-        <div class="proj-body"><div class="proj-body-inner">
-          <p class="proj-desc">A park visit shouldn't start with a queue. I designed Robopark's ticketing journey end to end, from the first online booking to the post-visit follow-up. It covers solo and group bookings, face recognition at entry, and companion identification so groups stay connected. Behind it sit the flowcharts, API requirements, notification logic, and data schemas, plus a gamification layer of points, leaderboards, and rally competitions.</p>
-          <div class="chip-row"><span class="chip">Face Recognition</span><span class="chip">System Design</span><span class="chip">API Design</span><span class="chip">Data Schemas</span><span class="chip">Gamification</span></div>
-        </div></div>
-      </div>
+  <div class="proj-top">
+    <div class="proj-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M14 9h4M14 13h4M6 18v2M18 18v2"/></svg></div>
+    <div class="proj-meta">
+      <h3 class="proj-title">Smart Ticketing Platform</h3>
+      <div class="proj-tag">Visitor Management &amp; Smart Access for RoboPark</div>
+    </div>
+    <span class="proj-idx">02 <svg class="proj-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+  </div>
+  <div class="proj-body"><div class="proj-body-inner">
+    <p class="proj-desc">A park visit shouldn't start with a queue. At Inker Robotics, I designed the ticketing journey for RoboPark end to end, from the first online booking to the post-visit follow-up. It covers solo and group bookings, face recognition at entry, and companion identification so groups stay connected. Behind it sit the flowcharts, API requirements, notification logic, and data schemas, plus a gamification layer of points, leaderboards, and rally competitions.</p>
+    <div class="chip-row"><span class="chip">Face Recognition</span><span class="chip">System Design</span><span class="chip">API Design</span><span class="chip">Data Schemas</span><span class="chip">Gamification</span></div>
+    <a class="proj-link" href="https://www.robopark.in/" target="_blank" rel="noopener noreferrer">More about RoboPark <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div></div>
+</div>
 
       <div class="proj-card">
         <div class="proj-top">
