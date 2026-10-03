@@ -36,7 +36,7 @@
   img,svg{display:block;}
   ::selection{background:var(--teal); color:var(--paper);}
 
-  .ast{width:20px; height:20px;}
+  .ast{width:22px; height:22px;}
   .ast svg{width:100%; height:100%;}
   .ast path{fill:currentColor;}
 
@@ -59,7 +59,7 @@
   .mobile-menu a{color:var(--mist); font-family:'Baloo 2',sans-serif; font-size:2rem; text-decoration:none;}
 
   /* hero */
-  .hero{background:#fff; padding:72px 0 60px;}
+  .hero{background:#fff; padding:32px 0 48px;}
   .hero .wrap{display:grid; grid-template-columns:1.15fr 0.85fr; gap:40px; align-items:center;}
   .eyebrow-row{margin-bottom:18px;}
   .badge-loc{display:inline-flex; align-items:center; gap:8px; padding:7px 16px; border-radius:999px; background:var(--soft); border:1px solid var(--line); font-size:0.85rem; font-weight:600; color:var(--navy);}
@@ -93,12 +93,12 @@
   .sec-dark{background:var(--navy); color:var(--paper);}
   .sec-light{background:var(--soft);}
   #contact{background:#fff;}
-  .sec-pad{padding:110px 0;}
+  .sec-pad{padding:76px 0;}
   .ghost-num{position:absolute; top:-40px; right:-10px; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:clamp(9rem,22vw,15rem); line-height:1; color:transparent; -webkit-text-stroke:2px rgba(183,195,208,0.16); user-select:none; pointer-events:none;}
   .ghost-num.on-light{-webkit-text-stroke:2px rgba(28,34,48,0.08);}
-  .kicker{display:inline-flex; align-items:center; gap:10px; font-weight:700; margin-bottom:14px; font-size:0.92rem; color:var(--sky);}
-  .sec-light .kicker{color:var(--accent-ink);}
-  .sec-title{font-size:clamp(2.3rem,5vw,3.4rem); line-height:1.02; max-width:14ch;}
+  .kicker{display:inline-flex; align-items:center; gap:12px; font-weight:800; margin-bottom:16px; font-size:1.0rem; letter-spacing:0.6px; color:var(--sky);}
+.sec-light .kicker{color:var(--accent-ink);}
+  .sec-title{font-size:clamp(1.9rem,4vw,2.7rem); line-height:1.05; max-width:20ch;}
   .sec-dark .sec-title{color:var(--paper);}
   .sec-light .sec-title{color:var(--navy);}
   .reveal{opacity:0; transform:translateY(26px); transition:opacity .7s ease, transform .7s ease;}
@@ -139,26 +139,30 @@
 
   /* projects (light section, card grid) */
   .proj-grid{display:grid; grid-template-columns:1fr 1fr; gap:26px; position:relative; z-index:1; align-items:start;}
-  .proj-card{background:var(--card); border-radius:22px; padding:32px 32px 28px; border:1px solid var(--line); box-shadow:var(--shadow); display:flex; flex-direction:column; transition:transform .25s ease; cursor:pointer;}
+  .proj-card{background:var(--card); border-radius:22px; padding:28px 28px 26px; border:1px solid var(--line); box-shadow:var(--shadow); display:flex; flex-direction:column; transition:transform .25s ease; cursor:pointer;}
   .proj-card:hover{transform:translateY(-4px);}
   .proj-card:focus-visible{outline:3px solid var(--teal); outline-offset:3px;}
-  .proj-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;}
-  .proj-icon{width:52px; height:52px; border-radius:16px; background:var(--navy); color:var(--mist); display:flex; align-items:center; justify-content:center; box-shadow:0 6px 16px rgba(28,34,48,0.25);}
-  .proj-idx{display:flex; align-items:center; gap:10px; font-family:'Baloo 2',sans-serif; font-size:0.85rem; font-weight:700; letter-spacing:1.5px; color:var(--accent-ink);}
+  .proj-top{display:flex; align-items:center; gap:16px;}
+  .proj-meta{flex:1; min-width:0;}
+  .proj-icon{width:52px; height:52px; border-radius:16px; background:var(--navy); color:var(--mist); display:flex; align-items:center; justify-content:center; flex:none; box-shadow:0 6px 16px rgba(28,34,48,0.25);}
+  .proj-idx{display:flex; align-items:center; gap:8px; flex:none; font-family:'Baloo 2',sans-serif; font-size:0.85rem; font-weight:700; letter-spacing:1.5px; color:var(--accent-ink);}
   .proj-chev{width:24px; height:24px; color:var(--navy); transition:transform .3s ease;}
   .proj-card.open .proj-chev{transform:rotate(180deg);}
-  .proj-title{font-family:'Baloo 2',sans-serif; font-size:1.5rem; color:var(--navy); font-weight:700; line-height:1.1;}
-  .proj-tag{font-size:0.82rem; font-weight:700; color:var(--accent-ink); margin-top:6px;}
+  .proj-title{font-family:'Baloo 2',sans-serif; font-size:1.3rem; color:var(--navy); font-weight:700; line-height:1.1;}
+  .proj-tag{font-size:0.8rem; font-weight:700; color:var(--accent-ink); margin-top:4px;}
   .proj-body{display:grid; grid-template-rows:0fr; transition:grid-template-rows .35s ease;}
   .proj-card.open .proj-body{grid-template-rows:1fr;}
   .proj-body-inner{overflow:hidden; min-height:0;}
-  .proj-desc{margin:14px 0 22px; font-size:0.96rem; line-height:1.7; color:var(--slate);}
+  .proj-desc{margin:18px 0 20px; font-size:0.96rem; line-height:1.7; color:var(--slate);}
   .proj-card ul{margin:14px 0 20px; padding-left:20px; display:flex; flex-direction:column; gap:9px; font-size:0.94rem; line-height:1.55; color:#3D4A5C;}
   .proj-card ul li::marker{color:var(--teal);}
   .chip-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:auto;}
   .proj-body .chip-row{margin-top:0;}
   .chip{font-size:0.78rem; font-weight:700; padding:7px 13px; border-radius:999px; background:var(--soft); color:var(--navy); border:1px solid rgba(28,34,48,0.14); transition:background .2s ease, color .2s ease;}
   .chip:hover{background:var(--teal); color:#fff;}
+  .proj-link{display:inline-flex; align-items:center; gap:6px; margin-top:18px; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:0.98rem; color:var(--accent-ink); text-decoration:none; border-bottom:2px solid transparent; transition:gap .2s ease, border-color .2s ease;}
+  .proj-link:hover{gap:10px; border-bottom-color:var(--teal);}
+  .proj-link svg{width:16px; height:16px;}
 
   /* experience (dark section) */
   .exp-card{position:relative; z-index:1; background:#ffffff; color:var(--abyss); border-radius:var(--radius); padding:40px; box-shadow:0 14px 40px rgba(0,0,0,0.3);}
@@ -170,14 +174,14 @@
   .story-item{display:flex; gap:22px;}
   .story-marker-col{display:flex; flex-direction:column; align-items:center; flex:none;}
   .story-icon{width:52px; height:52px; border-radius:16px; background:var(--navy); color:var(--mist); display:flex; align-items:center; justify-content:center; flex:none; box-shadow:0 6px 16px rgba(28,34,48,0.28);}
-  .story-connector{flex:1; width:2px; min-height:28px; background:linear-gradient(var(--navy), rgba(28,34,48,0.15)); margin:6px 0;}
-  .story-content{padding-top:6px; padding-bottom:34px;}
+  .story-connector{flex:1; width:2px; min-height:12px; background:linear-gradient(var(--navy), rgba(28,34,48,0.15)); margin:4px 0;}
+  .story-content{padding-top:6px; padding-bottom:16px;}
   .story-item:last-child .story-content{padding-bottom:0;}
   .story-index{font-family:'Baloo 2',sans-serif; font-size:0.78rem; font-weight:700; color:var(--navy); letter-spacing:1.5px; opacity:0.65;}
   .story-title{font-family:'Baloo 2',sans-serif; font-size:1.28rem; color:var(--navy); font-weight:700; margin-top:2px;}
-  .story-text{margin-top:8px; max-width:62ch; color:#3D4A5C; font-size:0.98rem;}
-  @media (max-width:560px){
-    .story-item{gap:14px;} .story-icon{width:44px; height:44px; border-radius:13px;} .story-icon svg{width:18px; height:18px;}
+.story-text{margin-top:8px; max-width:none; color:#3D4A5C; font-size:1rem;}
+@media (max-width:560px){
+  .story-item{gap:14px;} .story-icon{width:44px; height:44px; border-radius:13px;} .story-icon svg{width:18px; height:18px;}
   }
 
   /* skills */
@@ -208,11 +212,12 @@
     .nav-links,.nav-cta{display:none;}
     .burger{display:flex;}
     .hero .wrap,.overview-grid,.skills-grid,.proj-grid{grid-template-columns:1fr;}
-    .sec-pad{padding:80px 0;}
+    .sec-pad{padding:56px 0;}
     .edu-card{flex-direction:column;}
   }
   @media (max-width:520px){
-    .wrap{padding:0 20px;} .exp-card{padding:26px;} .proj-card{padding:26px 22px;}
+    .wrap{padding:0 20px;} .exp-card{padding:26px;} .proj-card{padding:24px 20px;}
+    .proj-top{gap:12px;} .proj-icon{width:46px; height:46px;} .proj-title{font-size:1.15rem;}
   }
   @media (prefers-reduced-motion: reduce){
     *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
@@ -299,7 +304,6 @@ Give me a problem, a few components, and enough time, I'll build something that 
           <line x1="0" y1="50" x2="400" y2="50"/><line x1="0" y1="100" x2="400" y2="100"/><line x1="0" y1="150" x2="400" y2="150"/><line x1="0" y1="200" x2="400" y2="200"/><line x1="0" y1="250" x2="400" y2="250"/><line x1="0" y1="300" x2="400" y2="300"/><line x1="0" y1="350" x2="400" y2="350"/>
         </g>
 
-        <circle cx="200" cy="315" r="235" fill="none" stroke="#1C2230" stroke-width="1" stroke-dasharray="4 8" opacity="0.18"/>
         <ellipse cx="200" cy="354" rx="78" ry="13" fill="#1C2230" opacity="0.18"/>
 
         <g filter="url(#robotShadow)">
@@ -374,7 +378,6 @@ Give me a problem, a few components, and enough time, I'll build something that 
           <line y1="-22" y2="-7" stroke-width="1.5"/><line y1="7" y2="22" stroke-width="1.5"/>
         </g>
       </svg>
-      <div class="robot-caption"><span>MOVE POINTER</span><span>TO CONTROL</span></div>
     </div>
   </div>
 </header>
@@ -406,7 +409,7 @@ Give me a problem, a few components, and enough time, I'll build something that 
 <section class="sec-light sec-pad" id="projects">
   <span class="ghost-num on-light">02</span>
   <div class="wrap">
-    <div class="reveal" style="margin-bottom:44px;">
+    <div class="reveal" style="margin-bottom:36px;">
       <div class="kicker"><span class="ast"><svg viewBox="0 0 40 40"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span> PROJECTS</div>
       <h2 class="sec-title">Systems I've taken from idea to production</h2>
     </div>
@@ -416,49 +419,60 @@ Give me a problem, a few components, and enough time, I'll build something that 
       <div class="proj-card">
         <div class="proj-top">
           <div class="proj-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4M6 20v-4l4-3V7"/><path d="M10 7l5-2 2 2-4 2"/><circle cx="17" cy="6" r="2"/></svg></div>
+          <div class="proj-meta">
+            <h3 class="proj-title">Robobooth</h3>
+            <div class="proj-tag">Automated Robotic Videography System</div>
+          </div>
           <span class="proj-idx">01 <svg class="proj-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
         </div>
-        <h3 class="proj-title">Robobooth</h3>
-        <div class="proj-tag">Automated Robotic Videography System</div>
         <div class="proj-body"><div class="proj-body-inner">
           <p class="proj-desc">A robot arm that films you like a movie scene. A Doosan 6-axis cobot moves through the shot while my FastAPI backend runs the show: arm motion through DART, camera recording through ADB, and an Arduino relay keeping both in sync. FFmpeg then adds slow motion, branding, and music, so the clip is ready fast. It runs real production sessions, not just on my desk.</p>
           <div class="chip-row"><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">Android ADB</span><span class="chip">FFmpeg</span><span class="chip">Doosan Cobot</span><span class="chip">Arduino</span></div>
+          <a class="proj-link" href="https://github.com/Varadha24/RoboBooth" target="_blank" rel="noopener noreferrer">Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div></div>
       </div>
 
       <div class="proj-card">
-        <div class="proj-top">
-          <div class="proj-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M14 9h4M14 13h4M6 18v2M18 18v2"/></svg></div>
-          <span class="proj-idx">02 <svg class="proj-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
-        </div>
-        <h3 class="proj-title">Robopark</h3>
-        <div class="proj-tag">Smart Ticketing Platform</div>
-        <div class="proj-body"><div class="proj-body-inner">
-          <p class="proj-desc">A park visit shouldn't start with a queue. I designed Robopark's ticketing journey end to end, from the first online booking to the post-visit follow-up. It covers solo and group bookings, face recognition at entry, and companion identification so groups stay connected. Behind it sit the flowcharts, API requirements, notification logic, and data schemas, plus a gamification layer of points, leaderboards, and rally competitions.</p>
-          <div class="chip-row"><span class="chip">Face Recognition</span><span class="chip">System Design</span><span class="chip">API Design</span><span class="chip">Data Schemas</span><span class="chip">Gamification</span></div>
-        </div></div>
-      </div>
+  <div class="proj-top">
+    <div class="proj-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M14 9h4M14 13h4M6 18v2M18 18v2"/></svg></div>
+    <div class="proj-meta">
+      <h3 class="proj-title">Smart Ticketing Platform</h3>
+      <div class="proj-tag">Visitor Management &amp; Smart Access for RoboPark</div>
+    </div>
+    <span class="proj-idx">02 <svg class="proj-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+  </div>
+  <div class="proj-body"><div class="proj-body-inner">
+    <p class="proj-desc">A park visit shouldn't start with a queue. At Inker Robotics, I designed the ticketing journey for RoboPark end to end, from the first online booking to the post-visit follow-up. It covers solo and group bookings, face recognition at entry, and companion identification so groups stay connected. Behind it sit the flowcharts, API requirements, notification logic, and data schemas, plus a gamification layer of points, leaderboards, and rally competitions.</p>
+    <div class="chip-row"><span class="chip">Face Recognition</span><span class="chip">System Design</span><span class="chip">API Design</span><span class="chip">Data Schemas</span><span class="chip">Gamification</span></div>
+    <a class="proj-link" href="https://www.robopark.in/" target="_blank" rel="noopener noreferrer">More about RoboPark <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div></div>
+</div>
 
       <div class="proj-card">
         <div class="proj-top">
           <div class="proj-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21v-6h6v6"/><path d="M9 11h6"/></svg></div>
+          <div class="proj-meta">
+            <h3 class="proj-title">AIoT Smart School Campus</h3>
+            <div class="proj-tag">Campus Monitoring &amp; Digital Twin</div>
+          </div>
           <span class="proj-idx">03 <svg class="proj-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
         </div>
-        <h3 class="proj-title">AIoT Smart School Campus</h3>
-        <div class="proj-tag">Campus Monitoring &amp; Digital Twin</div>
         <div class="proj-body"><div class="proj-body-inner">
           <p class="proj-desc">What if a campus could tell you how it's doing? ESP32 sensing nodes track attendance, occupancy, environment, energy, parking, and emergencies, then stream live to a web app over WebSocket. A 3D digital twin turns that data into something you can actually see. Every piece is its own subsystem, so the campus can keep growing without a rewrite.</p>
           <div class="chip-row"><span class="chip">ESP32</span><span class="chip">WebSocket</span><span class="chip">React</span><span class="chip">Three.js</span><span class="chip">Real-Time Data</span></div>
+          <a class="proj-link" href="https://github.com/Varadha24/AIoT-Smart-Campus-Operating-System" target="_blank" rel="noopener noreferrer">Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div></div>
       </div>
 
       <div class="proj-card">
         <div class="proj-top">
           <div class="proj-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V5a1.5 1.5 0 0 1 3 0v6M11 10V3.5a1.5 1.5 0 0 1 3 0V10M14 10V5a1.5 1.5 0 0 1 3 0v9a6 6 0 0 1-6 6h-1a6 6 0 0 1-5-3l-2-4a1.5 1.5 0 0 1 2.5-1.5L8 14"/></svg></div>
+          <div class="proj-meta">
+            <h3 class="proj-title">Vision-Based Bionic Hand</h3>
+            <div class="proj-tag">Real-Time Gesture Replication</div>
+          </div>
           <span class="proj-idx">04 <svg class="proj-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
         </div>
-        <h3 class="proj-title">Vision-Based Bionic Hand</h3>
-        <div class="proj-tag">Real-Time Gesture Replication</div>
         <div class="proj-body"><div class="proj-body-inner">
           <p class="proj-desc">Wave at a camera, and a hand waves back. I designed and 3D-printed a 5-joint robotic hand, then taught it to copy mine. MediaPipe tracks the hand landmarks, Python maps gestures to servo angles with inverse kinematics, and UART carries the commands to an Arduino that drives the servos.</p>
           <div class="chip-row"><span class="chip">MediaPipe</span><span class="chip">Python</span><span class="chip">OpenCV</span><span class="chip">Arduino</span><span class="chip">UART</span></div>
@@ -473,7 +487,7 @@ Give me a problem, a few components, and enough time, I'll build something that 
 <section class="sec-dark sec-pad" id="experience">
   <span class="ghost-num">03</span>
   <div class="wrap">
-    <div class="reveal" style="margin-bottom:44px;">
+    <div class="reveal" style="margin-bottom:36px;">
       <div class="kicker"><span class="ast"><svg viewBox="0 0 40 40"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span> WORK EXPERIENCE</div>
       <h2 class="sec-title">Where I've built it</h2>
     </div>
@@ -551,7 +565,7 @@ Give me a problem, a few components, and enough time, I'll build something that 
 <section class="sec-light sec-pad" id="skills">
   <span class="ghost-num on-light">04</span>
   <div class="wrap">
-    <div class="reveal" style="margin-bottom:44px;">
+    <div class="reveal" style="margin-bottom:36px;">
       <div class="kicker"><span class="ast"><svg viewBox="0 0 40 40"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span> TECHNICAL SKILLS</div>
       <h2 class="sec-title">What I build with</h2>
     </div>
@@ -584,7 +598,7 @@ Give me a problem, a few components, and enough time, I'll build something that 
 <section class="sec-dark sec-pad" id="education">
   <span class="ghost-num">05</span>
   <div class="wrap">
-    <div class="reveal" style="margin-bottom:44px; text-align:center;">
+    <div class="reveal" style="margin-bottom:36px; text-align:center;">
       <div class="kicker" style="justify-content:center;"><span class="ast"><svg viewBox="0 0 40 40"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span> EDUCATION</div>
       <h2 class="sec-title" style="max-width:none; margin:0 auto;">Where it started</h2>
     </div>
@@ -640,9 +654,12 @@ Give me a problem, a few components, and enough time, I'll build something that 
     };
     card.addEventListener('click', toggle);
     card.addEventListener('keydown', e => {
+      if (e.target !== card) return;
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
     });
   });
+  /* repo link click must not collapse the card */
+  document.querySelectorAll('.proj-link').forEach(l => l.addEventListener('click', e => e.stopPropagation()));
 
   const navLinks = document.querySelectorAll('[data-nav]');
   const navObserver = new IntersectionObserver((entries) => {
