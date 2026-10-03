@@ -120,8 +120,8 @@
 /* left: label on top, photo under it, photo sits flush on section bottom */
 #overview .about-visual{align-self:end; display:flex; flex-direction:column; padding-top:var(--ov-top);}
 #overview .about-visual .kicker{margin-bottom:18px;}
-.about-photo{margin:0; width:100%; max-width:600px;}
-.about-photo img{display:block; width:100%; height:auto; max-height:520px; object-fit:cover; object-position:top;}
+.about-photo{margin:0; width:100%; max-width:600px; overflow:hidden;}
+.about-photo img{display:block; width:100%; height:auto; margin-top:-80px;}
 
 
 /* right: text only, centered beside photo */
@@ -133,7 +133,7 @@
   #overview .overview-grid{grid-template-columns:1fr; gap:0;}
   #overview .about-visual{align-items:center;}
   #overview .about-visual .kicker{align-self:flex-start;}
-  .about-photo{max-width:400px;}
+  .about-photo img{margin-top:-40px;}
   #overview .about-text{padding:28px 0 var(--ov-bottom);}
 }
 
