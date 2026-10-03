@@ -42,8 +42,9 @@
 
   /* nav */
   .nav{position:sticky; top:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:16px 28px; background:rgba(255,255,255,0.88); backdrop-filter:blur(10px); border-bottom:1px solid var(--line);}
-  .nav-mark{display:flex; align-items:center; gap:10px; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:1.15rem; color:var(--navy);}
-  .nav-mark .dot{width:34px;height:34px;border-radius:50%;background:var(--navy); color:var(--mist); display:flex; align-items:center; justify-content:center; font-size:0.85rem;}
+  .nav-mark{display:flex; align-items:center; gap:10px; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:1.15rem; color:var(--navy); text-decoration:none; cursor:pointer;}
+  .nav-mark .dot{width:38px; height:38px; border-radius:50%; overflow:hidden; flex:none; display:block; background:var(--soft); border:2px solid var(--navy);}
+  .nav-mark .dot img{width:100%; height:100%; object-fit:cover; object-position:center 25%;}
   .nav-links{display:flex; gap:30px; list-style:none; margin:0; padding:0;}
   .nav-links a{text-decoration:none; font-weight:600; font-size:0.95rem; position:relative; padding-bottom:4px; opacity:0.72; transition:opacity .2s ease;}
   .nav-links a::after{content:""; position:absolute; left:0; right:0; bottom:-2px; height:3px; border-radius:3px; background:var(--teal); transform:scaleX(0); transform-origin:left; transition:transform .25s ease;}
@@ -112,7 +113,6 @@
   .stat .num{font-family:'Baloo 2',sans-serif; font-size:2.4rem; font-weight:700; min-width:96px; color:var(--teal);}
   .stat .label{font-weight:600; opacity:0.9; padding-top:8px; font-size:0.98rem;}
   /* ABOUT: edit these two numbers to change spacing */
-  /* ABOUT: edit these two numbers to change spacing */
 #overview{--ov-top:48px; --ov-bottom:48px; padding:0;}
 
 #overview .overview-grid{grid-template-columns:1fr 1fr; gap:48px; align-items:end;}
@@ -138,18 +138,25 @@
 
 
   /* projects (light section, card grid) */
-  .proj-grid{display:grid; grid-template-columns:1fr 1fr; gap:26px; position:relative; z-index:1;}
-  .proj-card{background:var(--card); border-radius:22px; padding:32px 32px 28px; border:1px solid var(--line); box-shadow:var(--shadow); display:flex; flex-direction:column; transition:transform .25s ease;}
+  .proj-grid{display:grid; grid-template-columns:1fr 1fr; gap:26px; position:relative; z-index:1; align-items:start;}
+  .proj-card{background:var(--card); border-radius:22px; padding:32px 32px 28px; border:1px solid var(--line); box-shadow:var(--shadow); display:flex; flex-direction:column; transition:transform .25s ease; cursor:pointer;}
   .proj-card:hover{transform:translateY(-4px);}
+  .proj-card:focus-visible{outline:3px solid var(--teal); outline-offset:3px;}
   .proj-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;}
   .proj-icon{width:52px; height:52px; border-radius:16px; background:var(--navy); color:var(--mist); display:flex; align-items:center; justify-content:center; box-shadow:0 6px 16px rgba(28,34,48,0.25);}
-  .proj-idx{font-family:'Baloo 2',sans-serif; font-size:0.85rem; font-weight:700; letter-spacing:1.5px; color:var(--accent-ink); opacity:0.85;}
+  .proj-idx{display:flex; align-items:center; gap:10px; font-family:'Baloo 2',sans-serif; font-size:0.85rem; font-weight:700; letter-spacing:1.5px; color:var(--accent-ink);}
+  .proj-chev{width:24px; height:24px; color:var(--navy); transition:transform .3s ease;}
+  .proj-card.open .proj-chev{transform:rotate(180deg);}
   .proj-title{font-family:'Baloo 2',sans-serif; font-size:1.5rem; color:var(--navy); font-weight:700; line-height:1.1;}
   .proj-tag{font-size:0.82rem; font-weight:700; color:var(--accent-ink); margin-top:6px;}
+  .proj-body{display:grid; grid-template-rows:0fr; transition:grid-template-rows .35s ease;}
+  .proj-card.open .proj-body{grid-template-rows:1fr;}
+  .proj-body-inner{overflow:hidden; min-height:0;}
   .proj-desc{margin:14px 0 22px; font-size:0.96rem; line-height:1.7; color:var(--slate);}
   .proj-card ul{margin:14px 0 20px; padding-left:20px; display:flex; flex-direction:column; gap:9px; font-size:0.94rem; line-height:1.55; color:#3D4A5C;}
   .proj-card ul li::marker{color:var(--teal);}
   .chip-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:auto;}
+  .proj-body .chip-row{margin-top:0;}
   .chip{font-size:0.78rem; font-weight:700; padding:7px 13px; border-radius:999px; background:var(--soft); color:var(--navy); border:1px solid rgba(28,34,48,0.14); transition:background .2s ease, color .2s ease;}
   .chip:hover{background:var(--teal); color:#fff;}
 
@@ -216,7 +223,7 @@
 
 <!-- NAV -->
 <nav class="nav">
-  <div class="nav-mark"><span class="dot">V</span> Varadha VR</div>
+  <a class="nav-mark" href="#home" id="logoHome" aria-label="Back to top"><span class="dot"><img src="asset/off-me.png" alt="Varadha V R"></span> Varadha VR</a>
   <ul class="nav-links">
     <li><a href="#overview" data-nav>About</a></li>
     <li><a href="#projects" data-nav>Projects</a></li>
@@ -238,7 +245,7 @@
 </div>
 
 <!-- HERO -->
-<header class="hero">
+<header class="hero" id="home">
   <div class="wrap">
     <div>
       <div class="eyebrow-row">
@@ -407,48 +414,56 @@ Give me a problem, a few components, and enough time, I'll build something that 
     <div class="proj-grid reveal" style="transition-delay:0.1s">
 
       <div class="proj-card">
-  <div class="proj-top">
-    <div class="proj-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4M6 20v-4l4-3V7"/><path d="M10 7l5-2 2 2-4 2"/><circle cx="17" cy="6" r="2"/></svg></div>
-    <span class="proj-idx">01</span>
-  </div>
-  <h3 class="proj-title">Robobooth</h3>
-  <div class="proj-tag">Automated Robotic Videography System</div>
-  <p class="proj-desc">A robot arm that films you like a movie scene. A Doosan 6-axis cobot moves through the shot while my FastAPI backend runs the show: arm motion through DART, camera recording through ADB, and an Arduino relay keeping both in sync. FFmpeg then adds slow motion, branding, and music, so the clip is ready fast. It runs real production sessions, not just on my desk.</p>
-  <div class="chip-row"><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">Android ADB</span><span class="chip">FFmpeg</span><span class="chip">Doosan Cobot</span><span class="chip">Arduino</span></div>
-</div>
+        <div class="proj-top">
+          <div class="proj-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4M6 20v-4l4-3V7"/><path d="M10 7l5-2 2 2-4 2"/><circle cx="17" cy="6" r="2"/></svg></div>
+          <span class="proj-idx">01 <svg class="proj-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+        </div>
+        <h3 class="proj-title">Robobooth</h3>
+        <div class="proj-tag">Automated Robotic Videography System</div>
+        <div class="proj-body"><div class="proj-body-inner">
+          <p class="proj-desc">A robot arm that films you like a movie scene. A Doosan 6-axis cobot moves through the shot while my FastAPI backend runs the show: arm motion through DART, camera recording through ADB, and an Arduino relay keeping both in sync. FFmpeg then adds slow motion, branding, and music, so the clip is ready fast. It runs real production sessions, not just on my desk.</p>
+          <div class="chip-row"><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">Android ADB</span><span class="chip">FFmpeg</span><span class="chip">Doosan Cobot</span><span class="chip">Arduino</span></div>
+        </div></div>
+      </div>
 
-<div class="proj-card">
-  <div class="proj-top">
-    <div class="proj-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M14 9h4M14 13h4M6 18v2M18 18v2"/></svg></div>
-    <span class="proj-idx">02</span>
-  </div>
-  <h3 class="proj-title">Robopark</h3>
-  <div class="proj-tag">Smart Ticketing Platform</div>
-  <p class="proj-desc">A park visit shouldn't start with a queue. I designed Robopark's ticketing journey end to end, from the first online booking to the post-visit follow-up. It covers solo and group bookings, face recognition at entry, and companion identification so groups stay connected. Behind it sit the flowcharts, API requirements, notification logic, and data schemas, plus a gamification layer of points, leaderboards, and rally competitions.</p>
- <div class="chip-row"><span class="chip">Face Recognition</span><span class="chip">System Design</span><span class="chip">API Design</span><span class="chip">Data Schemas</span><span class="chip">Gamification</span></div>
-</div>
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M14 9h4M14 13h4M6 18v2M18 18v2"/></svg></div>
+          <span class="proj-idx">02 <svg class="proj-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+        </div>
+        <h3 class="proj-title">Robopark</h3>
+        <div class="proj-tag">Smart Ticketing Platform</div>
+        <div class="proj-body"><div class="proj-body-inner">
+          <p class="proj-desc">A park visit shouldn't start with a queue. I designed Robopark's ticketing journey end to end, from the first online booking to the post-visit follow-up. It covers solo and group bookings, face recognition at entry, and companion identification so groups stay connected. Behind it sit the flowcharts, API requirements, notification logic, and data schemas, plus a gamification layer of points, leaderboards, and rally competitions.</p>
+          <div class="chip-row"><span class="chip">Face Recognition</span><span class="chip">System Design</span><span class="chip">API Design</span><span class="chip">Data Schemas</span><span class="chip">Gamification</span></div>
+        </div></div>
+      </div>
 
-<div class="proj-card">
-  <div class="proj-top">
-    <div class="proj-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21v-6h6v6"/><path d="M9 11h6"/></svg></div>
-    <span class="proj-idx">03</span>
-  </div>
-  <h3 class="proj-title">AIoT Smart School Campus</h3>
-  <div class="proj-tag">Campus Monitoring &amp; Digital Twin</div>
-  <p class="proj-desc">What if a campus could tell you how it's doing? ESP32 sensing nodes track attendance, occupancy, environment, energy, parking, and emergencies, then stream live to a web app over WebSocket. A 3D digital twin turns that data into something you can actually see. Every piece is its own subsystem, so the campus can keep growing without a rewrite.</p>
-  <div class="chip-row"><span class="chip">ESP32</span><span class="chip">WebSocket</span><span class="chip">React</span><span class="chip">Three.js</span><span class="chip">Real-Time Data</span></div>
-</div>
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21v-6h6v6"/><path d="M9 11h6"/></svg></div>
+          <span class="proj-idx">03 <svg class="proj-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+        </div>
+        <h3 class="proj-title">AIoT Smart School Campus</h3>
+        <div class="proj-tag">Campus Monitoring &amp; Digital Twin</div>
+        <div class="proj-body"><div class="proj-body-inner">
+          <p class="proj-desc">What if a campus could tell you how it's doing? ESP32 sensing nodes track attendance, occupancy, environment, energy, parking, and emergencies, then stream live to a web app over WebSocket. A 3D digital twin turns that data into something you can actually see. Every piece is its own subsystem, so the campus can keep growing without a rewrite.</p>
+          <div class="chip-row"><span class="chip">ESP32</span><span class="chip">WebSocket</span><span class="chip">React</span><span class="chip">Three.js</span><span class="chip">Real-Time Data</span></div>
+        </div></div>
+      </div>
 
-<div class="proj-card">
-  <div class="proj-top">
-    <div class="proj-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V5a1.5 1.5 0 0 1 3 0v6M11 10V3.5a1.5 1.5 0 0 1 3 0V10M14 10V5a1.5 1.5 0 0 1 3 0v9a6 6 0 0 1-6 6h-1a6 6 0 0 1-5-3l-2-4a1.5 1.5 0 0 1 2.5-1.5L8 14"/></svg></div>
-    <span class="proj-idx">04</span>
-  </div>
-  <h3 class="proj-title">Vision-Based Bionic Hand</h3>
-  <div class="proj-tag">Real-Time Gesture Replication</div>
-  <p class="proj-desc">Wave at a camera, and a hand waves back. I designed and 3D-printed a 5-joint robotic hand, then taught it to copy mine. MediaPipe tracks the hand landmarks, Python maps gestures to servo angles with inverse kinematics, and UART carries the commands to an Arduino that drives the servos.</p>
-  <div class="chip-row"><span class="chip">MediaPipe</span><span class="chip">Python</span><span class="chip">OpenCV</span><span class="chip">Arduino</span><span class="chip">UART</span></div>
-</div>
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V5a1.5 1.5 0 0 1 3 0v6M11 10V3.5a1.5 1.5 0 0 1 3 0V10M14 10V5a1.5 1.5 0 0 1 3 0v9a6 6 0 0 1-6 6h-1a6 6 0 0 1-5-3l-2-4a1.5 1.5 0 0 1 2.5-1.5L8 14"/></svg></div>
+          <span class="proj-idx">04 <svg class="proj-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+        </div>
+        <h3 class="proj-title">Vision-Based Bionic Hand</h3>
+        <div class="proj-tag">Real-Time Gesture Replication</div>
+        <div class="proj-body"><div class="proj-body-inner">
+          <p class="proj-desc">Wave at a camera, and a hand waves back. I designed and 3D-printed a 5-joint robotic hand, then taught it to copy mine. MediaPipe tracks the hand landmarks, Python maps gestures to servo angles with inverse kinematics, and UART carries the commands to an Arduino that drives the servos.</p>
+          <div class="chip-row"><span class="chip">MediaPipe</span><span class="chip">Python</span><span class="chip">OpenCV</span><span class="chip">Arduino</span><span class="chip">UART</span></div>
+        </div></div>
+      </div>
 
     </div>
   </div>
@@ -479,7 +494,6 @@ Give me a problem, a few components, and enough time, I'll build something that 
             <div class="story-connector"></div>
           </div>
           <div class="story-content">
-            
             <div class="story-title">Robotics &amp; Automation</div>
             <p class="story-text">Programmed, commissioned, and deployed industrial robotic arms, integrating sensors, controllers, hardware, and software for real-world automation applications.</p>
           </div>
@@ -491,7 +505,6 @@ Give me a problem, a few components, and enough time, I'll build something that 
             <div class="story-connector"></div>
           </div>
           <div class="story-content">
-            
             <div class="story-title">End-to-End Systems</div>
             <p class="story-text">Designed and developed robotics and IoT solutions from requirements and system architecture through hardware–software integration, testing, debugging, and deployment.</p>
           </div>
@@ -503,7 +516,6 @@ Give me a problem, a few components, and enough time, I'll build something that 
             <div class="story-connector"></div>
           </div>
           <div class="story-content">
-           
             <div class="story-title">Product &amp; PoC Development</div>
             <p class="story-text">Built and validated Proof-of-Concept systems across robotics, IoT, and computer vision, combining embedded systems, sensors, robotic hardware, software, and AI technologies.</p>
           </div>
@@ -515,7 +527,6 @@ Give me a problem, a few components, and enough time, I'll build something that 
             <div class="story-connector"></div>
           </div>
           <div class="story-content">
-          
             <div class="story-title">RTBS / Smart Ticketing</div>
             <p class="story-text">Led the design and development planning of Robopark's smart ticketing platform, covering booking architecture, biometric authentication, workflows, API requirements, notifications, and gamification.</p>
           </div>
@@ -526,7 +537,6 @@ Give me a problem, a few components, and enough time, I'll build something that 
             <div class="story-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2 20c0-3 2.7-5 6-5s6 2 6 5M15.5 20c0-2.2-1.4-4-3.5-4.7"/></svg></div>
           </div>
           <div class="story-content">
-            
             <div class="story-title">Training &amp; Mentoring</div>
             <p class="story-text">Owned the IoT domain within the Academic Department, conducting internships, workshops, FDPs, industrial visits, and hands-on technical sessions for engineering students and faculty.</p>
           </div>
@@ -611,6 +621,28 @@ Give me a problem, a few components, and enough time, I'll build something that 
   const mobileMenu = document.getElementById('mobileMenu');
   burger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
   mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+  /* logo photo -> scroll to top (hero) */
+  document.getElementById('logoHome').addEventListener('click', e => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    mobileMenu.classList.remove('open');
+  });
+
+  /* project cards: click to expand / collapse */
+  document.querySelectorAll('.proj-card').forEach(card => {
+    card.tabIndex = 0;
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-expanded', 'false');
+    const toggle = () => {
+      const open = card.classList.toggle('open');
+      card.setAttribute('aria-expanded', open);
+    };
+    card.addEventListener('click', toggle);
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+    });
+  });
 
   const navLinks = document.querySelectorAll('[data-nav]');
   const navObserver = new IntersectionObserver((entries) => {
