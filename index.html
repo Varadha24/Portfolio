@@ -111,11 +111,18 @@
   .stat:last-child{border-bottom:none;}
   .stat .num{font-family:'Baloo 2',sans-serif; font-size:2.4rem; font-weight:700; min-width:96px; color:var(--teal);}
   .stat .label{font-weight:600; opacity:0.9; padding-top:8px; font-size:0.98rem;}
-  .about-photo{position:relative; margin:0 0 14px; width:100%; max-width:380px; aspect-ratio:3/4;}
-  .about-photo{margin:0 0 14px; width:100%; max-width:380px;}
+  #overview{padding-bottom:0;}
+#overview .overview-grid{grid-template-columns:1fr 1fr; align-items:stretch;}
+#overview .overview-grid > div:first-child{display:flex; flex-direction:column; justify-content:space-between;}
+#overview .overview-grid > div:last-child{padding-bottom:110px;}
+
+.about-photo{margin:0; width:100%; max-width:520px;}
 .about-photo img{display:block; width:100%; height:auto;}
+
 @media (max-width:900px){
-  .about-photo{max-width:300px; margin:0 auto 24px;}
+  #overview{padding-bottom:80px;}
+  #overview .overview-grid > div:last-child{padding-bottom:0;}
+  .about-photo{max-width:340px; margin:20px auto 0;}
 }
 
 
@@ -360,7 +367,6 @@ Give me a problem, a few components, and enough time, I'll build something that 
   <div class="wrap overview-grid">
     <div class="reveal">
       <div class="kicker"><span class="ast"><svg viewBox="0 0 40 40"><path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"/></svg></span> ABOUT ME</div>
-      <h3 class="sec-title">From concept to code, circuits to deployment.</h3>
       <figure class="about-photo"> 
         <img src="asset/photo-me.png" alt="Varadha V R" loading="lazy">
       </figure>
