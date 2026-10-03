@@ -111,6 +111,13 @@
   .stat:last-child{border-bottom:none;}
   .stat .num{font-family:'Baloo 2',sans-serif; font-size:2.4rem; font-weight:700; min-width:96px; color:var(--teal);}
   .stat .label{font-weight:600; opacity:0.9; padding-top:8px; font-size:0.98rem;}
+  .about-photo{position:relative; margin:0 0 14px; width:100%; max-width:380px; aspect-ratio:3/4;}
+.about-photo::before{content:""; position:absolute; inset:0; transform:translate(16px,16px); border:2px solid var(--teal); border-radius:var(--radius); z-index:0;}
+.about-photo img{position:relative; z-index:1; width:100%; height:100%; object-fit:cover; object-position:center top; border-radius:var(--radius); background:#fff; box-shadow:0 14px 40px rgba(0,0,0,0.35);}
+@media (max-width:900px){
+  .about-photo{max-width:300px; margin:0 auto 24px;}
+  .about-photo::before{transform:translate(12px,12px);}
+}
 
   /* projects (light section, card grid) */
   .proj-grid{display:grid; grid-template-columns:1fr 1fr; gap:26px; position:relative; z-index:1;}
