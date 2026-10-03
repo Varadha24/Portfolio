@@ -115,12 +115,12 @@
   /* ABOUT: edit these two numbers to change spacing */
 #overview{--ov-top:48px; --ov-bottom:48px; padding:0;}
 
-#overview .overview-grid{grid-template-columns:1fr 1fr; gap:48px; align-items:end;}
+#overview .overview-grid{grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:end;}
 
 /* left: label on top, photo under it, photo sits flush on section bottom */
 #overview .about-visual{align-self:end; display:flex; flex-direction:column; padding-top:var(--ov-top);}
 #overview .about-visual .kicker{margin-bottom:18px;}
-.about-photo{margin:0; width:100%; max-width:520px;}
+.about-photo{margin:0; width:100%; max-width:600px;}
 .about-photo img{display:block; width:100%; height:auto;}
 
 /* right: text only, centered beside photo */
@@ -132,7 +132,7 @@
   #overview .overview-grid{grid-template-columns:1fr; gap:0;}
   #overview .about-visual{align-items:center;}
   #overview .about-visual .kicker{align-self:flex-start;}
-  .about-photo{max-width:340px;}
+  .about-photo{max-width:400px;}
   #overview .about-text{padding:28px 0 var(--ov-bottom);}
 }
 
