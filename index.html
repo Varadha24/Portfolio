@@ -129,11 +129,12 @@
 #overview .stat-list{margin-top:24px;}
 #overview .stat:last-child{padding-bottom:0;}
 
-@media (max-width:340px){
+@media (max-width:900px){
   #overview .overview-grid{grid-template-columns:1fr; gap:0;}
   #overview .about-visual{align-items:center;}
   #overview .about-visual .kicker{align-self:flex-start;}
-  .about-photo img{margin-top:-30px;}
+  .about-photo img{max-width:340px;}
+  .about-photo img{margin-top:-40px;}
   #overview .about-text{padding:28px 0 var(--ov-bottom);}
 }
 
