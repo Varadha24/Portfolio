@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Varadha VR — Robotics Systems Engineer & IoT Product Developer</title>
+<title>Varadha VR — Robotics Systems Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -165,6 +165,26 @@
   .proj-link{display:inline-flex; align-items:center; gap:6px; margin-top:18px; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:0.98rem; color:var(--accent-ink); text-decoration:none; border-bottom:2px solid transparent; transition:gap .2s ease, border-color .2s ease;}
   .proj-link:hover{gap:10px; border-bottom-color:var(--teal);}
   .proj-link svg{width:16px; height:16px;}
+  /* one card per row */
+.proj-grid{grid-template-columns:1fr;}
+.proj-desc{max-width:90ch;}
+
+/* gallery */
+.gallery{position:relative; margin-top:22px;}
+.g-track{display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x proximity; scrollbar-width:none; padding:2px;}
+.g-track::-webkit-scrollbar{display:none;}
+.g-track img{height:190px; width:auto; flex:none; object-fit:contain; background:var(--soft); border:1px solid var(--line); border-radius:14px; scroll-snap-align:start; cursor:zoom-in; transition:transform .2s ease;}
+.g-track img:hover{transform:translateY(-3px);}
+.g-btn{position:absolute; top:50%; transform:translateY(-50%); width:38px; height:38px; border-radius:50%; border:none; background:var(--navy); color:#fff; font-size:1.4rem; line-height:1; cursor:pointer; box-shadow:var(--shadow); z-index:2;}
+.g-btn:hover{background:var(--teal);}
+.g-btn[hidden]{display:none;}
+.g-prev{left:6px;} .g-next{right:6px;}
+@media (max-width:520px){ .g-track img{height:150px;} }
+
+/* lightbox */
+.lightbox{position:fixed; inset:0; z-index:200; display:none; align-items:center; justify-content:center; background:rgba(28,34,48,0.92); padding:20px; cursor:zoom-out;}
+.lightbox.open{display:flex;}
+.lightbox img{max-width:94vw; max-height:90vh; border-radius:12px; background:#fff;}
 
   /* experience (dark section) */
   .exp-card{position:relative; z-index:1; background:#ffffff; color:var(--abyss); border-radius:var(--radius); padding:40px; box-shadow:0 14px 40px rgba(0,0,0,0.3);}
@@ -439,24 +459,9 @@ Give me a problem, a few components, and enough time, I'll build something that 
           <p class="proj-desc">A robot arm that films you like a movie scene. A Doosan 6-axis cobot moves through the shot while my FastAPI backend runs the show: arm motion through DART, camera recording through ADB, and an Arduino relay keeping both in sync. FFmpeg then adds slow motion, branding, and music, so the clip is ready fast. It runs real production sessions, not just on my desk.</p>
           <div class="chip-row"><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">Android ADB</span><span class="chip">FFmpeg</span><span class="chip">Doosan Cobot</span><span class="chip">Arduino</span></div>
           <a class="proj-link" href="https://github.com/Varadha24/RoboBooth" target="_blank" rel="noopener noreferrer">Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          
         </div></div>
       </div>
-
-      <div class="proj-card">
-  <div class="proj-top">
-    <div class="proj-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M14 9h4M14 13h4M6 18v2M18 18v2"/></svg></div>
-    <div class="proj-meta">
-      <h3 class="proj-title">Smart Ticketing Platform</h3>
-      <div class="proj-tag">Visitor Management &amp; Smart Access for RoboPark</div>
-    </div>
-    <span class="proj-idx">02 <svg class="proj-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
-  </div>
-  <div class="proj-body"><div class="proj-body-inner">
-    <p class="proj-desc">A park visit shouldn't start with a queue. At Inker Robotics, I designed the ticketing journey for RoboPark end to end, from the first online booking to the post-visit follow-up. It covers solo and group bookings, face recognition at entry, and companion identification so groups stay connected. Behind it sit the flowcharts, API requirements, notification logic, and data schemas, plus a gamification layer of points, leaderboards, and rally competitions.</p>
-    <div class="chip-row"><span class="chip">Face Recognition</span><span class="chip">System Design</span><span class="chip">API Design</span><span class="chip">Data Schemas</span><span class="chip">Gamification</span></div>
-    <a class="proj-link" href="https://www.robopark.in/" target="_blank" rel="noopener noreferrer">More about RoboPark <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-  </div></div>
-</div>
 
       <div class="proj-card">
         <div class="proj-top">
@@ -465,12 +470,22 @@ Give me a problem, a few components, and enough time, I'll build something that 
             <h3 class="proj-title">AIoT Smart School Campus</h3>
             <div class="proj-tag">Campus Monitoring &amp; Digital Twin</div>
           </div>
-          <span class="proj-idx">03 <svg class="proj-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+          <span class="proj-idx">02 <svg class="proj-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
         </div>
         <div class="proj-body"><div class="proj-body-inner">
           <p class="proj-desc">What if a campus could tell you how it's doing? ESP32 sensing nodes track attendance, occupancy, environment, energy, parking, and emergencies, then stream live to a web app over WebSocket. A 3D digital twin turns that data into something you can actually see. Every piece is its own subsystem, so the campus can keep growing without a rewrite.</p>
           <div class="chip-row"><span class="chip">ESP32</span><span class="chip">WebSocket</span><span class="chip">React</span><span class="chip">Three.js</span><span class="chip">Real-Time Data</span></div>
           <a class="proj-link" href="https://github.com/Varadha24/AIoT-Smart-Campus-Operating-System" target="_blank" rel="noopener noreferrer">Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <div class="gallery">
+            <button class="g-btn g-prev" aria-label="Previous photos" hidden>‹</button>
+            <div class="g-track">
+              <img src="asset/aiot1.png" alt="AIoT Smart Campus digital twin dashboard">
+              <img src="asset/aiot4.png" alt="Smart Campus Energy mobile app design">
+              <img src="asset/aiot5.jpg" alt="ESP32 wiring diagrams for the sensor nodes">
+              <img src="asset/aiot2.jpg" alt="App Inventor blocks: SOS and device control"><img src="asset/aiot3.jpg" alt="App Inventor blocks: voltage, current and alert logic">
+            </div>
+            <button class="g-btn g-next" aria-label="Next photos" hidden>›</button>
+          </div>
         </div></div>
       </div>
 
@@ -481,7 +496,7 @@ Give me a problem, a few components, and enough time, I'll build something that 
             <h3 class="proj-title">Vision-Based Bionic Hand</h3>
             <div class="proj-tag">Real-Time Gesture Replication</div>
           </div>
-          <span class="proj-idx">04 <svg class="proj-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+          <span class="proj-idx">03 <svg class="proj-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
         </div>
         <div class="proj-body"><div class="proj-body-inner">
           <p class="proj-desc">Wave at a camera, and a hand waves back. I designed and 3D-printed a 5-joint robotic hand, then taught it to copy mine. MediaPipe tracks the hand landmarks, Python maps gestures to servo angles with inverse kinematics, and UART carries the commands to an Arduino that drives the servos.</p>
@@ -489,6 +504,22 @@ Give me a problem, a few components, and enough time, I'll build something that 
           <a class="proj-link" href="https://github.com/Varadha24/Vision-Based-Bionic-Hand" target="_blank" rel="noopener noreferrer">Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a> 
         </div></div>
       </div>
+      
+      <div class="proj-card">
+  <div class="proj-top">
+    <div class="proj-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M14 9h4M14 13h4M6 18v2M18 18v2"/></svg></div>
+    <div class="proj-meta">
+      <h3 class="proj-title">Smart Ticketing Platform</h3>
+      <div class="proj-tag">Visitor Management &amp; Smart Access for RoboPark</div>
+    </div>
+    <span class="proj-idx">04 <svg class="proj-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+  </div>
+  <div class="proj-body"><div class="proj-body-inner">
+    <p class="proj-desc">A park visit shouldn't start with a queue. At Inker Robotics, I designed the ticketing journey for RoboPark end to end, from the first online booking to the post-visit follow-up. It covers solo and group bookings, face recognition at entry, and companion identification so groups stay connected. Behind it sit the flowcharts, API requirements, notification logic, and data schemas, plus a gamification layer of points, leaderboards, and rally competitions.</p>
+    <div class="chip-row"><span class="chip">Face Recognition</span><span class="chip">System Design</span><span class="chip">API Design</span><span class="chip">Data Schemas</span><span class="chip">Gamification</span></div>
+    <a class="proj-link" href="https://www.robopark.in/" target="_blank" rel="noopener noreferrer">More about RoboPark <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div></div>
+</div>
 
     </div>
   </div>
@@ -635,7 +666,8 @@ Give me a problem, a few components, and enough time, I'll build something that 
     <div>Robotics Engineer</div>
   </div>
 </section>
-
+<div class="lightbox" id="lightbox"><img alt=""></div>
+  
 <script>
   const burger = document.getElementById('burger');
   const mobileMenu = document.getElementById('mobileMenu');
@@ -666,6 +698,35 @@ Give me a problem, a few components, and enough time, I'll build something that 
   });
   /* repo link click must not collapse the card */
   document.querySelectorAll('.proj-link').forEach(l => l.addEventListener('click', e => e.stopPropagation()));
+
+  /* galleries: arrows show only when photos overflow */
+document.querySelectorAll('.gallery').forEach(g => {
+  const track = g.querySelector('.g-track');
+  const prev = g.querySelector('.g-prev');
+  const next = g.querySelector('.g-next');
+  const update = () => {
+    const overflow = track.scrollWidth > track.clientWidth + 1;
+    prev.hidden = !overflow || track.scrollLeft <= 2;
+    next.hidden = !overflow || track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+  };
+  prev.addEventListener('click', () => track.scrollBy({ left: -track.clientWidth * 0.8, behavior: 'smooth' }));
+  next.addEventListener('click', () => track.scrollBy({ left: track.clientWidth * 0.8, behavior: 'smooth' }));
+  track.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  track.querySelectorAll('img').forEach(i => i.addEventListener('load', update));
+  g.closest('.proj-card').addEventListener('click', () => setTimeout(update, 400));
+  g.addEventListener('click', e => e.stopPropagation()); /* no card collapse */
+  update();
+});
+
+/* lightbox */
+const lb = document.getElementById('lightbox');
+const lbImg = lb.querySelector('img');
+document.querySelectorAll('.g-track img').forEach(img => img.addEventListener('click', () => {
+  lbImg.src = img.src; lbImg.alt = img.alt; lb.classList.add('open');
+}));
+lb.addEventListener('click', () => lb.classList.remove('open'));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
 
   const navLinks = document.querySelectorAll('[data-nav]');
   const navObserver = new IntersectionObserver((entries) => {
